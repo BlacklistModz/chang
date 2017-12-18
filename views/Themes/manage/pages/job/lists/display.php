@@ -19,7 +19,7 @@
 
 		<!-- <div class="listpage2-table-overlay"></div> -->
 		<div class="listpage2-table-empty">
-	        <div class="empty-icon"><i class="icon-angle-double-right"></i></div>
+	        <div class="empty-icon"><i class="icon-shopping-cart"></i></div>
 	        <div class="empty-title">ไม่พบข้อมูลแผนการผลิต</div>
 		</div>
 		

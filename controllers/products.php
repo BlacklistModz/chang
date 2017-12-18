@@ -12,12 +12,9 @@ class Products extends Controller {
 
     #Product
     public function add(){
+        if( empty($this->me) || $this->format!="json" ) $this->error();
 
-      if( empty($this->me) || $this->format!="json" ) $this->error();
-
-      $breed = $this->model->breed();
-      // print_r($breed);die;
-      $this->view->setData('breed', $breed);
+        $this->view->setData('breed', $this->model->breed());
     	$this->view->setPage("path", "Forms/products/products");
     	$this->view->render("add_products");
     }
@@ -25,14 +22,10 @@ class Products extends Controller {
       $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
       if( empty($this->me) || empty($id) || $this->format!="json" ) $this->error();
 
-
       $item = $this->model->get( $id );
       if( empty($item) ) $this->error();
 
-      $breed = $this->model->breed();
-      // print_r($breed);die;
-      // $this->view->setData("status", $this->model->brandStatus());
-      $this->view->setData('breed', $breed);
+      $this->view->setData('breed', $this->model->breed());
       $this->view->setData("item", $item);
       $this->view->setPage("path", "Forms/products/products");
       $this->view->render("add_products");
@@ -47,57 +40,43 @@ class Products extends Controller {
       }
 
       try {
-        $form = new Form();
-        $form   ->post('pro_code')
-        ->post('pro_breed_id')->val('is_empty')
-        ->post('pro_amount');
+            $form = new Form();
+            $form   ->post('pro_code')->val('is_empty')
+                    ->post('pro_breed_id')
+                    ->post('pro_amount');
 
+            $form->submit();
+            $postData = $form->fetch();
 
-        $form->submit();
-        $postData = $form->fetch();
+            if( empty($arr['error']) ){
+                if( !empty($id) ){
+                    $this->model->update( $id, $postData );
+                }
+                else{
+                    $this->model->insert( $postData );
+                }
+                $arr['url'] = 'refresh';
+                $arr['message'] = 'บันทึกเรียบร้อย !';
+            }
 
-        // $has_name = true;
-        // if( !empty($item) ){
-        // 	if( $item["name"] == $postData["type_name"] ){
-        // 		$has_name = false;
-        // 	}
-        // }
-        //
-        // if( $this->model->is_typeName($postData["type_name"]) && $has_name ){
-        // 	$arr["error"]["type_name"] = "ตรวจพบชื่อซ้ำในระบบ";
-        // }
-
-        if( empty($arr['error']) ){
-
-          if( !empty($id) ){
-            $this->model->update( $id, $postData );
-          }
-          else{
-            $this->model->insert( $postData );
-          }
-
-          $arr['url'] = 'refresh';
-          $arr['message'] = 'บันทึกเรียบร้อย !';
+        } catch (Exception $e) {
+            $arr['error'] = $this->_getError($e->getMessage());
         }
 
-      } catch (Exception $e) {
-        $arr['error'] = $this->_getError($e->getMessage());
-      }
-
-      echo json_encode($arr);
+        echo json_encode($arr);
 
     }
     public function del($id=null){
       $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
     	if( empty($id) || empty($this->me) || $this->format!="json" ) $this->error();
 
-    	$item = $this->model->getType( $id );
+    	$item = $this->model->get( $id );
     	if( empty($item) ) $this->error();
 
     	if( !empty($_POST) ){
 
     		if( !empty($item["permit"]['del']) ){
-    			$this->model->delType( $id );
+    			$this->model->delete( $id );
     			$arr['message'] = "ลบข้อมูลเรียบร้อย";
                 $arr['url'] = "refresh";
     		}

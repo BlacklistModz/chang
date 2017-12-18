@@ -30,7 +30,7 @@ if( !empty($this->results['lists']) ){
 
             '</td>'.
 
-            '<td class="icon_name">'.$item['amount'].'</td>'.
+            '<td class="status_arr">'.$item['amount'].'</td>'.
 
             '<td class="actions whitespace">
                 <span class=""><a data-plugins="dialog" href="'.$url.'edit/'.$item['id'].'" class="btn btn-no-padding btn-orange"><i class="icon-pencil"></i></a></span>

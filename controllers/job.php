@@ -6,6 +6,10 @@ class Job extends Controller {
     }
 
     public function index($id=null){
+
+        $this->view->setPage('on', 'job');
+        $this->view->setPage('title', 'Job Order');
+
     	$id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
 
     	if( !empty($id) ){

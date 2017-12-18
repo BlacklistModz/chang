@@ -38,6 +38,9 @@ class products_Model extends Model
             $where_arr[':not'] = $options['not'];
         }
 
+        if( isset($_REQUEST["type"]) ){
+            $options["type"] = $_REQUEST["type"];
+        }
         if( !empty($options['type']) ){
             $where_str .= !empty($where_str) ? " AND " : "";
             $where_str .= "{$this->_cutNamefield}type_id=:type";
@@ -58,24 +61,20 @@ class products_Model extends Model
         return $arr;
     }
 
-    public function setData( $data ){
-    	$data["pro_updated"] = date("c");
-    	if( !isset($data["pro_created"]) ){
-    		$data["pro_created"] = data("c");
-    	}
-    }
-
     public function insert( &$data ){
-    	$this->db->insert( $this->_objName, $this->setDate($data) );
-        $data["pro_id"] = $this->db->lastInsertId();
+        $data["{$this->_cutNamefield}created"] = date("c");
+        $data["{$this->_cutNamefield}updated"] = date("c");
+    	$this->db->insert( $this->_objName, $data);
+        $data["id"] = $this->db->lastInsertId();
     }
 
     public function update($id, $data) {
-      $this->db->update( $this->_objName, $this->_setDate($data), "`pro_id`={$id}" );
+        $data["{$this->_cutNamefield}updated"] = date("c");
+      $this->db->update( $this->_objName, $data, "`{$this->_cutNamefield}id`={$id}" );
     }
 
     public function delete($id){
-    	$this->db->delete( $this->_objName, "`pro_id`={$id}" );
+    	$this->db->delete( $this->_objName, "`{$this->_cutNamefield}id`={$id}" );
     }
 
     public function get($id, $options=array()){
@@ -102,6 +101,11 @@ class products_Model extends Model
     public function convert($data, $options=array()){
     	$data = $this->cut($this->_cutNamefield, $data);
 
+        $data['permit']['del'] = true;
+        /* $data['pallet_total'] = $this->db->select('pallets', 'pallet_pro_id=:id', array(':id'=>$id));
+        if( !empty($data['pallet_total']) ){
+            $data['permit']['del'] = false;
+        } */
     	// $data["type"] = $this->getType( $data["type_id"] );
 
     	return $data;
