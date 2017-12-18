@@ -5,7 +5,7 @@ class Controller {
     public $format = "html";
     public $pathName = "";
     function __construct() {
-        
+
         $this->fn = new _function();
         $this->format = $this->get_format_json() ? "json":"html";
         $this->lang = new Langs();
@@ -16,7 +16,7 @@ class Controller {
 
         $this->view->setPage('locale', $this->lang->getCode() );
     }
- 
+
     private function get_format_json() {
         $_q = false;
         if( isset($_SERVER['HTTP_X_REQUESTED_WITH']) ){
@@ -27,7 +27,7 @@ class Controller {
 
         return $_q;
     }
-    
+
     public function verifyWWW() {
 
         if (strpos($_SERVER['SERVER_NAME'],'www') !== false) {
@@ -36,7 +36,7 @@ class Controller {
     }
 
     /**
-     * 
+     *
      * @param string $name Name of the model
      * @param string $path Location of the models
      */
@@ -44,17 +44,17 @@ class Controller {
 
         $path = $modelPath . $name.'_model.php';
         $this->pathName = $name;
-        
+
         if (file_exists($path)) {
             require $modelPath .$name.'_model.php';
-            
+
             $modelName = $name . '_Model';
             $this->model = new $modelName();
         }
         else{
             $this->model = new Model();
         }
-        
+
         $this->system = $this->model->query('system')->get();
         if( !empty($this->system) ){
             $this->setSystem();
@@ -62,7 +62,7 @@ class Controller {
         }
 
         $this->handleLogin();
-        
+
     }
     public function setPagePermit($value='') {
 
@@ -71,7 +71,7 @@ class Controller {
         if( !empty($this->me['permission']) ){
 
             foreach ($permit as $key => $value) {
-                
+
                 if( !empty($this->me['permission'][ $key ]) ){
                     $permit[$key] = array_merge($value, $this->me['permission'][ $key ]);
                 }
@@ -80,7 +80,7 @@ class Controller {
         }
 
         // print_r($permit); die;
-        
+
         $this->permit = $permit;
         $this->view->setData('permit', $this->permit);
         // print_r($this->permit); die;
@@ -131,8 +131,8 @@ class Controller {
             }
 
             $this->view->setPage('description',  $description );
-        }  
-	
+        }
+
 		if( empty($this->system['image']) ){
 			$this->view->setPage( 'image', IMAGES.'logo/25x25.png' );
 		}
@@ -151,7 +151,7 @@ class Controller {
             $error[$str[0]] = $str[1];
         }
 
-        return $error;        
+        return $error;
     }
 
     public $me = null;
@@ -168,7 +168,7 @@ class Controller {
 
                 Session::init();
                 Session::set('lang', $this->me['lang']);
-                
+
                 $this->lang->set( $this->me['lang'] );
             }
 
@@ -178,7 +178,7 @@ class Controller {
 
             Cookie::set( COOKIE_KEY_EMP, $this->me['id'], time() + (3600*24));
 
-            // 
+            //
             $this->setPagePermit();
             $this->_modify();
         }else {
@@ -217,7 +217,7 @@ class Controller {
         }
 
         if( !empty($_POST) && empty($error) ){
-            
+
             if( $login_mode=='pin' && $this->format=='json' ){
 
                 $ip = $this->fn->q('util')->get_client_ip();
@@ -276,7 +276,7 @@ class Controller {
                     else{
 
                         if(!$this->model->query('employees')->is_user($post['email'])){
-                            $error['email'] = 'ชื่อผู้ใช้ไม่ถูกต้อง'; 
+                            $error['email'] = 'ชื่อผู้ใช้ไม่ถูกต้อง';
                         }
                         else{
                             $error['pass'] = 'รหัสผ่านไม่ถูกต้อง';
@@ -304,12 +304,12 @@ class Controller {
 
         $redirect = URL;
         $next = isset($_REQUEST['next']) ? $_REQUEST['next']: '';
-        
+
         if( !in_array($this->view->getPage('theme'), array('default', 'crm')) ){
             $next = URL.$this->view->getPage('theme');
             $redirect = $next;
         }
-        
+
         if( !empty( $next) ){
             $this->view->setData('next', $next);
         }
@@ -334,7 +334,7 @@ class Controller {
     }
 
     public function _modify() {
-        
+
         $options = array(
             'has_topbar' => false,
             'has_menu' => false,
@@ -345,7 +345,7 @@ class Controller {
         if( $this->pathName=='printer' ){
             $this->system['theme'] = 'printer';
         }
-        
+
 
         if( empty($this->system['theme']) ){
             $options['has_menu'] = true;
@@ -356,6 +356,6 @@ class Controller {
         $this->view->setData('zone', $this->model->query('warehouse')->lists( array('sort'=>'name', 'dir'=>'ASC') ));
         $this->view->setData('type', $this->model->query('products')->type());
         $this->view->setPage('theme', $this->system['theme']);
-        $this->view->setPage('theme_options', $options);  
+        $this->view->setPage('theme_options', $options);
     }
 }

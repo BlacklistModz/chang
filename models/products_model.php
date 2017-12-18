@@ -71,7 +71,7 @@ class products_Model extends Model
     }
 
     public function update($id, $data) {
-        $this->db->update( $this->_objName, $this->_setDate($data), "`pro_id`={$id}" );
+      $this->db->update( $this->_objName, $this->_setDate($data), "`pro_id`={$id}" );
     }
 
     public function delete($id){
@@ -79,25 +79,25 @@ class products_Model extends Model
     }
 
     public function get($id, $options=array()){
-        $select = $this->_field;
+      $select = $this->_field;
 
-        $sth = $this->db->prepare("SELECT {$select} FROM {$this->_table} WHERE {$this->_cutNamefield}id=:id LIMIT 1");
-        $sth->execute( array(
-            ':id' => $id
-        ) );
+      $sth = $this->db->prepare("SELECT {$select} FROM {$this->_table} WHERE {$this->_cutNamefield}id=:id LIMIT 1");
+      $sth->execute( array(
+        ':id' => $id
+      ) );
 
-        return $sth->rowCount()==1
-            ? $this->convert( $sth->fetch( PDO::FETCH_ASSOC ), $options )
-            : array();
+      return $sth->rowCount()==1
+      ? $this->convert( $sth->fetch( PDO::FETCH_ASSOC ), $options )
+      : array();
     }
     public function buildFrag($results, $options=array()) {
+      $data = array();
+      foreach ($results as $key => $value) {
+        if( empty($value) ) continue;
+        $data[] = $this->convert($value, $options);
+      }
+      return $data;
 
-        $data = array();
-        foreach ($results as $key => $value) {
-            if( empty($value) ) continue;
-            $data[] = $this->convert($value, $options);
-        }
-        return $data;
     }
     public function convert($data, $options=array()){
     	$data = $this->cut($this->_cutNamefield, $data);
@@ -703,8 +703,8 @@ class products_Model extends Model
     public function sizeWeight($id=null){
         $data = array();
 
-        $_size = $this->db->select("SELECT s.size_id as id, s.size_name as name, p.weight_id 
-            FROM products_size s 
+        $_size = $this->db->select("SELECT s.size_id as id, s.size_name as name, p.weight_id
+            FROM products_size s
                 LEFT JOIN permit_type_size_weight p ON s.size_id=p.size_id
             WHERE p.type_id=:id", array(
             ':id' => $id
