@@ -964,6 +964,15 @@ class Products extends Controller {
         if( empty($item) ) $this->error();
 
         $results = $this->model->sizeWeight($id);
-        print_r($results);die;
+        if( !empty($_POST) ){
+
+        }
+        else{
+            $this->view->setData('results', $results);
+            $this->view->setData('size', $this->model->size());
+            $this->view->setData('weight', $this->model->weight());
+            $this->view->setPage('path', 'Forms/products/size_weight');
+            $this->view->render('set');
+        }
     }
 }
