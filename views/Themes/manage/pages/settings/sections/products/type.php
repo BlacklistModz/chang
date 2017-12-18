@@ -21,6 +21,7 @@ $url = URL .'products/';
 			<th class="number"><?=$this->lang->translate('Code')?></th>
 			<th class="name"><?=$this->lang->translate('Type')?></th>
 			<th class="icon_name"><?=$this->lang->translate('Icon Name')?></th>
+			<th class="status">DW/NW</th>
 			<th class="actions"><?=$this->lang->translate('Action')?></th>
 
 		</tr>
@@ -31,7 +32,11 @@ $url = URL .'products/';
 			<td class="number tac"><span class="fwb"><?=$item['code']?></span></td>
 			<td class="name"><?=$item['name']?></td>
 			<td class="icon_name image"><?=$item['icon']?></td>
-
+			<td class="status">
+				<span class="gbtn">
+					<a data-plugins="dialog" href="<?=$url?>products/setSizeWeight/<?=$item['id']?>" class="btn btn-blue btn-no-padding"><i class="icon-wrench"></i></a>
+				</span>
+			</td>
 			<td class="actions whitespace">
 
 				<span class=""><a data-plugins="dialog" href="<?=$url?>edit_type/<?=$item['id'];?>" class="btn btn-orange"><i class="icon-pencil"></i></a></span>

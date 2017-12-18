@@ -699,6 +699,9 @@ class products_Model extends Model
     public function deleteWeight($id){
         $this->db->delete('products_weight', "weight_id={$id}");
     }
+    public function is_weight($dw, $nw){
+        return $this->db->count('products_weight', "weight_dw={$dw} AND weight_nw={$nw}");
+    }
 
     public function sizeWeight($id=null){
         $data = array();

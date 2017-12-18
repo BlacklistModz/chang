@@ -13,6 +13,7 @@ class Employees_Model extends Model{
         LEFT JOIN city c ON e.emp_city_id=c.city_id";
 
     private $_field = "   emp_id
+                        , emp_code
                         , emp_prefix_name
                         , emp_first_name
                         , emp_last_name

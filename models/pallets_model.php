@@ -360,8 +360,9 @@ class pallets_Model extends Model
 
     #Status
     public function status(){
-        $a[] = array('id'=>1, 'name'=>'ปกติ');
+        $a[] = array('id'=>1, 'name'=>'ของดี');
         $a[] = array('id'=>2, 'name'=>'Hold');
+        $a[] = array('id'=>2, 'name'=>'Release');
         return $a;
     }
     public function getStatus($id){
