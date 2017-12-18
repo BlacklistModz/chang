@@ -711,7 +711,7 @@ class products_Model extends Model
         ));
 
         foreach ($_size as $key => $value) {
-            $data[$value['id']]['name'] = $value['size_name'];
+            $data[$value['id']] = $value;
             $data[$value['id']]['weight'][] = $this->getWeight($value['weight_id']);
         }
 
