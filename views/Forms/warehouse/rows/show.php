@@ -1,11 +1,9 @@
 <?php
 
-
-
 $body = '';
 for($i=10;$i>=1;$i--){
   $td = '';
-  for($j=1;$j<=$this->item['deep'];$j++){
+  for($j=$this->item['deep'];$j>=1;$j--){
     if( empty($this->item['pallets'][$j][$i]) ) {
       $pallet = '<div>
                     <ul calss="lfloat" ref="action" style="height: 66px;">
