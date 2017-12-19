@@ -78,6 +78,13 @@ class Settings extends Controller {
       if($tap=='position'){
         $data = $this->model->query('employees')->position();
       }
+      elseif($tap=='customers'){
+        if( $this->format=='json' ){
+          $this->view->setData('results', $this->model->query('customers')->lists());
+          $render = 'settings/sections/accounts/customers/lists/json';
+        }
+        $data = array();
+      }
       elseif($tap=='department'){
         $this->view->setData('access', $this->model->query('system')->roles());
         $data = $this->model->query('employees')->department();
@@ -94,6 +101,14 @@ class Settings extends Controller {
         $this->view->setData('department', $this->model->query('employees')->department() );
         $this->view->setData('position', $this->model->query('employees')->position() );
         $this->view->setData('display', $this->model->query('employees')->display() );
+        $data = array();
+      }
+      elseif( $tap=='customers' ){
+        if( $this->format=='json' ){
+          $this->view->setData('results', $this->model->query('customers')->lists());
+          $render = 'settings/sections/accounts/customers/lists/json';
+        }
+        $this->view->setData('group', $this->model->query('customers')->group());
         $data = array();
       }
       else{
@@ -257,5 +272,13 @@ class Settings extends Controller {
 
       $this->view->setData('data', $data);
       $this->view->render( $render );
+    }
+
+    // กลุ่มสร้างกลุ่มใหม่สำหรับ customers
+    public function group() {
+      $a[] = array( "id"=>"A", "name"=>"A", "A"=>"UP TO USD 200,000");
+      $a[] = array( "id"=>"B", "name"=>"B", "B"=>"USD 100,000-200,000");
+      $a[] = array( "id"=>"C", "name"=>"C", "C"=>"LOWER USD 100,000");
+      return $a;
     }
 }

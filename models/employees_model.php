@@ -236,9 +236,6 @@ class Employees_Model extends Model{
             $data['permission'] = json_decode($data['dep_permission'], true);
         }
 
-        //Skill
-        $data['skill'] = $this->listSkill( $data['id'] );
-
         $data['permit']['del'] = true;
 
         $view_stype = !empty($options['view_stype']) ? $options['view_stype']:'convert';
@@ -309,6 +306,8 @@ class Employees_Model extends Model{
         if( isset($data['emp_password']) ){
             $data['emp_password'] = Hash::create('sha256', $data['emp_password'], HASH_PASSWORD_KEY);
         }
+
+        print_r($data);die;
 
         $this->db->insert($this->_objType, $data);
         $data['id'] = $this->db->lastInsertId();
@@ -452,15 +451,6 @@ class Employees_Model extends Model{
     public function sales(){
         return $this->buildFrag( $this->db->select("SELECT {$this->_field} FROM {$this->_table} WHERE dep_is_sale=1") );
     }
-
-    /**/
-    /* Tec */
-    /**/
-    public function tec(){
-        
-        return $this->buildFrag( $this->db->select("SELECT {$this->_field} FROM {$this->_table} WHERE dep_is_tec=1") );
-    }
-
     /**/
     /* */
     /**/
@@ -479,66 +469,4 @@ class Employees_Model extends Model{
     public function is_name( $first_name=null , $last_name=null ){
         return $this->db->count( 'employees', "emp_first_name=':first_name' AND emp_last_name=':last_name'", array(':first_name'=>$first_name , ':last_name'=>$last_name) );
     }
-
-    /**/
-    /* SKILL */
-    /**/
-    private $select_skill = "
-         skill_id as id
-        ,skill_name as name
-    ";
-    public function skill() {
-        $data = $this->db->select("SELECT {$this->select_skill} FROM emp_skill");
-        return $data;
-    }
-    public function get_skill($id){
-        $sth = $this->db->prepare("
-            SELECT {$this->select_skill}
-            FROM emp_skill 
-            WHERE `skill_id`=:id 
-            LIMIT 1");
-        $sth->execute( array( ':id' => $id ) );
-        $data = $sth->rowCount()==1 ? $sth->fetch( PDO::FETCH_ASSOC ) : array();
-
-        $data['permit']['del'] = true;
-
-        $total_emp = $this->db->count('emp_skill_permit', "`skill_id`={$data['id']}");
-        if( $total_emp > 0 ) $data['permit']['del'] = false;
-
-        return $data;
-    }
-    public function insert_skill(&$data) {
-        $this->db->insert( 'emp_skill', $data );
-        $data['skill_id'] = $this->db->lastInsertId();
-    }
-    public function update_skill($id, $data){
-        $this->db->update( 'emp_skill', $data, "`skill_id`={$id}" );
-    }
-    public function delete_skill($id){
-        $this->db->delete( 'emp_skill', "`skill_id`={$id}" );
-        $this->db->delete( 'emp_skill_permit', "`skill_id`={$id}" , $this->db->count('emp_skill_permit', "`skill_id`={$id}") );
-    }
-    public function is_skill( $text='' ){
-        return $this->db->count('emp_skill', "`skill_name`=:name", array(':name'=>$text));
-    }
-
-    public function setSkill( $data ){
-        $this->db->insert('emp_skill_permit', $data);
-    }
-
-    public function unsetSkill( $id ){
-        $this->db->delete('emp_skill_permit', "{$this->_cutNamefield}id={$id}", $this->db->count('emp_skill_permit', "{$this->_cutNamefield}id={$id}") );
-    }
-
-    public function listSkill( $id ){
-
-        $data = $this->db->select("SELECT s.skill_id AS id , s.skill_name AS name 
-            FROM emp_skill s
-                LEFT JOIN emp_skill_permit p ON s.skill_id = p.skill_id
-            WHERE p.emp_id = :id
-        ORDER By p.skill_id ASC", array(':id'=>$id));
-
-        return $data;
-    }
-    /* End skill */
 }
