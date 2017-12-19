@@ -37,8 +37,8 @@ $arr['body'] = '<svg xmlns="http://www.w3.org/2000/svg" style="margin:300px 5px 
       <p style="margin: -23px 0px 10px 35px;">ความลึกของแถว N..1 &#8594;</p></div>';
 $arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">Cancel</span></a>';
 $arr['is_close_bg'] = true;
-$arr['width'] = 1100;
-$arr['height'] = 550;
+$arr['width'] = 'full';
+$arr['height'] = 'full';
 
 
 
