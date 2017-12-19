@@ -22,6 +22,7 @@ $sub[] = array('text'=> $this->lang->translate('Customers'),'key' => 'customers'
 $sub[] = array('text'=> $this->lang->translate('Department'),'key'=>'department','url'=>URL.'settings/accounts/department');
 $sub[] = array('text'=> $this->lang->translate('Position'),'key' => 'position','url' => URL.'settings/accounts/position');
 $sub[] = array('text'=> $this->lang->translate('Employees'),'key' => 'employees','url' => URL.'settings/accounts/');
+$sub[] = array('text'=> $this->lang->translate('Customers'),'key' => 'customers','url' => URL.'settings/accounts/customers');
 
 foreach ($sub as $key => $value) {
 	if( empty($this->permit[$value['key']]['view']) ) unset($sub[$key]);

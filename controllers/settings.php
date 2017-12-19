@@ -103,6 +103,14 @@ class Settings extends Controller {
         $this->view->setData('display', $this->model->query('employees')->display() );
         $data = array();
       }
+      elseif( $tap=='customers' ){
+        if( $this->format=='json' ){
+          $this->view->setData('results', $this->model->query('customers')->lists());
+          $render = 'settings/sections/accounts/customers/lists/json';
+        }
+        $this->view->setData('group', $this->model->query('customers')->group());
+        $data = array();
+      }
       else{
         $this->error();
       }

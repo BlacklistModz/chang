@@ -34,6 +34,14 @@ class Job extends Controller {
 
     public function add(){
     	if( empty($this->me) ) $this->error();
+
+        $this->view->setPage('on','job');
+
+        $this->view->customers = $this->model->query('customers')->lists();
+        $this->view->brands = $this->model->query('brands')->lists();
+        $this->view->sales = $this->model->query('employees')->lists( array('dep'=>7) );
+
+        $this->view->render('job/forms/create');
     }
     public function edit($id=null){
     	$id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
@@ -41,6 +49,10 @@ class Job extends Controller {
 
     	$item = $this->model->get($id);
     	if( empty($item) ) $this->error();
+
+        $this->view->customers = $this->model->query('customers')->lists();
+        $this->view->brands = $this->model->query('brands')->lists();
+        $this->view->sales = $this->model->query('employees')->lists( array('dep'=>7) );
     }
     public function save(){
     	if( empty($_POST) ) $this->error();

@@ -8,7 +8,7 @@ $url = URL.'customers/';
 	<div class="clearfix">
 		<ul class="clearfix lfloat SettingCol-headerActions">
 
-			<li><h2><i class="icon-users mrs"></i><span><?=$this->lang->translate('Customers')?></span></h2></li>
+			<li><h2><i class="icon-user mrs"></i><span><?=$this->lang->translate('Customers')?></span></h2></li>
 			<li><a class="btn js-refresh"><i class="icon-refresh"></i></a></li>
 			<li class="divider"></li>
 
@@ -24,11 +24,13 @@ $url = URL.'customers/';
 
 	<div class="mtm clearfix">
 		<ul class="lfloat SettingCol-headerActions clearfix">
+			<li><label>GROUP:</label> <select ref="selector" name="group" class="inputtext">
+				<option value="">All</option>
+			<?php foreach ($this->group as $key => $value) {
 
-			<li><label>Customers group:</label> <select ref="selector" name="display" class="inputtext">
-			<?php foreach ($this->group() as $key => $value) {
 				$s = '';
 				if( isset($_GET['group']) ){
+
 					if( $_GET['group']==$value['id'] ){
 						$s = ' selected="1"';
 					}
@@ -37,7 +39,6 @@ $url = URL.'customers/';
 				<option<?=$s?> value="<?=$value['id']?>"><?=$value['name']?></option>
 			<?php } ?>
 			</select></li>
-
 		</ul>
 		<ul class="rfloat SettingCol-headerActions clearfix">
 			<li>
@@ -58,8 +59,8 @@ $url = URL.'customers/';
 <div class="SettingCol-main">
 	<div class="SettingCol-tableHeader"><div class="SettingCol-contentInner">
 		<table class="settings-table admin"><thead><tr>
-			<th class="name" data-col="0">Full Name</th>
-			<th class="email" data-col="1"></th>
+			<th class="number" data-col="0">CODE</th>
+			<th class="name" data-col="1">Name</th>
 			<th class="actions" data-col="2">Action</th>
 		</tr></thead></table>
 	</div></div>
@@ -76,7 +77,7 @@ $url = URL.'customers/';
 		</div>
 
 		<div class="empty-text">
-			<div class="empty-icon"><i class="icon-users"></i></div>
+			<div class="empty-icon"><i class="icon-user"></i></div>
 			<div class="empty-title">No Results Found.</div>
 		</div>
 	</div>
