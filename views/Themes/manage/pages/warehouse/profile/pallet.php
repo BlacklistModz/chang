@@ -1,14 +1,14 @@
 <?php
 
 $body = '';
-for($i=10;$i>=1;$i--){
+for($i=6;$i>=1;$i--){
   $td = '';
   for($j=$this->item['deep'];$j>=1;$j--){
     if( empty($this->item['pallets'][$j][$i]) ) {
       $pallet = '<div>
-                    <ul calss="lfloat" ref="action" style="height: 40px;">
+                    <ul calss="lfloat" ref="action" style="height: 68px;">
                       <li class="mt">
-                        <i></i>
+                        <label style="opacity: 0.3;">No Pallet</label>
                       </li>
                     </ul>
                   </div>';
@@ -24,8 +24,7 @@ for($i=10;$i>=1;$i--){
       $pallet = '<a target="_blank" href="'.URL.'pallets/profile/'.$this->item['pallets'][$j][$i]['id'].'"><div> Pallet code '.$this->item['pallets'][$j][$i]['code'].'<br><br>'.$_icon.'</div></a>' ;
     }
     $td .= '<td><div class="'.$className.'" style="position: relative;   position: relative; border: 2px solid #bfbfbf; padding-bottom: 12px; width: 98px;">'.
-      '<i class="icon-boxx  _ico-center64"></i>'.$pallet.
-      '</div></td>';
+      $pallet.'</div></td>';
   }
   $body .= '<tr>'.$td.'</tr>';
 }
@@ -40,8 +39,12 @@ for($i=10;$i>=1;$i--){
 
 					<div class="uiBoxWhite pas pam mtl">
 						<div>
-							<table class="blueTable"><?=$body?></table>
+							<div>
+								<svg xmlns="http://www.w3.org/2000/svg" style="margin:-15px 5px 5px 950px; position: absolute;" width="30" height="600"><text transform="rotate(270, 12, 0) translate(-450,0)">|--------------------- จำนวนชั้นของ pallet----------------------→</text></svg><br>
 
+							<table class="blueTable"><?=$body?><label></label></table>
+							<p style="margin: 5px 0px 10px 280px;" width="300" ;="">&#8592;-------------------------ความลึกของแถว----------------------------|</p>
+						</div>
 						</div>
 					</div>
 
