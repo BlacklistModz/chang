@@ -220,15 +220,15 @@ class Warehouse extends Controller {
 
   public function showRow($id=null){
     $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
-    if( empty($id) || empty($this->me) || $this->format!='json' ) $this->error();
+    if( empty($id) || empty($this->me) ) $this->error();
 
     $item = $this->model->getRows($id, array('pallets'=>true));
     // print_r($item);die;
     if( empty($item) ) $this->error();
 
     $this->view->setData('item', $item);
-    $this->view->setPage('path', 'Forms/warehouse/rows');
-    $this->view->render('show');
+    // $this->view->setPage('path', 'Forms/warehouse/rows');
+    $this->view->render('warehouse/profile/pallet');
 
 
   }

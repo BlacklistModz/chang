@@ -56,7 +56,7 @@
 
                           <li class="mt">
                             <div class="rfloat">
-                              <a href="<?=URL?>warehouse/showRow/<?=$value['id']?>" data-plugins="dialog" class="btn btn-zline">
+                              <a href="<?=URL?>warehouse/showRow/<?=$value['id']?>" class="btn btn-zline">
                                 <span><?=$value['name']?></span></a>
                               </div>
                             </li>
