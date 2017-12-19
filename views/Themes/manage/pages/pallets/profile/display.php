@@ -7,7 +7,7 @@
 						<div class="lfloat">
 							<div class="setting-title">
 								<ul calss="lfloat" ref="action"><li class="mt">
-								
+
 								<?php
 								// print_r($this->item['type_id']);die;
 								if($this->item['type_id'] == 1)$icon = 'rambutan';
@@ -15,6 +15,8 @@
 								elseif($this->item['type_id'] == 4)$icon = 'longan';
 								elseif($this->item['type_id'] == 5)$icon = 'lychee';
 								elseif($this->item['type_id'] == 6)$icon = 'mango';
+								elseif($this->item['type_id'] == 8)$icon = 'corncup';
+								elseif($this->item['type_id'] == 9)$icon = 'bakedlongan';
 								else $icon = 'corn';
 									?>
 								<i class="icon-<?=$icon?> _ico-center"></i> Pallet Code : <?=$this->item['code']?> (<?=$this->item['delivery_code']?>)</div>
