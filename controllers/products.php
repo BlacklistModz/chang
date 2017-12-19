@@ -952,6 +952,11 @@ class Products extends Controller {
             if( !empty($_POST["weight"]) ){
                 foreach ($_POST["weight"] as $key => $value) {
 
+                    if( empty($value) ) continue;
+
+                    $search = $this->model->countSizeWeight($id, $sid, $value);
+                    if( !empty($search) ) continue;
+
                     $data = array(
                         'type_id'=>$id,
                         'size_id'=>$sid,

@@ -733,4 +733,7 @@ class products_Model extends Model
     public function delSizeWeight($type,$size){
         $this->db->delete("permit_type_size_weight", "type_id={$type} AND size_id={$size}", $this->db->count("permit_type_size_weight", "type_id={$type} AND size_id={$size}"));
     }
+    public function countSizeWeight($type, $size, $weight){
+        return $this->db->count("permit_type_size_weight", "type_id={$type} AND size_id={$size} AND weight_id={$weight}");
+    }
 }

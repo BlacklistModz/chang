@@ -3261,6 +3261,237 @@ if ( typeof Object.create !== 'function' ) {
 	$.fn.holdManageForms.options = {
 		items: []
 	}
+
+	var joForm = {
+		init:function(options, elem){
+			var self = this;
+			self.$elem = $(elem);
+			self.options = $.extend( {}, $.fn.joForm.options, options );
+
+			self.$listsitem = self.$elem.find('[role=listsitem]');
+
+			self.$cus = self.$elem.find('[data-name=customers]');
+
+			self.setElem();
+			self.Events();
+		},
+		setElem:function(){
+			var self = this;
+			if( self.options.items.length==0 ){
+				self.getItem();
+			}else{
+				$.each( self.options.items, function (i, obj) {
+					self.getItem(obj);
+				} );
+			}
+		},
+		Events: function(){
+			var self = this;
+
+			self.$elem.delegate('.js-add-item', 'click', function () {
+				var box = $(this).closest('tr');
+
+				if( box.find(':input').first().val()=='' ){
+					box.find(':input').first().focus();
+					return false;
+				}
+
+				var setItem = self.setItem({});
+				box.after( setItem );
+				setItem.find(':input').first().focus();
+
+				self.sortItem();
+			});
+
+			self.$elem.delegate('.js-remove-item', 'click', function () {
+				var box = $(this).closest('tr');
+
+				if( self.$listsitem.find('tr').length==1 ){
+					box.find(':input').val('');
+					box.find(':input').first().focus();
+				}
+				else{
+					box.remove();
+				}
+
+				self.sortItem();
+			});
+
+			self.$elem.delegate('.js-select-type', 'change', function() {
+				var box = $(this).closest('tr');
+				self.setProducts(box);
+				self.setSize(box);
+			});
+
+			self.$elem.delegate('.js-select-size', 'change', function(){
+				var box = $(this).closest('tr');
+				self.setWeight(box);
+			});
+		},
+		getItem: function(data){
+			var self = this;
+
+			self.$listsitem.append( self.setItem( data || {} ) );
+			self.sortItem();
+		},
+		setItem: function ( data ) {
+			var self = this;
+
+			var $select = $('<select>', {class:'inputtext js-select-type', name:'items[type_id][]', style:"width: 100%;"});
+			$select.append( $('<option>', {value:'', text:'-'}) );
+			$.each( self.options.types, function(i,obj) {
+				$select.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
+			});
+
+			var $brand = $('<select>', {class:'inputtext', name:'items[brand][]', style:"width: 100%;"});
+			$brand.append( $('<option>', {value:'', text:'-'}) );
+			$.each( self.options.brand, function(i,obj) {
+				$brand.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
+			});
+
+			var $can = $('<select>', {class:'inputtext', name:'items[can][]', style:"width: 100%;"});
+			$can.append( $('<option>', {value:'', text:'-'}) );
+			$.each( self.options.can, function(i,obj) {
+				$can.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
+			});
+
+			var $lid = $('<select>', {class:'inputtext', name:'items[lid][]', style:"width: 100%;"});
+			$lid.append( $('<option>', {value:'', text:'-'}) );
+			$.each( self.options.lid, function(i,obj) {
+				$lid.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
+			});
+
+			var $pack = $('<select>', {class:'inputtext', name:'items[pack][]', style:"width: 100%;"});
+			$pack.append( $('<option>', {value:'', text:'-'}) );
+			$.each( self.options.pack, function(i,obj) {
+				$pack.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
+			});
+
+			$tr = $('<tr>');
+			$tr.append(
+				$('<td>', {class: "no"}),
+				$('<td>', {class: "name"}).append($select),
+				$('<td>', {"data-name": "products"}).append(
+						$('<select>', {class: 'inputtext js-select-products', name: 'items[pro_id][]', style:"width: 100%;"}).append(
+							$('<option>', {value: '', text: '-'})
+						 )
+					),
+				$('<td>').append(
+						$('<select>', {class: 'inputtext js-select-size', name:'items[size_id][]', style:"width: 100%;"}).append(
+							$('<option>', {value: '', text: '-'})
+						 )
+					),
+				$('<td>').append($brand),
+				$('<td>').append($can),
+				$('<td>').append($lid),
+				$('<td>').append($pack),
+				$('<td>').append(
+						$('<select>', {class: 'inputtext js-select-weight', name:'items[weight_id][]', style:"width: 100%;"}).append(
+							$('<option>', {value: '', text: '-'})
+						 )
+					),
+				$('<td>').append(
+							$('<input>', {class:'inputtext', name:'items[qty][]', style:"width: 100%;"})
+						),
+				$('<td>').append($('<input>', {class:'inputtext', name:'items[remark][]', style:"width: 100%;"})),
+				$('<td>', {class: 'actions'}).append(
+					$('<span class="gbtn">').append(
+						$('<button>', {
+					  	type:"button",
+					  	class:"btn js-add-item btn-no-padding btn-blue",
+						}).html( $('<i>', {class: 'icon-plus'}) ), 
+					),
+					$('<span class="gbtn">').append(
+						$('<button>', {
+					  	type:"button",
+					  	class:"btn js-remove-item btn-no-padding btn-red",
+						}).html( $('<i>', {class: 'icon-remove'}) ),
+					)
+				),
+			);
+
+			$tr.find('[data-id='+data.id+']').prop('selected', true);
+
+			return $tr;
+		},
+		sortItem: function () {
+			var self = this;
+			var no = 0;
+			$.each(self.$listsitem.find('tr'), function (i, obj) {
+				no++;
+				$(this).find('.no').text( no );
+			});
+		},
+		setProducts: function(box, pro_id){
+			var self = this;
+
+			var type = box.find('select.js-select-type').val();
+			var $product = box.find('select.js-select-products');
+
+			$.get( Event.URL + 'job/listsProducts/' + type, function(res) {
+				$product.empty();
+				var li = ( $('<option>', {value: '', text: '-'}) );
+				$product.append( li );
+				$.each( res, function (i, obj) {
+					var li = $('<option>', {value: obj.id, text: obj.code, "data-id":obj.id, "data-amount":obj.amount});
+					if( pro_id == obj.id ){
+						li.prop('selected', true);
+					}
+					$product.append( li );
+				} );
+			}, 'json');
+		},
+		setSize: function(box, size){
+			var self = this;
+
+			var type = box.find('select.js-select-type').val();
+			var $size = box.find('select.js-select-size');
+
+			$.get(Event.URL + 'job/listsSize/'+type, function( res ){
+
+				$size.empty();
+				var li = $('<option>', {value: "", text: "-"});
+				$size.append( li );
+				$.each( res, function(i, obj){
+					var li = $('<option>', {value: obj.id, text: obj.name, "data-id":obj.id});
+					 if( size == obj.id ){
+						li.prop('selected', true);
+					} 
+					$size.append( li );
+				});
+			},'json');
+		},
+		setWeight: function(box, weight){
+			var self = this;
+
+			var type = box.find('select.js-select-type').val();
+			var $weight = box.find('select.js-select-weight');
+			var	$size = box.find('select.js-select-size');
+
+			$.get( Event.URL + 'job/listsWeight/'+type, {size:$size.val()}, function (res) {
+				$weight.empty();
+				var li = $('<option>', {value: "", text: "-"});
+				$weight.append( li );
+				$.each( res, function(i, obj){
+					var li = $('<option>', {value: obj.id, text: obj.dw+'/'+obj.nw, "data-id":obj.id});
+					 if( weight == obj.id ){
+						li.prop('selected', true);
+					} 
+					$weight.append( li );
+				});
+			}, 'json');
+		}
+	}
+	$.fn.joForm = function( options ) {
+		return this.each(function() {
+			var $this = Object.create( joForm );
+			$this.init( options, this );
+			$.data( this, 'joForm', $this );
+		});
+	};
+	$.fn.joForm.options = {
+		items: []
+	}
 	
 })( jQuery, window, document );
 

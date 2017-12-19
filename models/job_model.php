@@ -121,4 +121,23 @@ class job_Model extends Model
         }
         return $data;
     }
+
+    #Pack
+    public function pack(){
+        $a[] = array('id'=>6, 'name'=>6);
+        $a[] = array('id'=>12, 'name'=>12);
+        $a[] = array('id'=>24, 'name'=>24);
+
+        return $a;
+    }
+    public function getPack($id){
+        $data = array();
+        foreach ($this->pack() as $key => $value) {
+            if( $value['id'] == $id ){
+                $data = $value;
+                break;
+            }
+        }
+        return $data;
+    }
 }
