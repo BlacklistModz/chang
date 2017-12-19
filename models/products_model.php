@@ -724,4 +724,13 @@ class products_Model extends Model
 
         return $data;
     }
+    public function setSizeWeight($data){
+        $this->db->insert("permit_type_size_weight", $data);
+    }
+    public function getSizeWeight($type, $size){
+        return $this->db->select("SELECT * FROM permit_type_size_weight WHERE type_id=:type AND size_id=:size", array(":type"=>$type, ":size"=>$size));
+    }
+    public function delSizeWeight($type,$size){
+        $this->db->delete("permit_type_size_weight", "type_id={$type} AND size_id={$size}", $this->db->count("permit_type_size_weight", "type_id={$type} AND size_id={$size}"));
+    }
 }

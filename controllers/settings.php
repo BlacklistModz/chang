@@ -116,6 +116,7 @@ class Settings extends Controller {
       $render = 'settings/display';
 
       if( $tap=='type' ){
+        $this->view->setData('size', $this->model->query('products')->size());
         $data = $this->model->query('products')->type();
       }
       elseif( $tap=='size' ){

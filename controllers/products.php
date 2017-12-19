@@ -53,6 +53,7 @@ class Products extends Controller {
                     $this->model->update( $id, $postData );
                 }
                 else{
+                    $postData['pro_emp_id'] = $this->me['id'];
                     $this->model->insert( $postData );
                 }
                 $arr['url'] = 'refresh';
@@ -935,22 +936,43 @@ class Products extends Controller {
         }
     }
 
-    public function setTypeSizeWeight($id=null){
+    public function setWeight($id=null,$sid=null){
         $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
+        $sid = isset($_REQUEST["sid"]) ? $_REQUEST["sid"] : $sid;
         if( empty($id) || empty($this->me) || $this->format!='json' ) $this->error();
 
         $item = $this->model->getType($id);
         if( empty($item) ) $this->error();
 
-        $results = $this->model->sizeWeight($id);
-        if( !empty($_POST) ){
+        $size = $this->model->getSize($sid);
+        if( empty($size) ) $this->error();
 
+        if( !empty($_POST) ){
+            $this->model->delSizeWeight($id, $sid);
+            if( !empty($_POST["weight"]) ){
+                foreach ($_POST["weight"] as $key => $value) {
+
+                    $data = array(
+                        'type_id'=>$id,
+                        'size_id'=>$sid,
+                        'weight_id'=>$value
+                    );
+
+                    $this->model->setSizeWeight( $data );
+                }
+            }
+            $arr['message'] = 'บันทึกเรียบร้อย';
+            $arr['url'] = 'refresh';
+
+            echo json_encode($arr);
         }
         else{
-            $this->view->setData('results', $results);
+            $this->view->setData('item', $item);
+            $this->view->setData('_size', $size);
+            $this->view->setData('results', $this->model->getSizeWeight($id,$sid));
             $this->view->setData('size', $this->model->size());
             $this->view->setData('weight', $this->model->weight());
-            $this->view->setPage('path', 'Forms/products/size_weight');
+            $this->view->setPage('path', 'Forms/products/weight');
             $this->view->render('set');
         }
     }
