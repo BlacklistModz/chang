@@ -50,11 +50,11 @@ $form = $form->create()
 $form   ->field("image")
         ->text( $picture_box );
 
-/*$form   ->field("emp_code")
-        ->label($this->lang->translate('Number').'*')
+$form   ->field("emp_code")
+        ->label($this->lang->translate('CODE').'*')
         ->autocomplete('off')
         ->addClass('inputtext')
-        ->value( !empty($this->item['code'])? $this->item['code']:'' );*/
+        ->value( !empty($this->item['code'])? $this->item['code']:'' );
 
 $form   ->field("emp_username")
         ->label($this->lang->translate('Username').'*')

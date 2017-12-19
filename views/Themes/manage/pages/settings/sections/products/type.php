@@ -20,9 +20,12 @@ $url = URL .'products/';
 			<!-- <th class="ID"></th> -->
 			<th class="number"><?=$this->lang->translate('Code')?></th>
 			<th class="name"><?=$this->lang->translate('Type')?></th>
-			<th class="icon_name"><?=$this->lang->translate('Icon Name')?></th>
+			<?php 
+			foreach ($this->size as $key => $value) {
+				echo '<th class="status">'.$value['name'].'</th>';
+			}
+			?>
 			<th class="actions"><?=$this->lang->translate('Action')?></th>
-
 		</tr>
 
 		<?php foreach ($this->data as $key => $item) { ?>
@@ -30,8 +33,13 @@ $url = URL .'products/';
 			<!-- <td class="ID"><i class="icon-<?=$item['icon']?> _ico-center"></i></td> -->
 			<td class="number tac"><span class="fwb"><?=$item['code']?></span></td>
 			<td class="name"><?=$item['name']?></td>
-			<td class="icon_name image"><?=$item['icon']?></td>
-
+			<?php foreach ($this->size as $key => $value) { ?>
+				<td class="status">
+					<span class="gbtn">
+						<a data-plugins="dialog" href="<?=$url?>setWeight/<?=$item['id']?>/<?=$value['id']?>" class="btn btn-blue btn-no-padding"><i class="icon-wrench"></i></a>
+					</span>
+				</td>
+			<?php } ?>
 			<td class="actions whitespace">
 
 				<span class=""><a data-plugins="dialog" href="<?=$url?>edit_type/<?=$item['id'];?>" class="btn btn-orange"><i class="icon-pencil"></i></a></span>

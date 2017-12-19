@@ -231,13 +231,17 @@ class warehouse_Model extends Model
       if( empty($value['deep']) || empty($value['floor']) ) continue;
       $data[$value['deep']][$value['floor']] = $value;
       $data[$value['deep']][$value['floor']]['icon'] = $this->getfuritpallet($value['id']);
+      if( empty($data[$value['deep']][$value['floor']]['icon']) ){
+        $data[$value['deep']][$value['floor']]['icon'] = $this->getfurit($value['id']);
+      }
     }
     return $data;
   }
 
   public function getfuritpallet($id){
-
       return $this->db->select("SELECT item_type_id ,type_code,type_name,type_icon FROM pallets_items p LEFT JOIN products_types t ON p.item_type_id=t.type_id  WHERE item_pallet_id = {$id} GROUP BY item_type_id");
-
+  }
+  public function getfurit($id){
+    return $this->db->select("SELECT type_code,type_name,type_icon FROM pallets p LEFT JOIN products_types t ON p.pallet_type_id=t.type_id  WHERE pallet_id={$id}");
   }
 }

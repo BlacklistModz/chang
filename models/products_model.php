@@ -38,6 +38,9 @@ class products_Model extends Model
             $where_arr[':not'] = $options['not'];
         }
 
+        if( isset($_REQUEST["type"]) ){
+            $options["type"] = $_REQUEST["type"];
+        }
         if( !empty($options['type']) ){
             $where_str .= !empty($where_str) ? " AND " : "";
             $where_str .= "{$this->_cutNamefield}type_id=:type";
@@ -58,50 +61,51 @@ class products_Model extends Model
         return $arr;
     }
 
-    public function setData( $data ){
-    	$data["pro_updated"] = date("c");
-    	if( !isset($data["pro_created"]) ){
-    		$data["pro_created"] = data("c");
-    	}
-    }
-
     public function insert( &$data ){
-    	$this->db->insert( $this->_objName, $this->setDate($data) );
-        $data["pro_id"] = $this->db->lastInsertId();
+        $data["{$this->_cutNamefield}created"] = date("c");
+        $data["{$this->_cutNamefield}updated"] = date("c");
+    	$this->db->insert( $this->_objName, $data);
+        $data["id"] = $this->db->lastInsertId();
     }
 
     public function update($id, $data) {
-        $this->db->update( $this->_objName, $this->_setDate($data), "`pro_id`={$id}" );
+        $data["{$this->_cutNamefield}updated"] = date("c");
+      $this->db->update( $this->_objName, $data, "`{$this->_cutNamefield}id`={$id}" );
     }
 
     public function delete($id){
-    	$this->db->delete( $this->_objName, "`pro_id`={$id}" );
+    	$this->db->delete( $this->_objName, "`{$this->_cutNamefield}id`={$id}" );
     }
 
     public function get($id, $options=array()){
-        $select = $this->_field;
+      $select = $this->_field;
 
-        $sth = $this->db->prepare("SELECT {$select} FROM {$this->_table} WHERE {$this->_cutNamefield}id=:id LIMIT 1");
-        $sth->execute( array(
-            ':id' => $id
-        ) );
+      $sth = $this->db->prepare("SELECT {$select} FROM {$this->_table} WHERE {$this->_cutNamefield}id=:id LIMIT 1");
+      $sth->execute( array(
+        ':id' => $id
+      ) );
 
-        return $sth->rowCount()==1
-            ? $this->convert( $sth->fetch( PDO::FETCH_ASSOC ), $options )
-            : array();
+      return $sth->rowCount()==1
+      ? $this->convert( $sth->fetch( PDO::FETCH_ASSOC ), $options )
+      : array();
     }
     public function buildFrag($results, $options=array()) {
+      $data = array();
+      foreach ($results as $key => $value) {
+        if( empty($value) ) continue;
+        $data[] = $this->convert($value, $options);
+      }
+      return $data;
 
-        $data = array();
-        foreach ($results as $key => $value) {
-            if( empty($value) ) continue;
-            $data[] = $this->convert($value, $options);
-        }
-        return $data;
     }
     public function convert($data, $options=array()){
     	$data = $this->cut($this->_cutNamefield, $data);
 
+        $data['permit']['del'] = true;
+        /* $data['pallet_total'] = $this->db->select('pallets', 'pallet_pro_id=:id', array(':id'=>$id));
+        if( !empty($data['pallet_total']) ){
+            $data['permit']['del'] = false;
+        } */
     	// $data["type"] = $this->getType( $data["type_id"] );
 
     	return $data;
@@ -699,22 +703,34 @@ class products_Model extends Model
     public function deleteWeight($id){
         $this->db->delete('products_weight', "weight_id={$id}");
     }
+    public function is_weight($dw, $nw){
+        return $this->db->count('products_weight', "weight_dw={$dw} AND weight_nw={$nw}");
+    }
 
     public function sizeWeight($id=null){
         $data = array();
 
-        $_size = $this->db->select("SELECT s.size_id as id, s.size_name as name, p.weight_id 
-            FROM products_size s 
+        $_size = $this->db->select("SELECT s.size_id as id, s.size_name as name, p.weight_id
+            FROM products_size s
                 LEFT JOIN permit_type_size_weight p ON s.size_id=p.size_id
             WHERE p.type_id=:id", array(
             ':id' => $id
         ));
 
         foreach ($_size as $key => $value) {
-            $data[$value['id']]['name'] = $value['size_name'];
+            $data[$value['id']] = $value;
             $data[$value['id']]['weight'][] = $this->getWeight($value['weight_id']);
         }
 
         return $data;
+    }
+    public function setSizeWeight($data){
+        $this->db->insert("permit_type_size_weight", $data);
+    }
+    public function getSizeWeight($type, $size){
+        return $this->db->select("SELECT * FROM permit_type_size_weight WHERE type_id=:type AND size_id=:size", array(":type"=>$type, ":size"=>$size));
+    }
+    public function delSizeWeight($type,$size){
+        $this->db->delete("permit_type_size_weight", "type_id={$type} AND size_id={$size}", $this->db->count("permit_type_size_weight", "type_id={$type} AND size_id={$size}"));
     }
 }

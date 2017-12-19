@@ -2916,6 +2916,10 @@ body.hidden-tobar #tobar {
 .settings-table .email {
     width: 120px
 }
+.settings-table .status_arr {
+    width: 120px;
+    text-align: center;
+}
 .settings-table .actions {
     width: 80px;
     text-align: right

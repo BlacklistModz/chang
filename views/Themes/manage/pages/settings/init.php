@@ -32,6 +32,7 @@ if( !empty($sub) ){
 
 /* Products */
 $sub = array();
+$sub[] = array('text'=> 'สินค้า','key'=>'products','url'=>URL.'settings/products/products');
 $sub[] = array('text'=> 'ประเภท/ผลไม้','key'=>'type','url'=>URL.'settings/products/type');
 $sub[] = array('text'=> 'พันธุ์ผลไม้', 'key'=>'breed', 'url'=>URL.'settings/products/breed');
 $sub[] = array('text'=> 'GRADE/สูตร', 'key'=>'grade', 'url'=>URL.'settings/products/grade');
