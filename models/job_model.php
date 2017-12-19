@@ -102,4 +102,23 @@ class job_Model extends Model
 
     	return $data;
     }
+
+    #STATUS
+    public function status(){
+        $a[] = array('id'=>1, 'name'=>'รอการตรวจสอบ');
+        $a[] = array('id'=>2, 'name'=>'ยืนยัน');
+        $a[] = array('id'=>3, 'name'=>'ยกเลิก');
+
+        return $a;
+    }
+    public function getStatus($id){
+        $data = array();
+        foreach ($this->status() as $key => $value) {
+            if( $value['id'] == $id ){
+                $data = $value;
+                break;
+            }
+        }
+        return $data;
+    }
 }

@@ -61,7 +61,7 @@ $path = !empty($_GET["type"]) ? "?type={$_GET["type"]}" : "";
 	<div class="SettingCol-tableHeader"><div class="SettingCol-contentInner">
 		<table class="settings-table admin"><thead><tr>
 			<th class="name" data-col="0">Type</th>
-			<th class="icon_name" data-col="0">Count</th>
+			<th class="status_arr" data-col="1">Count</th>
 			<th class="actions" data-col="2">จัดการ</th>
 		</tr></thead></table>
 	</div></div>

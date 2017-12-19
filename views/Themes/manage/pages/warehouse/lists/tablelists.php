@@ -21,37 +21,14 @@
               <div class="clearfix">
 
                 <div class="span10">
-                  <div class="uiBoxWhite pam">
+                  <div class="uiBoxWhite">
                     <h3 class="mbm fwb"><i class="icon-cube"></i> ข้อมูลแถว (Rows)</h3>
                     <ul>
 
                       <li>
                         <label><span class="fwb"><i class="icon-building-o"></i> แถวทั้งหมด : <?= $this->item['row_total']?></label>
                         </li>
-                        <!-- <li>
-												<label><span class="fwb">&nbsp;&nbsp;&nbsp;&nbsp; จำนวนคอร์นคัพ : </label>
-											</li>
-											<li>
-											<label><span class="fwb">&nbsp;&nbsp;&nbsp;&nbsp; จำนวนครีมคอร์น : </label>
-										</li>
-										<li>
-										<label><span class="fwb">&nbsp;&nbsp;&nbsp;&nbsp; จำนวนข้าวโพดหวาน : </label>
-									</li>
-									<li>
-									<label><span class="fwb">&nbsp;&nbsp;&nbsp;&nbsp; จำนวนเงาะ : </label>
-								</li>
-								<li>
-								<label><span class="fwb">&nbsp;&nbsp;&nbsp;&nbsp; จำนวนลำไย : </label>
-							</li>
-							<li>
-							<label><span class="fwb">&nbsp;&nbsp;&nbsp;&nbsp; จำนวนลำไยอบแห้ง : </label>
-						</li>
-						<li>
-						<label><span class="fwb">&nbsp;&nbsp;&nbsp;&nbsp; จำนวนลิ้นจี่ : </label>
-					</li>
-					<li>
-					<label><span class="fwb">&nbsp;&nbsp;&nbsp;&nbsp; จำนวนมะม่วง : </label>
-				</li> -->
+
 
                       </ul>
                     </div>
@@ -79,7 +56,7 @@
 
                           <li class="mt">
                             <div class="rfloat">
-                              <a href="<?=URL?>warehouse/showRow/<?=$value['id']?>" data-plugins="dialog" class="btn btn-zline">
+                              <a href="<?=URL?>warehouse/showRow/<?=$value['id']?>" class="btn btn-zline">
                                 <span><?=$value['name']?></span></a>
                               </div>
                             </li>

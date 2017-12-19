@@ -5,14 +5,14 @@
 
 			<ul class="lfloat" ref="actions">
 				<li class="mt">
-					<h2><i class="icon-angle-double-right mrs"></i><span>แผนการผลิต</span></h2>
+					<h2><i class="icon-shopping-cart mrs"></i><span> Job Order</span></h2>
 				</li>
 
 				<li class="mt"><a class="btn js-refresh" data-plugins="tooltip" data-options="<?=$this->fn->stringify(array('text'=>'refresh'))?>"><i class="icon-refresh"></i></a></li>
 
 				<li class="divider"></li>
 
-				<li class="mt"><a class="btn btn-blue" href="<?=URL?>planning/add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
+				<li class="mt"><a class="btn btn-blue" href="<?=URL?>job/add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
 
 			</ul>
 			
@@ -36,18 +36,6 @@
 		</div>
 		<div class="clearfix mbl mtm">
 			<ul class="lfloat" ref="control">
-				<li>
-					<label for="week" class="label">สัปดาห์</label>
-					<select ref="selector" name="week" class="inputtext">
-						<option value="">-</option>
-						<?php 
-						for($i=1;$i<=53;$i++){
-							echo '<option value="'.$i.'">'.$i.'</option>';
-						}
-						?>
-					</select>
-				</li>
-
 				<li>
 					<label for="closedate" class="label">เลือกวันที่</label><select ref="closedate" name="closedate" class="inputtext">
 						<option selected value="daily">วันนี้</option>

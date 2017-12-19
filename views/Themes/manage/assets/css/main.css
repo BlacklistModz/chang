@@ -1985,7 +1985,7 @@ body.drak .datalist-dialog-wrap {
 }
 .list-table {
     /*background-color:#fff;*/
-    
+
     color: #666
 }
 .list-settings {
@@ -2054,7 +2054,7 @@ body.hidden-tobar #tobar {
 }
 .list-topfive .title {
     /*font-size:18px;*/
-    
+
     font-weight: bold;
     margin-top: 5px
 }
@@ -2068,7 +2068,7 @@ body.hidden-tobar #tobar {
     margin-top: -17.5px;
     /*border-radius:50%;*/
     /*background-color:rgb(229,229,229);*/
-    
+
     text-align: center;
     z-index: 1;
     /*box-shadow:inset 0 1px 2px rgba(0,0,0,.3)*/
@@ -2095,7 +2095,7 @@ body.hidden-tobar #tobar {
 }
 .list-topfive .uiStarsRatable .icon-star {
     /*display:block;*/
-    
+
     color: rgba(0, 0, 0, .54);
     width: 20px;
     height: 20px;
@@ -2166,7 +2166,7 @@ body.hidden-tobar #tobar {
 }
 .wmMasterMain header {
     /*height:24px;*/
-    
+
     line-height: 30px;
     padding: 12px 20px;
     border-bottom: 1px solid #dedede
@@ -2253,7 +2253,7 @@ body.hidden-tobar #tobar {
 }
 .wmMasterMain .box-write>.write {
     /*vertical-align:middle;*/
-    
+
     padding-bottom: 5px
 }
 .wmMasterMain .messageInput {
@@ -2331,7 +2331,7 @@ body.hidden-tobar #tobar {
 }
 .wmMasterView .nav a {
     /*line-height:20px;margin:3px 5px;height:24px;padding:2px 6px;background-color:#cdcdcd;font-size:14px;border-radius:15px;*/
-    
+
     color: #333
 }
 .wmMasterView .nav a:hover {
@@ -2341,7 +2341,7 @@ body.hidden-tobar #tobar {
     padding: 4px 8px;
     font-size: 12px;
     /*border-bottom:1px solid #cdcdcd;*/
-    
+
     background-color: #cdcdcd;
     font-weight: bold
 }
@@ -2364,13 +2364,13 @@ body.hidden-tobar #tobar {
 .status-online>span {
     /*position:absolute;*/
     /*opacity:0;*/
-    
+
     display: none;
     white-space: nowrap;
     font-size: 11px;
     /*top:0;*/
     /*left:100%;*/
-    
+
     line-height: 12px;
     overflow: hidden
 }
@@ -2916,6 +2916,10 @@ body.hidden-tobar #tobar {
 .settings-table .email {
     width: 120px
 }
+.settings-table .status_arr {
+    width: 120px;
+    text-align: center;
+}
 .settings-table .actions {
     width: 80px;
     text-align: right
@@ -3169,7 +3173,7 @@ body.hidden-tobar #tobar {
     color: #fff;
     /*height:48px;*/
     /*line-height:48px;*/
-    
+
     padding: 10px 15px;
     position: relative;
     text-align: left;
@@ -3326,7 +3330,7 @@ body.hidden-tobar #tobar {
 }
 .calendarGridRoot .calendarGridCell {
     /*border-width: 1px 0 0;*/
-    
+
     background-color: transparent;
     border-color: #ccc
 }
@@ -3602,7 +3606,7 @@ body.hidden-tobar #tobar {
 .settingsListLink .label {
     margin-right: 18px;
     /*width:175px;*/
-    
+
     font-weight: bold;
     display: inline-block
 }
@@ -3618,14 +3622,14 @@ body.hidden-tobar #tobar {
 .settingsList .inputtext {
     border-width: 1px;
     /*padding:0 10px;*/
-    
+
     width: 100%;
     /*border:0;*/
     /*background-color:#E3E3E3;*/
     /*background-color:#fff;*/
     /*color:#7f7f7f;*/
     /*border-radius:2px;*/
-    
+
     -webkit-appearance: none;
     /*box-shadow:none;*/
     /*height:40px;line-height:40px;*/
@@ -3687,7 +3691,7 @@ body.hidden-tobar #tobar {
 }
 .settingsList .openPanel .content {
     /*background-color:#fff;*/
-    
+
     position: relative;
     /*padding-left:40px;*/
     /*margin-left:-40px;*/
@@ -4719,10 +4723,10 @@ img#SettingsContent_accountOwnerButton {
     background-color: #fff;
     top: 48px;
     /*height:calc(100% - 48px);transition:0.6s cubic-bezier(0.645,0.045,0.355,1) top,0.6s cubic-bezier(0.645,0.045,0.355,1) height;*/
-    
+
     overflow-y: scroll;
     /*height:300px;*/
-    
+
     left: 0;
     right: 0;
     height: 622px
@@ -4917,7 +4921,7 @@ img#SettingsContent_accountOwnerButton {
 .tours .item .inner {
     /*border:1px solid #000;*/
     /*background-color:#fff;*/
-    
+
     border: 1px solid #000;
     position: relative;
     -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
@@ -4973,7 +4977,7 @@ img#SettingsContent_accountOwnerButton {
 .tours .item .head a {
     color: #fff;
     /*background-color:rgba(0,0,0,.3);*/
-    
+
     padding-right: 12px;
     margin-left: -12px;
     padding-left: 12px
@@ -5085,7 +5089,7 @@ img#SettingsContent_accountOwnerButton {
     float: left;
     height: 100%;
     /*min-width:300px;*/
-    
+
     width: 25%;
     background-color: #fff;
     min-height: 100%;
@@ -5470,7 +5474,7 @@ img#SettingsContent_accountOwnerButton {
 }
 .ActivityList_filter {
     /*position:absolute;right:0;top:10px;*/
-    
+
     margin-top: 10px;
     text-align: right
 }
@@ -5655,7 +5659,7 @@ img#SettingsContent_accountOwnerButton {
 }
 .demo-page-item .bar {
     /*height:8px;*/
-    
+
     padding: 0 4px 1px;
     background-color: #ff8c00;
     font-size: 8px;
@@ -5807,7 +5811,7 @@ a.link-text:hover span {
 .nav-b li {
     padding: 5px 10px 5px 15px;
     /*background-color:#f5f5f5;*/
-    
+
     margin-bottom: 1px;
     position: relative
 }
@@ -6152,7 +6156,7 @@ a.ui-status {
     background-color: #fff;
     border-color: #dddfe2;
     /*box-shadow:0 1px 1px rgba(0,0,0,.08);*/
-    
+
     cursor: pointer;
     text-decoration: none
 }
@@ -6250,7 +6254,7 @@ a.ui-status {
     display: inline-block;
     margin: 5px;
     /**/
-    
+
     vertical-align: top;
 }
 .ui-list-roomsbox>li>.inner {
@@ -6307,7 +6311,7 @@ a.ui-status {
 																								padding-right: 4px;
 																								*/
     /*border: 1px solid #000;*/
-    
+
     background-color: #F44336;
     border-radius: 0;
     font-weight: bold;
@@ -6598,7 +6602,7 @@ a.ui-status {
 }
 .ui-toolbar-toolbar>a.active {
     /*background-color: #ccc;*/
-    
+
     color: #000
 }
 .ui-toolbar-toolbar>a.active:before {
@@ -9116,7 +9120,7 @@ body.light .datalist-main-footer {
     margin-right: 12px;
     background-color: #fff;
     /*border-radius:3px;*/
-    
+
     padding: 3px 12px 5px;
     border: 1px solid #2196f3;
     border-left-width: 4px;
@@ -9370,7 +9374,7 @@ table.table-plan td {
 }
 .ui-invite-selected-listsbox {
     /*height: 100%;*/
-    
+
     overflow-y: auto;
     overflow-x: hidden;
     position: absolute;
@@ -9642,7 +9646,7 @@ table.table-plan td {
     background-color: #fff;
     border: 1px solid #000;
     /*border-radius: 3px;*/
-    
+
     display: inline-block;
     position: relative;
 }
@@ -9654,7 +9658,7 @@ table.table-plan td {
     height: 1px;
     width: 10px;
     /*background-color: #000;*/
-    
+
     border-top: 1px dotted #000
 }
 .ui-list-rooms .inner {
@@ -10205,9 +10209,9 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
 ._ico-center64 {
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 128px;
-    height: 120px;
-    width: 130px!important;
+    background-size: 84px;
+    height: 74px;
+    width: 125px!important;
     opacity: 0.4;
 }
 ._ico-center {
@@ -10220,15 +10224,15 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
 /*table*/
 
 table.blueTable {
-    border: 1px solid #FFFFFF;
-    width: 100%;
+    border: 20px solid #FFFFFF;
+
     text-align: center;
     border-collapse: collapse;
 }
 table.blueTable td,
 table.blueTable th {
     border: 4px solid #fff;
-    padding: 3px 2px;
+    padding: 6px 14px;
 }
 table.blueTable tbody td {
     font-size: 13px;
@@ -10264,13 +10268,13 @@ table.blueTable tfoot .links a {
 /*botton*/
 
 .btn-zline {
-    width: 120px;
-    height: 40px;
+    width: 65px;
+    height: 35px;
     margin: 7px;
     text-align: center;
     border-radius: 11px;
-    box-shadow: 4px 4px 4px;
-    background: rgba(255, 255, 255, 1);
+    box-shadow: 3px 3px 4px;
+    background: rgb(255, 255, 255);;
     "
 
 }

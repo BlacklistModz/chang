@@ -21,7 +21,7 @@ if( !empty($this->results['lists']) ){
                 '<div class="ellipsis"><a title="" class="fwb" href="'.URL.'job/'.$item['id'].'"></a></div>'.
             '</td>'.
 
-            '<td class="contact"></td>'
+            '<td class="contact"></td>'.
 
             '<td class="actions">
                 <span class="gbtn">
