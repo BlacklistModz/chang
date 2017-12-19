@@ -5,7 +5,7 @@ $title = $this->lang->translate('Employees');
 $options = array(
     'url' => URL.'media/set',
     'data' => array(
-        'album_name'=>'my', 
+        'album_name'=>'my',
         'minimize'=> array(128,128),
         'has_quad'=> true,
      ),
@@ -25,7 +25,7 @@ if( !empty($this->item['image_url']) ){
     $image_url = '<img class="img" src="'.$this->item['image_url'].'?rand='.rand(100, 1).'">';
 
     $options['remove_url'] = URL.'media/del/'.$this->item['image_id'];
-    
+
 }
 
 $picture_box = '<div class="anchor"><div class="clearfix">'.
@@ -61,7 +61,7 @@ $form   ->field("emp_username")
         ->autocomplete('off')
         ->addClass('inputtext')
         ->value( !empty($this->item['username'])? $this->item['username']:'' );
-        
+
 if( empty($this->item) ){
 
     $form   ->field("emp_password")
@@ -132,15 +132,6 @@ $form   ->field("emp_line_id")
         ->addClass('inputtext')
         ->placeholder('')
         ->value( !empty($this->item['line_id'])? $this->item['line_id']:'' );
-
-$form   ->field("emp_bio")
-        ->label($this->lang->translate('Note'))
-        ->type('textarea')
-        ->autocomplete('off')
-        ->addClass('inputtext')
-        ->attr('data-plugins', 'autosize')
-        ->placeholder('')
-        ->value( !empty($this->item['bio'])? $this->fn->q('text')->textarea($this->item['bio']):'' );
 
 # set form
 $arr['form'] = '<form class="js-submit-form" data-plugins="empposition" method="post" action="'.URL. 'employees/save"></form>';

@@ -11,7 +11,7 @@ class Employees extends Controller {
 
             $item = $this->model->get($id);
             if( empty($item) ) $this->error();
-            
+
             $this->view->setData('item', $item);
             $this->view->render("employees/profile/display");
         }
@@ -85,8 +85,7 @@ class Employees extends Controller {
                     ->post('emp_phone_number')
                     ->post('emp_email')
                     ->post('emp_line_id')
-                    ->post('emp_address')
-                    ->post('emp_bio');
+                    ->post('emp_address');
 
             $form->submit();
             $postData = $form->fetch();
@@ -133,7 +132,7 @@ class Employees extends Controller {
             $postData['emp_first_name'] = trim($postData['emp_first_name']);
             $postData['emp_last_name'] = trim($postData['emp_last_name']);
             $postData['emp_address'] = nl2br(trim($postData['emp_address']));
-            $postData['emp_bio'] = nl2br(trim($postData['emp_bio']));
+            
             /*$postData['emp_city_id'] = $postData['address']['city'];
             $postData['emp_zip'] = $_POST['address']['zip'];*/
             $postData['emp_birthday'] = $birthday;
@@ -158,14 +157,14 @@ class Employees extends Controller {
                     }
 
                     $album = array('album_id'=>1);
-                    
+
                     if( empty($structure) ){
                         $structure = WWW_UPLOADS . $album['album_id'];
                         if( !is_dir( $structure ) ){
                             mkdir($structure, 0777, true);
                         }
                     }
-                
+
 
                     /**/
                     /* get Data Album */
@@ -207,10 +206,10 @@ class Employees extends Controller {
                     }
                     $item['image_id'] = $media['id'];
                     $this->model->update( $id, array('emp_image_id'=>$item['image_id'] ) );
-                    
+
                 }
 
-                // resize 
+                // resize
                 if( !empty($_POST['cropimage']) && !empty($item['image_id']) ){
                     $this->model->query('media')->resize($item['image_id'], $_POST['cropimage']);
                 }
@@ -271,7 +270,7 @@ class Employees extends Controller {
         }
         else{
             $this->view->setData('item', $item );
-            
+
             $this->view->setPage('path','Forms/employees');
             $this->view->render("change_password");
         }
@@ -433,11 +432,11 @@ class Employees extends Controller {
 
         echo json_encode($arr);
     }
-    
+
     public function del_department($id=null){
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : $id;
         if( empty($this->me) || empty($id) || $this->format!='json' ) $this->error();
-        
+
         $item = $this->model->get_department($id);
         if( empty($item) ) $this->error();
 
@@ -462,7 +461,7 @@ class Employees extends Controller {
             $this->view->setData('item', $item);
             $this->view->setPage('path','Forms/department');
             $this->view->render("del");
-        }   
+        }
     }
     // end: department
 
@@ -530,7 +529,7 @@ class Employees extends Controller {
     public function del_position($id=null){
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : $id;
         if( empty($this->me) || empty($id) || $this->format!='json' ) $this->error();
-        
+
         $item = $this->model->get_position($id);
         if( empty($item) ) $this->error();
 
@@ -555,7 +554,7 @@ class Employees extends Controller {
             $this->view->setData('item', $item);
             $this->view->setPage('path','Forms/position');
             $this->view->render("del");
-        }   
+        }
     }
     // end: position
 
@@ -598,7 +597,7 @@ class Employees extends Controller {
         if( empty($item) ) $this->error();
 
         if( $_POST['section'] == 'basic' ){
-            
+
             try{
 
                 $form = new Form();
@@ -726,7 +725,7 @@ class Employees extends Controller {
     public function del_note($id=null) {
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : $id;
         if( empty($this->me) || empty($id) || $this->format!='json' ) $this->error();
-        
+
         $item = $this->model->query('notes')->get_note($id);
         if( empty($item) ) $this->error();
 
@@ -766,12 +765,12 @@ class Employees extends Controller {
                 $form   ->post('note_text')->val('is_empty');
 
                 $form->submit();
-                $postData = $form->fetch();  
-                
+                $postData = $form->fetch();
+
                 if( empty($arr['error']) ){
 
                     $this->model->query('notes')->updateNote($id, $postData );
-                    
+
                     $arr['message'] = 'บันทึกเรียบร้อย';
 
                     $arr['url'] = 'refresh';
@@ -817,7 +816,7 @@ class Employees extends Controller {
         $this->view->setPage('path','Forms/permission');
         $this->view->render("permission");
     }
-    
+
     public function save_permit(){
         if( empty($this->me) || empty($_POST) || $this->format!='json' ) $this->error();
 
@@ -940,11 +939,11 @@ class Employees extends Controller {
 
         echo json_encode($arr);
     }
-    
+
     public function del_skill($id=null){
         $id = isset($_REQUEST['id']) ? $_REQUEST['id'] : $id;
         if( empty($this->me) || empty($id) || $this->format!='json' ) $this->error();
-        
+
         $item = $this->model->get_skill($id);
         if( empty($item) ) $this->error();
 
@@ -969,7 +968,7 @@ class Employees extends Controller {
             $this->view->setData('item', $item);
             $this->view->setPage('path','Forms/skill');
             $this->view->render("del");
-        }   
+        }
     }
 
     public function set_skill($id=null){
