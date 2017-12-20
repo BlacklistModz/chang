@@ -10224,10 +10224,11 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
 /*table*/
 
 table.blueTable {
-    border: 20px solid #FFFFFF;
+    border: 15px solid #c6d4bf;
 
     text-align: center;
     border-collapse: collapse;
+    margin: auto;
 }
 table.blueTable td,
 table.blueTable th {
@@ -10270,10 +10271,10 @@ table.blueTable tfoot .links a {
 .btn-zline {
     width: 65px;
     height: 35px;
-    margin: 7px;
+    margin: 8px;
     text-align: center;
-    border-radius: 11px;
-    box-shadow: 3px 3px 4px;
+    border-radius: 8px;
+    box-shadow: 3px 4px 20px 0px;
     background: rgb(255, 255, 255);;
     "
 

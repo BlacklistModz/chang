@@ -1,4 +1,12 @@
+<?php
+$data = array();
+foreach ($this->item['rows']['lists'] as $key => $value) {
+  $type = substr($value['name'],0,1);
+  $data[$type][] = $value;
 
+}
+
+?>
 <div ref="header" class="listpage2-header clearfix">
   <div ref="actions" class="listpage2-actions">
     <div id="mainContainer" class="profile clearfix" data-plugins="main">
@@ -22,15 +30,17 @@
 
                 <div class="span10">
                   <div class="uiBoxWhite">
+                    <div class="pas pam">
                     <h3 class="mbm fwb"><i class="icon-cube"></i> ข้อมูลแถว (Rows)</h3>
                     <ul>
 
                       <li>
-                        <label><span class="fwb"><i class="icon-building-o"></i> แถวทั้งหมด : <?= $this->item['row_total']?></label>
+                        <label><span class="fwb"><i class="icon-building-o"></i> แถวทั้งหมด : <?= $this->item['row_total']?> แถว</label>
                         </li>
 
 
                       </ul>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -40,6 +50,7 @@
             <div class="pas pam">
               <div class="clearfix mbm">
                 <div class="span10">
+
                   <div class="lfloat">
                     <div class="setting-title"><i class="icon-building-o"></i> แถวทั้งหมดใน Zone : <?=$this->item['name']?></div>
                   </div>
@@ -47,8 +58,11 @@
 
                 <div class="span10">
                   <div class="lfloat">
+                      <div class="pas pam">
                     <ul>
                       <?php
+
+
                       foreach ($this->item['rows']['lists'] as $key => $value) {?>
 
                         <ul class="lfloat" ref="actions">
@@ -67,6 +81,8 @@
 
 
                       </ul>
+
+                      </div>
                     </div>
                   </div>
                 </div>
