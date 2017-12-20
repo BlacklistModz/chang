@@ -227,6 +227,9 @@ class Settings extends Controller {
       if( $tap=='brands' ){
         $data = $this->model->query('pallets')->brand();
       }
+      elseif ( $tap=='retort') {
+        $data = $this->model->query('pallets')->retort();
+      }
       else{
         $this->error();
       }

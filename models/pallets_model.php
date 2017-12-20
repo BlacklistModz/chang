@@ -396,7 +396,6 @@ class pallets_Model extends Model
     }
 
     #Brand
-    #Brand
     private $brand_select = "brand_id AS id, brand_name AS name, brand_status AS status";
     private $brand_table = "pallets_brand";
     public function brand( $options=array() ){
@@ -450,6 +449,60 @@ class pallets_Model extends Model
         return $this->db->count($this->brand_table, "`brand_name`=:text", array(':text'=>$text));
     }
 
+    #retort
+    private $retort_select = "rt_id AS id, rt_name AS name";
+    private $retort_table = "retort";
+    public function retort( $options=array() ){
+
+        $w = "";
+        $w_arr = array();
+
+        // if( !empty($options["status"]) ){
+        //     $w .= !empty($w) ? " AND " : "";
+        //     $w .= "brand_status=:status";
+        //     $w_arr[":status"] = $options["status"];
+        // }
+
+        $data = $this->db->select("SELECT {$this->retort_select} FROM {$this->retort_table} {$w}", $w_arr);
+
+        // foreach ($data as $key => $value) {
+        //     $data[$key]["status_arr"] = $this->query('products')->getBrandStatus($value["status"]);
+        // }
+
+        return $data;
+    }
+    public function getRetort( $id ){
+        $select = $this->retort_select;
+
+        $sth = $this->db->prepare("SELECT {$select} FROM {$this->brand_table} WHERE `rt_id`=:id LIMIT 1");
+        $sth->execute( array(
+            ':id' => $id
+        ) );
+
+        $data = $sth->fetch( PDO::FETCH_ASSOC );
+        // $data["status_arr"] = $this->query('products')->getBrandStatus( $data["status"] );
+        $data["permit"]["del"] = true;
+
+        return $sth->rowCount()==1
+            ? $data
+            : array();
+    }
+    public function insertRetort( &$data ){
+        // $data["brand_status"] = "enabled";
+
+        $this->db->insert( $this->retort_table, $data );
+        $data["id"] = $this->db->lastInsertId();
+    }
+    public function updateRetort( $id, $data ){
+        $this->db->update( $this->retort_table, $data, "`tr_id`={$id}" );
+    }
+    public function delRetort( $id ){
+        $this->db->delete( $this->retort_table, "`rt_id`={$id}" );
+    }
+    public function is_Retort($text){
+        return $this->db->count($this->retort_table, "`rt_name`=:text", array(':text'=>$text));
+    }
+
     #warehouse
     public function warehouse(){
         return $this->db->select("SELECT ware_id AS id, ware_name AS name FROM warehouse");
@@ -473,5 +526,4 @@ class pallets_Model extends Model
         return !empty($data['total']) ? $data['total'] : 0;
     }
 
-    
 }

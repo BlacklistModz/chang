@@ -68,6 +68,8 @@ if( !empty($sub) ){
 /* Pallets */
 $sub = array();
 $sub[] = array('text'=> 'ยี่ห้อพาเลท','key'=>'brands','url'=>URL.'settings/pallets/brands');
+$sub[] = array('text'=> 'Retort','key'=>'retort','url'=>URL.'settings/pallets/retort');
+
 
 /* foreach ($sub as $key => $value) {
 	if( empty($this->permit[$value['key']]['view']) ) unset($sub[$key]);
