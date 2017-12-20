@@ -135,6 +135,7 @@ class Job extends Controller {
                             'item_size_id'=>$items['size_id'][$i],
                             'item_pro_id'=>$items['pro_id'][$i],
                             'item_can_id'=>$items['can'][$i],
+                            'item_brand'=>$items['brand'][$i],
                             'item_lid'=>$items['lid'][$i],
                             'item_pack'=>$items['pack'][$i],
                             'item_weight_id'=>$items['weight_id'][$i],
