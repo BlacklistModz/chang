@@ -269,7 +269,7 @@ class hold_Model extends Model
     public function manage(){
         return $this->db->select("SELECT {$this->m_field} FROM {$this->m_table} ORDER BY manage_id ASC");
     }
-    public function getManage(){
+    public function getManage($id){
         $sth = $this->db->prepare("SELECT {$this->m_field} FROM {$this->m_table} WHERE manage_id=:id LIMIT 1");
         $sth->execute( array(
             ':id' => $id

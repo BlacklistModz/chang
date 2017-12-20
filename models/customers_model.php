@@ -89,6 +89,15 @@ class customers_model extends Model
             }
         }
 
+        if( isset($_REQUEST["group"]) ){
+            $options["group"] = $_REQUEST["group"];
+        }
+        if( !empty($options["group"]) ){
+            $where_str .= !empty( $where_str ) ? " AND ":'';
+            $where_str = "{$this->_cutNamefield}group=:group";
+            $where_arr[':group'] = $options['group'];
+        }
+
         $arr['total'] = $this->db->count($this->_table, $where_str, $where_arr);
 
         $where_str = !empty($where_str) ? "WHERE {$where_str}":'';

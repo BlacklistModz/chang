@@ -78,13 +78,6 @@ class Settings extends Controller {
       if($tap=='position'){
         $data = $this->model->query('employees')->position();
       }
-      elseif($tap=='customers'){
-        if( $this->format=='json' ){
-          $this->view->setData('results', $this->model->query('customers')->lists());
-          $render = 'settings/sections/accounts/customers/lists/json';
-        }
-        $data = array();
-      }
       elseif($tap=='department'){
         $this->view->setData('access', $this->model->query('system')->roles());
         $data = $this->model->query('employees')->department();

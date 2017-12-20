@@ -83,6 +83,7 @@ class Job extends Controller {
         try{
             $form = new Form();
             $form   ->post('job_code')
+                    ->post('job_date')
                     ->post('job_cus_id')->val('is_empty');
             $form->submit();
             $postData = $form->fetch();
