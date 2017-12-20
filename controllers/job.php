@@ -200,7 +200,6 @@ class Job extends Controller {
         echo json_encode($this->model->query('planning')->listsSize( $id ));
     }
     public function listsWeight($id=null, $size=null){
-
         $size = isset($_REQUEST["size"]) ? $_REQUEST["size"] : $size;
 
         if( empty($this->me) || $this->format!='json' ) $this->error();
