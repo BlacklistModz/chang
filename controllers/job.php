@@ -16,7 +16,7 @@ class Job extends Controller {
     		$item = $this->model->get($id, array("items"=>true));
     		if( empty($item) ) $this->error();
 
-    		$this->view->item = $item;
+    		$this->view->setData('item', $item);
     		$render = "job/profile/display";
     	}
     	else{

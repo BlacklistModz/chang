@@ -102,7 +102,8 @@ class Pallets extends Controller {
         $this->view->setData('brix', $this->model->query('products')->brix());
         $this->view->setData('brand', $this->model->brand());
         $this->view->setData('warehouse', $this->model->warehouse());
-        $this->view->SetData('brands', $this->model->query('products')->brand());
+        $this->view->setData('brands', $this->model->query('products')->brand());
+        $this->view->setData('batch', $this->model->batch());
 
         $this->view->render('pallets/forms/add');
     }
@@ -136,7 +137,8 @@ class Pallets extends Controller {
         $this->view->setData('brix', $this->model->query('products')->brix());
         $this->view->setData('brand', $this->model->brand());
         $this->view->setData('warehouse', $this->model->warehouse());
-        $this->view->SetData('brands', $this->model->query('products')->brand());
+        $this->view->setData('brands', $this->model->query('products')->brand());
+        $this->view->setData('batch', $this->model->batch());
 
         $this->view->render('pallets/forms/add');
     }

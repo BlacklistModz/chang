@@ -526,4 +526,12 @@ class pallets_Model extends Model
         return !empty($data['total']) ? $data['total'] : 0;
     }
 
+    #Batch
+    public function batch(){
+        for($i=1;$i<=15;$i++){
+            $a[] = array('id'=>$i, 'name'=>$i);
+        }
+
+        return $a;
+    }
 }

@@ -16,7 +16,10 @@ $options = $this->fn->stringify( array(
 		'grade' => !empty($this->item['grade_id']) ? $this->item['grade_id'] : '',
 		'weight' => !empty($this->item['weight_id']) ? $this->item['weight_id'] : '',
 		'rows' => !empty($this->item['row_id']) ? $this->item['row_id'] : '',
-		'deep' => !empty($this->item['deep']) ? $this->item['deep'] : ''
+		'deep' => !empty($this->item['deep']) ? $this->item['deep'] : '',
+		'items'=> !empty($this->item['retort']) ? $this->item['retort'] : array(),
+		'retort' => array(),
+		'batch' => $this->batch
 	) );
 
 $form = new Form();
@@ -142,14 +145,14 @@ $form 	->field('pallet_brix_id')
 		->select( $this->brix )
 		->value( !empty($this->item['brix_id']) ? $this->item['brix_id'] : '' );
 
-if( empty($this->item) ){
-	$form 	->field('pallet_qty')
-			->label('จำนวน (กระป๋อง) *')
-			->autocomplete('off')
-			->type('number')
-			->addClass('inputtext')
-			->value( !empty($this->item['qty']) ? $this->item['qty'] : '' );
-}
+// if( empty($this->item) ){
+// 	$form 	->field('pallet_qty')
+// 			->label('จำนวน (กระป๋อง) *')
+// 			->autocomplete('off')
+// 			->type('number')
+// 			->addClass('inputtext')
+// 			->value( !empty($this->item['qty']) ? $this->item['qty'] : '' );
+// }
 
 $form 	->field('pallet_brand_id')
 		->label('ยี่ห้อพาเลท')
@@ -205,37 +208,27 @@ if( !empty($this->item) ){
 }
 
 
-/* $form2 = new Form();
+$form2 = new Form();
 $form2 = $form2 ->create()
 		->elem('div')
 		->addClass('form-insert form-pallet');
 
 $form2 	->field("rt_lists")
 		->label("RT")
-		->text( '<div class="listpage2-table">
-					<table role="tableRT" class="table-bordered">
+		->text( '<div role="tableRT">
+					<table class="table-bordered" width="100%">
 						<thead>
 							<tr>
-								<th class="ID">RT NO.</th>
-								<th class="status">Batch</th>
-								<th class="status">จำนวนกระป๋อง</th>
-								<th class="actions">เพิ่ม/ลบ</th>
+								<th class="ID" width="25%">RT NO.</th>
+								<th class="status" width="25%">Batch</th>
+								<th class="status" width="25%">จำนวนกระป๋อง</th>
+								<th class="actions" width="25%">เพิ่ม/ลบ</th>
 							</tr>
 						</thead>
-						<tbody role="listsRT">
-						</tbody>
+						<tbody role="listsRT"></tbody>
 					</table>
 				</div>'
 		);
-
-if( empty($this->item) ){
-	$form2 	->field('pallet_qty')
-			->label('จำนวน (กระป๋อง) *')
-			->autocomplete('off')
-			->type('number')
-			->addClass('inputtext')
-			->value( !empty($this->item['qty']) ? $this->item['qty'] : '' );
-} */
 ?>
 <div id="mainContainer" class="Setting clearfix" data-plugins="main">
 	<div role="main">
@@ -244,11 +237,16 @@ if( empty($this->item) ){
 		</div>
 		<div class="clearfix">
 			<form class="js-submit-form" data-plugins="palletsForm" data-options="<?=$options?>" method="POST" action="<?=URL?>pallets/save">
-				<div class="pll mbl" style="width: 750px;">
+				<div class="pll mbl span6" style="width: 700px; margin-left: -2mm">
 					<div class="uiBoxWhite pam">
 						<?=$form->html()?>
 					</div>
-					<div class="clearfix uiBoxWhite pam">
+				</div>
+				<div class="span4" style="margin-left: 2mm">
+					<div class="uiBoxWhite pam">
+						<?=$form2->html(); ?>
+					</div>
+					<div class="clearfix uiBoxWhite pam mtl">
 						<div class="lfloat">
 							<a href="<?=URL?>pallets/<?=$this->types['id']?>" class="btn btn-red">ยกเลิก</a>
 						</div>
@@ -259,11 +257,6 @@ if( empty($this->item) ){
 						</div>
 					</div>
 				</div>
-				<!-- <div class="span4">
-					<div class="uiBoxWhite pam">
-						<?php //echo $form2->html(); ?>
-					</div>
-				</div> -->
 			</form>
 		</div>
 	</div>

@@ -2756,6 +2756,8 @@ if ( typeof Object.create !== 'function' ) {
 
 			self.$floor = self.$elem.find('[data-name=floor]');
 
+			self.$listsRT = self.$elem.find('[role=listsRT]');
+
 			self.setElem();
 			self.Events();
 		},
@@ -2769,6 +2771,14 @@ if ( typeof Object.create !== 'function' ) {
 			if( self.$warehouse.val() != '' ){
 				self.changeRows();
 				self.changeDeep();
+			}
+
+			if( self.options.items.length==0 ){
+				self.getItem();
+			}else{
+				$.each( self.options.items, function (i, obj) {
+					self.getItem(obj);
+				} );
 			}
 		},
 		Events: function(){
@@ -2785,6 +2795,35 @@ if ( typeof Object.create !== 'function' ) {
 
 			self.$rows.change(function(){
 				self.changeDeep();
+			});
+
+			self.$elem.delegate('.js-add-item', 'click', function () {
+				var box = $(this).closest('tr');
+
+				if( box.find(':input').first().val()=='' ){
+					box.find(':input').first().focus();
+					return false;
+				}
+
+				var setItem = self.setItem({});
+				box.after( setItem );
+				setItem.find(':input').first().focus();
+
+				self.sortItem();
+			});
+
+			self.$elem.delegate('.js-remove-item', 'click', function () {
+				var box = $(this).closest('tr');
+
+				if( self.$listsitem.find('tr').length==1 ){
+					box.find(':input').val('');
+					box.find(':input').first().focus();
+				}
+				else{
+					box.remove();
+				}
+
+				self.sortItem();
 			});
 		},
 		changeWeight: function(){
@@ -2844,7 +2883,65 @@ if ( typeof Object.create !== 'function' ) {
 					});
 				}
 			}, 'json');
+		},
+		getItem: function( data ){
+			var self = this;
+
+			self.$listsRT.append( self.setItem( data || {} ) );
+			// self.sortItem();
+		},
+		setItem: function ( data ) {
+			var self = this;
+
+			var $retort = $('<select>', {class:'inputtext', name:'retort[id][]'});
+			$retort.append( $('<option>', {value:'', text:'-'}) );
+
+			$.each( self.options.retort, function(i,obj) {
+				$retort.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
+			});
+
+			var $batch = $('<select>', {class:'inputtext', name:'retort[batch][]'});
+			$batch.append( $('<option>', {value:'', text:'-'}) );
+
+			$.each( self.options.batch, function(i,obj) {
+				$batch.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
+			});
+
+			$tr = $('<tr>');
+			$tr.append(
+				$('<td>', {class: "ID"}).append($retort),
+				$('<td>', {class: "status"}).append($batch),
+				$('<td>', {class: "status"}).append(
+					$('<input type="number" class="inputtext" name="retort[qty][]">')
+				),
+				$('<td>', {class: 'actions', style:"text-align: center;"}).append( 
+					$('<span>', {class:"gbtn"}).append(
+						$('<button>', {
+							type:"button",
+							class:"btn js-add-item btn-no-padding btn-blue",
+						}).html( $('<i>', {class: 'icon-plus'}) )
+					),
+					$('<span>', {class:"gbtn"}).append(
+						$('<button>', {
+							type:"button",
+							class:"btn js-remove-item btn-no-padding btn-red",
+						}).html( $('<i>', {class: 'icon-remove'}) )
+					)
+				)
+			);
+
+			$tr.find('[data-id='+data.id+']').prop('selected', true);
+
+			return $tr;
 		}
+		// sortItem: function () {
+		// 	var self = this;
+		// 	var no = 0;
+		// 	$.each(self.$listsRT.find('tr'), function (i, obj) {
+		// 		no++;
+		// 		$(this).find('.no').text( no );
+		// 	});
+		// }
 	}
 	$.fn.palletsForm = function( options ) {
 		return this.each(function() {
@@ -2933,7 +3030,7 @@ if ( typeof Object.create !== 'function' ) {
 		init: function(options, elem){
 			var self = this;
 			self.$elem = $(elem);
-			self.options = $.extend( {}, $.fn.palletsForm.options, options );
+			self.options = $.extend( {}, $.fn.tablePallets.options, options );
 
 			self.$warehouse = self.$elem.find('[data-name=warehouse]');
 			self.$rows = self.$elem.find('[data-name=rows]');
