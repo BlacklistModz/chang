@@ -18,7 +18,6 @@ $url = URL .'pallets/';
 <section class="setting-section">
 	<table class="settings-table admin"><tbody>
 		<tr>
-			<th class="status"><?=$this->lang->translate('ID')?></th>
 			<th class="name"><?=$this->lang->translate('Name')?></th>
 			<th class="actions"><?=$this->lang->translate('Action')?></th>
 
@@ -26,14 +25,14 @@ $url = URL .'pallets/';
 
 		<?php foreach ($this->data as $key => $item) { ?>
 		<tr>
-			<td class="name"><?=$item['id']?></td>
-			<td class="status" style="width: 90px;"><?=$item["name"]?></td>
-
+			<td class="name"><span class="fwb">RT No.</span> <?=$item["name"]?></td>
 			<td class="actions whitespace">
-
-				<span class=""><a data-plugins="dialog" href="<?=$url?>edit_retort/<?=$item['id'];?>" class="btn btn-orange"><i class="icon-pencil"></i></a></span>
-				<span class=""><a data-plugins="dialog" href="<?=$url?>del_retort/<?=$item['id'];?>" class="btn btn-red"><i class="icon-trash"></i></a></span>
-
+				<span class="gbtn">
+					<a data-plugins="dialog" href="<?=$url?>edit_retort/<?=$item['id'];?>" class="btn btn-orange btn-no-padding"><i class="icon-pencil"></i></a>
+				</span>
+				<span class="gbtn">
+					<a data-plugins="dialog" href="<?=$url?>del_retort/<?=$item['id'];?>" class="btn btn-red btn-no-padding"><i class="icon-trash"></i></a>
+				</span>
 			</td>
 
 		</tr>
