@@ -35,14 +35,14 @@
 			
 		</div>
 		<div class="clearfix mbl mtm">
-			<ul class="lfloat" ref="control">
+			<!-- <ul class="lfloat" ref="control">
 				<li>
 					<label for="closedate" class="label">เลือกวันที่</label><select ref="closedate" name="closedate" class="inputtext">
 						<option selected value="daily">วันนี้</option>
 						<option value="custom">กำหนดเอง</option>
 					</select>
 				</li>
-			</ul>
+			</ul> -->
 			<ul class="rfloat" ref="control">
 				<li class="mt"><form class="form-search" action="#">
 					<input class="inputtext search-input" type="text" id="search-query" placeholder="<?=$this->lang->translate('Search')?>" name="q" autocomplete="off">

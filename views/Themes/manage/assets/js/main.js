@@ -3343,25 +3343,25 @@ if ( typeof Object.create !== 'function' ) {
 				$select.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
 			});
 
-			var $brand = $('<select>', {class:'inputtext', name:'items[brand][]', style:"width: 100%;"});
+			var $brand = $('<select>', {class:'inputtext js-select-brand', name:'items[brand][]', style:"width: 100%;"});
 			$brand.append( $('<option>', {value:'', text:'-'}) );
 			$.each( self.options.brand, function(i,obj) {
 				$brand.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
 			});
 
-			var $can = $('<select>', {class:'inputtext', name:'items[can][]', style:"width: 100%;"});
+			var $can = $('<select>', {class:'inputtext js-select-can', name:'items[can][]', style:"width: 100%;"});
 			$can.append( $('<option>', {value:'', text:'-'}) );
 			$.each( self.options.can, function(i,obj) {
 				$can.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
 			});
 
-			var $lid = $('<select>', {class:'inputtext', name:'items[lid][]', style:"width: 100%;"});
+			var $lid = $('<select>', {class:'inputtext js-select-lid', name:'items[lid][]', style:"width: 100%;"});
 			$lid.append( $('<option>', {value:'', text:'-'}) );
 			$.each( self.options.lid, function(i,obj) {
 				$lid.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
 			});
 
-			var $pack = $('<select>', {class:'inputtext', name:'items[pack][]', style:"width: 100%;"});
+			var $pack = $('<select>', {class:'inputtext js-select-pack', name:'items[pack][]', style:"width: 100%;"});
 			$pack.append( $('<option>', {value:'', text:'-'}) );
 			$.each( self.options.pack, function(i,obj) {
 				$pack.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
@@ -3391,9 +3391,9 @@ if ( typeof Object.create !== 'function' ) {
 						 )
 					),
 				$('<td>').append(
-							$('<input>', {class:'inputtext', name:'items[qty][]', style:"width: 100%;"})
+							$('<input>', {class:'inputtext', name:'items[qty][]', style:"width: 100%;", value:data.qty})
 						),
-				$('<td>').append($('<input>', {class:'inputtext', name:'items[remark][]', style:"width: 100%;"})),
+				$('<td>').append($('<input>', {class:'inputtext', name:'items[remark][]', style:"width: 100%;", value:data.remark})),
 				$('<td>', {class: 'actions'}).append(
 					$('<span class="gbtn">').append(
 						$('<button>', {
@@ -3410,7 +3410,15 @@ if ( typeof Object.create !== 'function' ) {
 				),
 			);
 
-			$tr.find('[data-id='+data.id+']').prop('selected', true);
+			$tr.find('.js-select-type').find('[data-id='+data.type_id+']').prop('selected', true);
+			$tr.find('.js-select-brand').find('[data-id='+data.brand+']').prop('selected', true);
+			$tr.find('.js-select-can').find('[data-id='+data.can_id+']').prop('selected', true);
+			$tr.find('.js-select-lid').find('[data-id='+data.lid+']').prop('selected', true);
+			$tr.find('.js-select-pack').find('[data-id='+data.pack+']').prop('selected', true);
+
+			self.setProducts($tr, data.pro_id);
+			self.setSize($tr, data.size_id);
+			self.setWeight($tr, data.weight_id);
 
 			return $tr;
 		},
@@ -3466,9 +3474,9 @@ if ( typeof Object.create !== 'function' ) {
 
 			var type = box.find('select.js-select-type').val();
 			var $weight = box.find('select.js-select-weight');
-			var	$size = box.find('select.js-select-size');
+			var size = box.find('select.js-select-size').val();
 
-			$.get( Event.URL + 'job/listsWeight/'+type, {size:$size.val()}, function (res) {
+			$.get( Event.URL + 'job/listsWeight/'+type, {size:size}, function (res) {
 				$weight.empty();
 				var li = $('<option>', {value: "", text: "-"});
 				$weight.append( li );

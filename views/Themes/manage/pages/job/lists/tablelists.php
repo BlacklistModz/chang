@@ -13,15 +13,15 @@ if( !empty($this->results['lists']) ){
 
         $tr .= '<tr class="'.$cls.'" data-id="'.$item['id'].'">'.
 
-            '<td class="ID">'.$item['code'].'</td>'.
+            '<td class="email"><span class="fwb">'.$item['code'].'</span></td>'.
 
             '<td class="date">'.date("d/m/y", strtotime($item['date'])).'</td>'.
 
             '<td class="name">'.
-                '<div class="ellipsis"><a title="" class="fwb" href="'.URL.'job/'.$item['id'].'"></a></div>'.
+                '<div class="ellipsis"><a title="" class="fwb" href="'.URL.'job/'.$item['id'].'">'.$item['cus_name'].'</a></div>'.
             '</td>'.
 
-            '<td class="contact"></td>'.
+            // '<td class="contact"></td>'.
 
             '<td class="actions">
                 <span class="gbtn">

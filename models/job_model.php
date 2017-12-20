@@ -13,13 +13,17 @@ class job_Model extends Model
 
     public function insert( &$data ){
     	$this->db->insert( $this->_objName, $data);
-        $data["{$this->_cutNamefield}"] = $this->db->lastInsertId();
+        $data["id"] = $this->db->lastInsertId();
     }
     public function update($id, $data) {
         $this->db->update( $this->_objName, $data, "`{$this->_cutNamefield}id`={$id}" );
     }
     public function delete($id){
     	$this->db->delete( $this->_objName, "`{$this->_cutNamefield}id`={$id}" );
+        $this->delJobItem($id);
+    }
+    public function is_code($text){
+        return $this->db->count( $this->_objName, "`{$this->_cutNamefield}code`=:text", array(":text"=>$text) );
     }
     public function lists( $options=array() ){
     	$options = array_merge(array(
@@ -39,6 +43,26 @@ class job_Model extends Model
 
         $where_str = "";
         $where_arr = array();
+
+        if( !empty($options['q']) ){
+
+            $arrQ = explode(' ', $options['q']);
+            $wq = '';
+            foreach ($arrQ as $key => $value) {
+                $wq .= !empty( $wq ) ? " OR ":'';
+                $wq .= "job_code=:q{$key}
+                        OR job_cus_name=:q{$key}
+                        OR job_cus_phone=:q{$key}";
+                $where_arr[":q{$key}"] = "%{$value}%";
+                $where_arr[":s{$key}"] = "{$value}%";
+                $where_arr[":f{$key}"] = $value;
+            }
+
+            if( !empty($wq) ){
+                $where_str .= !empty( $where_str ) ? " AND ":'';
+                $where_str .= "($wq)";
+            }
+        }
 
         $arr['total'] = $this->db->count($this->_table, $where_str, $where_arr);
 
@@ -77,6 +101,8 @@ class job_Model extends Model
     public function convert($data, $options=array()){
     	$data = $this->cut($this->_cutNamefield, $data);
 
+        $data['permit']['del'] = true;
+
     	if( !empty($options['items']) ){
     		$data['items'] = $this->listsItems($data['id']);
     	}
@@ -86,13 +112,13 @@ class job_Model extends Model
 
     #ITEMS
     public function listsItems($id){
-    	return $this->buildFragItem( $this->db->select("SELECT * FROM job_orders_items WHERE item_job_id=:id", array(":id"=>$id)) );
+    	return $this->buildFragItem( $this->db->select("SELECT * FROM job_orders_items WHERE item_job_id=:id ORDER BY item_id ASC", array(":id"=>$id)) );
     }
     public function buildFragItem($results){
     	$data = array();
         foreach ($results as $key => $value) {
             if( empty($value) ) continue;
-            $data[] = $this->convertItem($results);
+            $data[] = $this->convertItem($value);
         }
 
         return $data;
@@ -101,6 +127,25 @@ class job_Model extends Model
     	$data = $this->cut('item_', $data);
 
     	return $data;
+    }
+    public function setItem($data){
+        if( !empty($data['id']) ){
+            $id = $data['id'];
+            unset($data['id']);
+            $data['item_updated'] = date("c");
+            $this->db->update("job_orders_items", $data, "item_id={$id}");
+        }
+        else{
+            $data['item_created'] = date("c");
+            $data['item_updated'] = date("c");
+            $this->db->insert("job_orders_items", $data);
+        }
+    }
+    public function delItem($id){
+        $this->db->delete("job_orders_items", "item_id={$id}");
+    }
+    public function delJobItem($id){
+        $this->db->delete("job_orders_items", "item_job_id={$id}");
     }
 
     #STATUS
