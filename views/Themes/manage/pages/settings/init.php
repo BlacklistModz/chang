@@ -18,7 +18,6 @@ if( !empty($sub) ){
 
 /* Accounts */
 $sub = array();
-$sub[] = array('text'=> $this->lang->translate('Customers'),'key' => 'customers','url' => URL.'settings/accounts/customers');
 $sub[] = array('text'=> $this->lang->translate('Department'),'key'=>'department','url'=>URL.'settings/accounts/department');
 $sub[] = array('text'=> $this->lang->translate('Position'),'key' => 'position','url' => URL.'settings/accounts/position');
 $sub[] = array('text'=> $this->lang->translate('Employees'),'key' => 'employees','url' => URL.'settings/accounts/');

@@ -7,8 +7,8 @@ class Employees_Model extends Model{
     }
 
     private $_objType = "employees";
-    private $_table = "employees e 
-        LEFT JOIN emp_department d ON e.emp_dep_id=d.dep_id 
+    private $_table = "employees e
+        LEFT JOIN emp_department d ON e.emp_dep_id=d.dep_id
         LEFT JOIN emp_position p ON e.emp_pos_id=p.pos_id
         LEFT JOIN city c ON e.emp_city_id=c.city_id";
 
@@ -34,13 +34,13 @@ class Employees_Model extends Model{
                         , emp_permission
 
                         , emp_dealer_id
-                        
+
                         , d.dep_id
                         , d.dep_name
                         , d.dep_access as access
                         , d.dep_permission
 
-                        , p.pos_id 
+                        , p.pos_id
                         , p.pos_name
                         , p.pos_permission
                         , c.city_name";
@@ -119,6 +119,7 @@ class Employees_Model extends Model{
             $where_arr[':not_dep_id'] = $options['not_dep_id'];
         }
 
+        // สำหรับการค้นหา
         if( !empty($options['q']) ){
 
             $arrQ = explode(' ', $options['q']);
@@ -148,7 +149,7 @@ class Employees_Model extends Model{
 
         if( ($options['pager']*$options['limit']) >= $arr['total'] ) $options['more'] = false;
         $arr['options'] = $options;
-        
+
         return $arr;
     }
 
@@ -197,7 +198,7 @@ class Employees_Model extends Model{
         if( empty($data['prefix_name_str']) ){
             $data['prefix_name_str'] = '';
         }
-        
+
 
         $data['fullname'] = "{$data['prefix_name_str']}{$data['first_name']} {$data['last_name']}";
 
@@ -298,7 +299,7 @@ class Employees_Model extends Model{
 
     /**/
     public function insert(&$data) {
-        
+
         $data["{$this->_cutNamefield}created"] = date('c');
         $data["{$this->_cutNamefield}updated"] = date('c');
         $data["{$this->_cutNamefield}display"] = 'enabled';
@@ -348,8 +349,8 @@ class Employees_Model extends Model{
     public function get_department($id){
         $sth = $this->db->prepare("
             SELECT {$this->select_department}
-            FROM emp_department 
-            WHERE `dep_id`=:id 
+            FROM emp_department
+            WHERE `dep_id`=:id
             LIMIT 1");
         $sth->execute( array( ':id' => $id ) );
         $data = $sth->rowCount()==1 ? $sth->fetch( PDO::FETCH_ASSOC ) : array();
@@ -357,7 +358,7 @@ class Employees_Model extends Model{
         return $this->convert_department($data);
     }
     public function convert_department( $data ){
-        
+
         if( !empty($data['permission'] )){
             $data['permission'] = json_decode($data['permission'], true);
         }
@@ -413,11 +414,11 @@ class Employees_Model extends Model{
         $sth = $this->db->prepare("
             SELECT {$this->select_position}
             FROM emp_position LEFT JOIN emp_department ON pos_dep_id=dep_id
-            WHERE `pos_id`=:id 
+            WHERE `pos_id`=:id
             LIMIT 1");
         $sth->execute( array( ':id' => $id ) );
         $data = $sth->rowCount()==1 ? $sth->fetch( PDO::FETCH_ASSOC ) : array();
-        
+
         // print_r($data); die;
         if( !empty($data['permission']) ){
             $data['permission'] = json_decode($data['permission'], true);

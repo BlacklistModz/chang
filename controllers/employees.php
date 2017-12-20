@@ -119,7 +119,6 @@ class Employees extends Controller {
                 $arr['error']['emp_name'] = "มีชื่อ-นามสกุลนี้ ในระบบแล้ว";
             }
 
-
             $futureDate = date('Y-m-d',strtotime(date("Y-m-d", mktime()) . " -6 year"));
             $birthday = date("{$_POST['birthday']['year']}-{$_POST['birthday']['month']}-{$_POST['birthday']['date']}");
             if( strtotime($birthday) > strtotime($futureDate) ){
@@ -132,7 +131,7 @@ class Employees extends Controller {
             $postData['emp_first_name'] = trim($postData['emp_first_name']);
             $postData['emp_last_name'] = trim($postData['emp_last_name']);
             $postData['emp_address'] = nl2br(trim($postData['emp_address']));
-            
+
             /*$postData['emp_city_id'] = $postData['address']['city'];
             $postData['emp_zip'] = $_POST['address']['zip'];*/
             $postData['emp_birthday'] = $birthday;
@@ -354,8 +353,6 @@ class Employees extends Controller {
             $this->view->render("del_image_profile");
         }
     }
-
-
 
     /**/
     /* department */

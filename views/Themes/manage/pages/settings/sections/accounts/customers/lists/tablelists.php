@@ -16,27 +16,18 @@ if( !empty($this->results['lists']) ){
 
         $tr .= '<tr class="'.$cls.'" data-id="'.$item['id'].'">'.
 
-            '<td class="number">'.sprintf("%03d", $item['id']).'</td>'.
-
-            '<td class="name">'.
-
-                '<div class="anchor clearfix">'.
-                    $image.
-
-                    '<div class="content"><div class="spacer"></div><div class="massages">'.
-
-                        '<div class="name"><a class="fwb">'. $item['name'].'</a> <span class="fwn">@'. $item['username'].'</span></div>'.
-
-                        '<div class="fsm fcg whitespace">Last update: '.$this->fn->q('time')->live( $item['updated'] ).'</div>'.
-                    '</div>'.
-                '</div></div>'.
-
-            '</td>'.
+            '<td class="number">'.$item['id'].'</td>'.
+            '<td class="name">'.$item['name'].'</td>'.
 
             '<td class="actions">'.
+              '<div class="group-btn whitespace mts">'.
                 '<span class="gbtn">'.
-                    '<a class="btn btn-orange btn-no-padding" href="'.URL.'customers/edit/'.$item['id'].'"><i class="icon-pencil"></i></a>'.
+                  '<a class="btn btn-orange btn-no-padding" href="'.URL.'customers/edit/'.$item['id'].'"><i class="icon-pencil"></i></a>'.
                 '</span>'.
+                '<span class="gbtn">'.
+                  '<a class="btn btn-red btn-no-padding" data-plugins="dialog" href="'.URL.'customers/del/'.$item['id'].'"><i class="icon-trash"></i></a>'.
+                '</span>'.
+              '</div>'.
             '</td>'.
 
         '</tr>';
