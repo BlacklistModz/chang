@@ -1,8 +1,26 @@
 <?php
+$startDate = !empty($this->item['date']) ? $this->item['date'] : "";
+if( !empty($this->item['date']) && $this->item['date'] == "0000-00-00" ){
+	$startDate = "";
+}
+
 $form = new Form();
 $form = $form->create()
 			 ->elem('div')
 			 ->addClass('form-insert');
+
+$form 	->field('job_date')
+		->label("DATE")
+		->addClass('inputtext')
+		->autocomplete('off')
+		->attr('data-plugins', 'datepicker')
+		->value( !empty($startDate) ? $this->item['date'] : '' );
+
+$form 	->field('job_code')
+		->label("JO CODE")
+		->addClass('inputtext')
+		->autocomplete('off')
+		->value( !empty($this->item['code']) ? $this->item['code'] : '' );
 
 $form 	->field('job_cus_id')
 		->label("BUYER NAME")
@@ -12,7 +30,7 @@ $form 	->field('job_cus_id')
 		->select( $this->customers['lists'] )
 		->value( !empty($this->item['cus_id']) ? $this->item['cus_id'] : '' );
 
-$form 	->field("job_cus_address")
+/* $form 	->field("job_cus_address")
 		->label("ADDRESS")
 		->addClass('inputtext')
 		->type('textarea')
@@ -30,7 +48,7 @@ $form 	->field("job_cus_fax")
 		->label("FAX")
 		->addClass('inputtext')
 		->attr('data-name','fax')
-		->value( !empty($this->item['cus_fax']) ? $this->item['cus_fax'] : '' );
+		->value( !empty($this->item['cus_fax']) ? $this->item['cus_fax'] : '' ); */
 
 $form2 = new Form();
 $form2 = $form2->create()
@@ -57,7 +75,7 @@ $form2 	->field('job_incoterm')
 		->value( !empty($this->item['incoterm']) ? $this->item['incoterm'] : '' );
 
 $options = $this->fn->stringify( array(
-		'item' => !empty($this->item['items']) ? $this->item['items'] : array(),
+		'items' => !empty($this->item['items']) ? $this->item['items'] : array(),
 		'types' => $this->types,
 		'brand' => $this->brands['lists'],
 		'can' => $this->can,
@@ -75,11 +93,11 @@ $options = $this->fn->stringify( array(
 						<?=$form->html()?>
 					</div>
 				</div>
-				<div class="mtm">
+				<!-- <div class="mtm">
 					<div class="uiBoxWhite pam pas">
 						<?=$form2->html()?>
 					</div>
-				</div>
+				</div> -->
 				<div class="clearfix mtm">
 					<div class="uiBoxWhite pam pas">
 						<div class="lists-items" role="listsitems">
@@ -113,6 +131,11 @@ $options = $this->fn->stringify( array(
 						<a href="<?=URL?>job" class="btn">CANCEL</a>
 					</div>
 				</div>
+				<?php 
+				if( !empty($this->item) ){
+					echo '<input type="hidden" name="id" value="'.$this->item['id'].'">';
+				}
+				?>
 			</form>
 		</div>
 	</div>

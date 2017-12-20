@@ -75,6 +75,7 @@ class customers_model extends Model
         $where_str = !empty($where_str) ? "WHERE {$where_str}":'';
         $orderby = $this->orderby( $this->_cutNamefield.$options['sort'], $options['dir'] );
         $limit = $this->limited( $options['limit'], $options['pager'] );
+        if( !empty($options["unlimit"]) ) $limit = "";
         $arr['lists'] = $this->buildFrag( $this->db->select("SELECT {$this->_field} FROM {$this->_table} {$where_str} {$groupby} {$orderby}  {$limit}", $where_arr ), $options );
 
         if( ($options['pager']*$options['limit']) >= $arr['total'] ) $options['more'] = false;

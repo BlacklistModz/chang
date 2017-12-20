@@ -380,5 +380,46 @@ class System_Model extends Model{
     public function country() {
         return $this->db->select("SELECT country_id as id, country_code as code, country_name as name FROM country ORDER BY country_name ASC");
     }
+    public function getCountryName($name){
+        $sth = $this->db->prepare("SELECT country_id as id, country_code as code, country_name as name FROM country WHERE country_name=:name LIMIT 1");
+        $sth->execute( array(
+            ':name' => $name
+        ) );
 
+        return $sth->rowCount()==1
+            ? $sth->fetch( PDO::FETCH_ASSOC )
+            : array();
+    }
+
+    /*public function copyCustomer(){
+       $results = $this->db->select("SELECT * FROM customers_2"); 
+       foreach ($results as $key => $value) {
+            $country = trim($value['country']);
+            $_country = $this->query('system')->getCountryName($country);
+
+            $address = $value['address1'];
+            if( !empty($value['address2']) ) $address .= ' '.$value['address2'];
+
+            $data = array(
+                'cus_id'=>$value['customerid'],
+                'cus_tax_id'=>$value['customer_taxid'],
+                'cus_branch'=>$value['customer_branch'],
+                'cus_name'=>$value['customer_name'],
+                'cus_address'=>$address,
+                'cus_province'=>$value['province'],
+                'cus_country'=> !empty($_country) ? $_country['id'] : 0 ,
+                'cus_postcode'=>$value['postcode'],
+                'cus_brand'=>$value['brand'],
+                'cus_contact_name'=>$value['contact_name1'],
+                'cus_contact_phone'=>$value['contact_phone1'],
+                'cus_contact_email'=>$value['contact_email1'],
+                'cus_contact_fax'=>$value['contact_fax'],
+                'cus_sale_id'=>0,
+                'cus_group'=>$value['customer_group'],
+                'cus_currency'=>$value['cust_currency']
+            );
+
+            $this->insert($data);
+       }
+    }*/
 }

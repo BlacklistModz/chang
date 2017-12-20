@@ -1,5 +1,13 @@
 <?php
 
+$job[] = array('key'=>'job', 'text'=>'JOB ORDER', 'link'=>$url.'job', 'icon'=>'clipboard');
+// foreach ($job as $key => $value) {
+// 	if( empty($this->permit[$value['key']]['view']) ) unset($job[$key]);
+// }
+if( !empty($job) ){
+	echo $this->fn->manage_nav($job, $this->getPage('on'));
+}
+
 #Order
 // $order[] = array('key'=>'planning', 'text'=>'แผนการผลิต', 'link'=>$url.'planning', 'icon'=>'angle-double-right ');
 foreach ($this->type as $key => $value) {
