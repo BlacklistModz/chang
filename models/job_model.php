@@ -44,15 +44,15 @@ class job_Model extends Model
         $where_str = "";
         $where_arr = array();
 
-        if( !empty($options['q']) ){
+        /* if( !empty($options['q']) ){
 
             $arrQ = explode(' ', $options['q']);
             $wq = '';
             foreach ($arrQ as $key => $value) {
                 $wq .= !empty( $wq ) ? " OR ":'';
-                $wq .= "job_code=:q{$key}
-                        OR job_cus_name=:q{$key}
-                        OR job_cus_phone=:q{$key}";
+                $wq .= "job_code LIKE :q{$key}
+                        OR job_cus_name LIKE :q{$key}
+                        OR job_cus_phone LIKE :q{$key}";
                 $where_arr[":q{$key}"] = "%{$value}%";
                 $where_arr[":s{$key}"] = "{$value}%";
                 $where_arr[":f{$key}"] = $value;
@@ -62,6 +62,13 @@ class job_Model extends Model
                 $where_str .= !empty( $where_str ) ? " AND ":'';
                 $where_str .= "($wq)";
             }
+        } */
+
+        if( !empty($options['q']) ){
+            $where_str .= !empty($where_str) ? " AND " : "";
+            $where_str .= "job_code LIKE :f OR job_cus_name LIKE :q OR job_cus_phone LIKE :q";
+            $where_arr[":q"] = "%{$options["q"]}%";
+            $where_arr[":f"] = $options["q"];
         }
 
         $arr['total'] = $this->db->count($this->_table, $where_str, $where_arr);
