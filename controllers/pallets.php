@@ -104,6 +104,7 @@ class Pallets extends Controller {
         $this->view->setData('warehouse', $this->model->warehouse());
         $this->view->setData('brands', $this->model->query('products')->brand());
         $this->view->setData('batch', $this->model->batch());
+        $this->view->setData('retort', $this->model->retort());
 
         $this->view->render('pallets/forms/add');
     }
@@ -139,6 +140,7 @@ class Pallets extends Controller {
         $this->view->setData('warehouse', $this->model->warehouse());
         $this->view->setData('brands', $this->model->query('products')->brand());
         $this->view->setData('batch', $this->model->batch());
+        $this->view->setData('retort', $this->model->retort());
 
         $this->view->render('pallets/forms/add');
     }
@@ -189,9 +191,9 @@ class Pallets extends Controller {
                 $arr['error']['pallet_qty'] = 'ช่องนี้เว้นว่างไว้ไม่ได้';
             } */
 
-            if( empty($item) ){
-                $postData['pallet_qty'] = $_POST['pallet_qty'];
-            }
+            // if( empty($item) ){
+            //     $postData['pallet_qty'] = $_POST['pallet_qty'];
+            // }
 
             if( !empty($postData['pallet_code']) ){
                 $has_code = true;
@@ -456,11 +458,11 @@ class Pallets extends Controller {
 
             $has_name = true;
             if( !empty($item) ){
-                if( $postData['tr_name'] == $item['name'] ) $has_name = false;
+                if( $postData['rt_name'] == $item['name'] ) $has_name = false;
             }
-            // if( $this->model->is_brand($postData['rt_name']) && $has_name ){
-            //     $arr['error']['brand_name'] = 'มีชื่อนี้อยู่ในระบบแล้ว';
-            // }
+            if( $this->model->is_retort($postData['rt_name']) && $has_name ){
+                $arr['error']['rt_name'] = 'มีชื่อนี้อยู่ในระบบแล้ว';
+            }
 
             if( empty($arr['error']) ){
                 if( !empty($item) ){

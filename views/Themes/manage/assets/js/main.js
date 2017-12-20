@@ -2809,13 +2809,13 @@ if ( typeof Object.create !== 'function' ) {
 				box.after( setItem );
 				setItem.find(':input').first().focus();
 
-				self.sortItem();
+				// self.sortItem();
 			});
 
 			self.$elem.delegate('.js-remove-item', 'click', function () {
 				var box = $(this).closest('tr');
 
-				if( self.$listsitem.find('tr').length==1 ){
+				if( self.$listsRT.find('tr').length==1 ){
 					box.find(':input').val('');
 					box.find(':input').first().focus();
 				}
@@ -2823,7 +2823,7 @@ if ( typeof Object.create !== 'function' ) {
 					box.remove();
 				}
 
-				self.sortItem();
+				// self.sortItem();
 			});
 		},
 		changeWeight: function(){

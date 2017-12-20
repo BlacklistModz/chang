@@ -474,7 +474,7 @@ class pallets_Model extends Model
     public function getRetort( $id ){
         $select = $this->retort_select;
 
-        $sth = $this->db->prepare("SELECT {$select} FROM {$this->brand_table} WHERE `rt_id`=:id LIMIT 1");
+        $sth = $this->db->prepare("SELECT {$select} FROM {$this->retort_table} WHERE `rt_id`=:id LIMIT 1");
         $sth->execute( array(
             ':id' => $id
         ) );
@@ -494,12 +494,12 @@ class pallets_Model extends Model
         $data["id"] = $this->db->lastInsertId();
     }
     public function updateRetort( $id, $data ){
-        $this->db->update( $this->retort_table, $data, "`tr_id`={$id}" );
+        $this->db->update( $this->retort_table, $data, "`rt_id`={$id}" );
     }
     public function delRetort( $id ){
         $this->db->delete( $this->retort_table, "`rt_id`={$id}" );
     }
-    public function is_Retort($text){
+    public function is_retort($text){
         return $this->db->count($this->retort_table, "`rt_name`=:text", array(':text'=>$text));
     }
 
