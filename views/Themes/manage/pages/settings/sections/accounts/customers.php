@@ -12,7 +12,7 @@ $url = URL.'customers/';
 			<li><a class="btn js-refresh"><i class="icon-refresh"></i></a></li>
 			<li class="divider"></li>
 
-			<li><a class="btn btn-blue" href="<?=$url?>add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
+			<li><a class="btn btn-blue" href="<?=URL?>settings/accounts/setCustomer"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
 
 		</ul>
 		<ul class="rfloat SettingCol-headerActions clearfix">

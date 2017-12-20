@@ -22,7 +22,7 @@ if( !empty($this->results['lists']) ){
             '<td class="actions">'.
               '<div class="group-btn whitespace mts">'.
                 '<span class="gbtn">'.
-                  '<a class="btn btn-orange btn-no-padding" href="'.URL.'customers/edit/'.$item['id'].'"><i class="icon-pencil"></i></a>'.
+                  '<a class="btn btn-orange btn-no-padding" href="'.URL.'settings/accounts/setCustomer/'.$item['id'].'"><i class="icon-pencil"></i></a>'.
                 '</span>'.
                 '<span class="gbtn">'.
                   '<a class="btn btn-red btn-no-padding" data-plugins="dialog" href="'.URL.'customers/del/'.$item['id'].'"><i class="icon-trash"></i></a>'.

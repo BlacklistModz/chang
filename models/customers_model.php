@@ -186,6 +186,7 @@ class customers_model extends Model
 
     #Branch
     public function branch(){
+        $a[] = array('id'=>'00000', 'name'=>'Head office');
         $a[] = array('id'=>'00001', 'name'=>'00001');
         $a[] = array('id'=>'00002', 'name'=>'00002');
         $a[] = array('id'=>'00003', 'name'=>'00003');

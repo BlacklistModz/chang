@@ -34,18 +34,19 @@ $form = $form->create()
   ->placeholder('')
   ->value( !empty($this->item['postcode'])? $this->item['postcode']:'' );
 
-  $form 	->field("cus_contact")
+  $form 	->field("cus_contact_name")
   ->label('Contact Name* : ')
   ->autocomplete('off')
   ->addClass('inputtext')
   ->placeholder('')
-  ->value( !empty($this->item['contact'])? $this->item['contact']:'' );
+  ->value( !empty($this->item['contact_name'])? $this->item['contact_name']:'' );
 
   $form 	->field("cus_sale_id")
   ->label('Sale Name* : ')
   ->autocomplete('off')
   ->addClass('inputtext')
   ->placeholder('')
+  ->select( $this->sale['lists'], 'id', 'fullname' )
   ->value( !empty($this->item['sale_id'])? $this->item['sale_id']:'' );
 
   $form 	->field("cus_group")
@@ -155,17 +156,19 @@ $form2 = $form2->create()
   ->select( $this->currency )
   ->value( !empty($this->item['currency'])? $this->item['currency']:'' );
 
+  $title = "Create";
+  if( !empty($this->item) ){
+  	$title = "Edit";
+  }
  ?>
+<div class="pal">
 
+	<div class="setting-header cleafix">
+		<div class="setting-title"><?=$title?> Customer</div>
+	</div>
 
-
-<div id="mainContainer" class="report-main clearfix" data-plugins="main">
-	<div role="content">
-		<div role="main" class="pal">
-
-      <div class="clearfix">
-				<h2 class="fwb mbm"><i class="icon-user"></i> Create Customer</h2>
-        <form class="js-submit-form" method="post" action="<?=URL?>customers/save">
+	<section class="setting-section">
+		<form class="js-submit-form" method="post" action="<?=URL?>customers/save">
 
           <table style="width:100%; height:100%;" class="uiBoxLightblue">
 						<tr>
@@ -186,9 +189,12 @@ $form2 = $form2->create()
             <button type="submit" class="btn btn-primary btn-submit"><span class="btn-text"> Save</span></button>
             <a class="btn" role="dialog-close" href="<?=URL?>settings/accounts/customers"><span class="btn-text">Cancel</span></a>
           </div>
-        </form>
-      </div>
 
-    </div>
-  </div>
+          <?php 
+          if( !empty($this->item) ){
+          	echo '<input type="hidden" name="id" value="'.$this->item['id'].'">';
+          }
+          ?>
+        </form>
+	</section>
 </div>

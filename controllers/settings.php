@@ -66,7 +66,7 @@ class Settings extends Controller {
     /**/
     /* Manage employees */
     /**/
-    public function accounts($tap='employees'){
+    public function accounts($tap='employees',$id=null){
 
       $this->view->setPage("title", "Setting employees - ".ucfirst($tap));
 
@@ -102,6 +102,23 @@ class Settings extends Controller {
           $render = 'settings/sections/accounts/customers/lists/json';
         }
         $this->view->setData('group', $this->model->query('customers')->group());
+        $data = array();
+      }
+      elseif( $tap=="setCustomer" ){
+        $this->view->setData('branch', $this->model->query('customers')->branch());
+        $this->view->setData('status', $this->model->query('customers')->status());
+        $this->view->setData('country', $this->model->query('system')->country());
+        $this->view->setData('brand', $this->model->query('brands')->lists());
+        $this->view->setData('currency', $this->model->query('customers')->currency());
+        $this->view->setData('group', $this->model->query('customers')->group());
+        $this->view->setData('sale', $this->model->query('employees')->lists( array('department'=>7) ));
+
+        if( !empty($id) ){
+          $item = $this->model->query('customers')->get($id);
+          if( empty($item) ) $this->error();
+
+          $this->view->setData('item', $item);
+        }
         $data = array();
       }
       else{

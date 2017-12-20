@@ -17,6 +17,7 @@ class Customers extends Controller {
       $this->view->setData('country', $this->model->query('system')->country());
       $this->view->setData('brand', $this->model->query('brands')->lists());
       $this->view->setData('currency', $this->model->currency());
+      $this->view->setData('group', $this->model->group());
 
       $this->view->setPage('path','Forms/customers');
       $this->view->render("add");
@@ -34,6 +35,7 @@ class Customers extends Controller {
       $this->view->setData('country', $this->model->query('system')->country());
       $this->view->setData('brand', $this->model->query('brands')->lists());
       $this->view->setData('currency', $this->model->currency());
+      $this->view->setData('group', $this->model->group());
 
       $this->view->setData('item', $item );
 
@@ -52,13 +54,12 @@ class Customers extends Controller {
             if( empty($item) ) $this->error();
         }
 
-
         try {
             $form = new Form();
             $form   ->post('cus_name')->val('is_empty')
                     ->post('cus_address')->val('is_empty')
                     ->post('cus_postcode')->val('is_empty')
-                    ->post('cus_contact')->val('is_empty')
+                    ->post('cus_contact_name')->val('is_empty')
                     ->post('cus_sale_id')->val('is_empty')
                     ->post('cus_group')
                     ->post('cus_payment_term')
@@ -82,8 +83,6 @@ class Customers extends Controller {
 
             if( empty($arr['error']) ){
 
-                // $postData['dep_access'] = !empty($_POST['access']) ? json_encode($_POST['access']) : '';
-
                 if( !empty($item) ){
                     $this->model->update( $id, $postData );
                 }
@@ -91,8 +90,8 @@ class Customers extends Controller {
                     $this->model->insert( $postData );
                 }
 
-                $arr['url'] = 'refresh';
                 $arr['message'] = 'Saved';
+                $arr['url'] = URL.'settings/accounts/customers';
             }
 
         } catch (Exception $e) {
