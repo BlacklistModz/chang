@@ -20,6 +20,8 @@ $form 	->field("address")
 				->autocomplete('off')
 				->addClass('inputtext')
 				->placeholder('')
+				->type('textarea')
+				->attr('data-plugins', 'autosize')
 				->value( !empty($this->item['address'])? $this->item['address']:'' );
 
 # set form
