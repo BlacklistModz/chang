@@ -8,7 +8,7 @@ for($i=6;$i>=1;$i--){
       $pallet = '<div>
       <ul calss="lfloat" ref="action" style="height: 68px;">
       <li class="mt">
-      <label style="opacity: 0.3;">No Pallet</label>
+      <label></label>
       </li>
       </ul>
       </div>';
@@ -24,7 +24,7 @@ for($i=6;$i>=1;$i--){
       $pallet = '<a target="_blank" href="'.URL.'pallets/profile/'.$this->item['pallets'][$j][$i]['id'].'"><div> Pallet code '.$this->item['pallets'][$j][$i]['code'].'<br><br>'.$_icon.'</div></a>' ;
     }
     $td .= '<td><div class="'.$className.'" style="position: relative;   position: relative; border: 2px solid #bfbfbf; padding-bottom: 12px; width: 98px;">'.
-    $pallet.'</div></td>';
+    $pallet.'<span class="fwb" style="opacity: 0.3;"> ตั้ง '.$j.' / ชั้น '.$i.'</span></div></td>';
   }
   $body .= '<tr>'.$td.'</tr>';
 }
@@ -43,7 +43,7 @@ for($i=6;$i>=1;$i--){
 
 
             <table class="blueTable"><?=$body?><svg xmlns="http://www.w3.org/2000/svg" style="margin:-15px 5px 5px 70px; position: absolute;" width="30" height="600"><text transform="rotate(270, 12, 0) translate(-435,0)">|--------------------- จำนวนชั้นของ pallet(ชั้น)------------------→</text></svg><br></table>
-            <p style="margin: 5px 0px 10px 280px;" width="300">&#8592;-------------------------ความลึกของแถว(ตั้ง)---------------------------|</p>
+
           </div>
         </div>
       </div>
