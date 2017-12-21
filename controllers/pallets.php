@@ -515,12 +515,6 @@ class Pallets extends Controller {
             if( $this->model->is_retort($postData['rt_name']) && $has_name ){
                 $arr['error']['rt_name'] = 'มีชื่อนี้อยู่ในระบบแล้ว';
             }
-<<<<<<< HEAD
-            // if( $this->model->is_brand($postData['rt_name']) && $has_name ){
-            //     $arr['error']['rt_name'] = 'มีชื่อนี้อยู่ในระบบแล้ว';
-            // }
-=======
->>>>>>> 907ef6c20af9d97b8aad921c4f1bc29d82f3f40f
 
             if( empty($arr['error']) ){
                 if( !empty($item) ){
