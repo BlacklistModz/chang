@@ -3,9 +3,9 @@
 class Planload extends Controller  {
 
     public function __construct() {
-        parent::__construct();        
+        parent::__construct();
     }
-    
+
     public function index($id=null) {
     	$id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
     	if( !empty($id) ){
@@ -38,4 +38,8 @@ class Planload extends Controller  {
     	// $this->view->setPage('path', 'Forms/planload');
     	// $this->view->render('add');
     }
+
+
+
+
 }

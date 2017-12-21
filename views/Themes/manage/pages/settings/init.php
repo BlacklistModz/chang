@@ -93,3 +93,12 @@ if( !empty($sub) ){
 	$this->count_nav+=count($sub);
 	$menu[] = array('text'=> 'HOLD','sub' => $sub, 'url' => URL.'settings/hold/');
 }
+
+// platform//////////////////////////////////////////////////////////////////
+$sub = array();
+$sub[] = array('text'=> 'ชานชาลา','key'=>'platform','url'=>URL.'settings/planload/platform');
+
+if( !empty($sub) ){
+	$this->count_nav+=count($sub);
+	$menu[] = array('text'=> 'PLANLOAD','sub' => $sub, 'url' => URL.'settings/planload/');
+}

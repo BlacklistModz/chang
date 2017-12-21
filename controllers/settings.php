@@ -314,4 +314,26 @@ class Settings extends Controller {
       $a[] = array( "id"=>"C", "name"=>"C", "C"=>"LOWER USD 100,000");
       return $a;
     }
+
+    public function planload($tap='platform'){
+      $this->view->setPage('title', "Setting Planload - ".ucfirst($tap));
+
+      $this->view->setPage('on', 'settings');
+      $this->view->setData('section', 'planload');
+      $this->view->setData('tap', $tap);
+      $render = 'settings/display';
+
+      if( $tap=='platform' ){
+        $data = $this->model->query('platform')->lists();
+      }
+      else{
+        $this->error();
+      }
+
+      $this->view->setData('data', $data);
+      $this->view->render( $render );
+    }
+
+
+
 }
