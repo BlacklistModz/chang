@@ -164,6 +164,7 @@ class pallets_Model extends Model
     public function delete( $id ){
     	$this->db->delete( $this->_objName, "{$this->_cutNamefield}id={$id}" );
         $this->delItems($id);
+        $this->delPalletReport($id);
     }
     public function get($id, $options=array()){
 
@@ -204,6 +205,7 @@ class pallets_Model extends Model
             $data['holds'] = $this->query('hold')->lists( array("pallet"=>$data['id']) );
         }
 
+        $data['retort'] = $this->listsRetort($data['id']);
         $data['total_hole'] = $this->summaryHold( $data['id'] );
 
         $data['permit']['del'] = true;
@@ -271,18 +273,14 @@ class pallets_Model extends Model
     public function setItem($data){
 
         if( !empty($data['id']) ){
-
-            $_data = array();
-            foreach ($data as $key => $value) {
-                if( $key == 'id' ) continue;
-                $_data[$key] = $value;
-            }
-
+            $id = $data['id'];
+            unset($data['id']);
             $_data['item_updated'] = date("c");
-            $this->db->update($this->i_objType, $_data, "item_id={$data['id']}");
+            $this->db->update($this->i_objType, $data, "item_id={$id}");
         }
         else{
             $data['item_created'] = date("c");
+            $data['item_updated'] = date("c");
             $this->db->insert($this->i_objType, $data);
         }
     }
@@ -474,7 +472,7 @@ class pallets_Model extends Model
     public function getRetort( $id ){
         $select = $this->retort_select;
 
-        $sth = $this->db->prepare("SELECT {$select} FROM {$this->brand_table} WHERE `rt_id`=:id LIMIT 1");
+        $sth = $this->db->prepare("SELECT {$select} FROM {$this->retort_table} WHERE `rt_id`=:id LIMIT 1");
         $sth->execute( array(
             ':id' => $id
         ) );
@@ -494,12 +492,12 @@ class pallets_Model extends Model
         $data["id"] = $this->db->lastInsertId();
     }
     public function updateRetort( $id, $data ){
-        $this->db->update( $this->retort_table, $data, "`tr_id`={$id}" );
+        $this->db->update( $this->retort_table, $data, "`rt_id`={$id}" );
     }
     public function delRetort( $id ){
         $this->db->delete( $this->retort_table, "`rt_id`={$id}" );
     }
-    public function is_Retort($text){
+    public function is_retort($text){
         return $this->db->count($this->retort_table, "`rt_name`=:text", array(':text'=>$text));
     }
 
@@ -533,5 +531,26 @@ class pallets_Model extends Model
         }
 
         return $a;
+    }
+
+    #SET RETORT
+    public function listsRetort($id){
+        return $this->db->select("SELECT prt_id AS id , prt_rt_id AS rt_id, prt_pallet_id AS pallet_id, prt_batch AS batch, prt_qty AS qty FROM pallets_retort ORDER BY prt_id ASC");
+    }
+    public function setRetort($data){
+        if( !empty($data['id']) ){
+            $id = $data["id"];
+            unset($data['id']);
+            $this->db->update("pallets_retort", $data, "prt_id={$id}");
+        }
+        else{
+            $this->db->insert("pallets_retort", $data);
+        }
+    }
+    public function unsetRetort($id){
+        $this->db->delete("pallets_retort", "prt_id={$id}");
+    }
+    public function delPalletReport($id){
+        $this->db->delete("pallets_retort", "prt_pallet_id={$id}", $this->db->count("pallets_retort", "prt_pallet_id={$id}"));
     }
 }

@@ -2809,13 +2809,13 @@ if ( typeof Object.create !== 'function' ) {
 				box.after( setItem );
 				setItem.find(':input').first().focus();
 
-				self.sortItem();
+				// self.sortItem();
 			});
 
 			self.$elem.delegate('.js-remove-item', 'click', function () {
 				var box = $(this).closest('tr');
 
-				if( self.$listsitem.find('tr').length==1 ){
+				if( self.$listsRT.find('tr').length==1 ){
 					box.find(':input').val('');
 					box.find(':input').first().focus();
 				}
@@ -2823,7 +2823,7 @@ if ( typeof Object.create !== 'function' ) {
 					box.remove();
 				}
 
-				self.sortItem();
+				// self.sortItem();
 			});
 		},
 		changeWeight: function(){
@@ -2893,14 +2893,14 @@ if ( typeof Object.create !== 'function' ) {
 		setItem: function ( data ) {
 			var self = this;
 
-			var $retort = $('<select>', {class:'inputtext', name:'retort[id][]'});
+			var $retort = $('<select>', {class:'inputtext js-select-retort', name:'retort[id][]'});
 			$retort.append( $('<option>', {value:'', text:'-'}) );
 
 			$.each( self.options.retort, function(i,obj) {
 				$retort.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
 			});
 
-			var $batch = $('<select>', {class:'inputtext', name:'retort[batch][]'});
+			var $batch = $('<select>', {class:'inputtext js-select-batch', name:'retort[batch][]'});
 			$batch.append( $('<option>', {value:'', text:'-'}) );
 
 			$.each( self.options.batch, function(i,obj) {
@@ -2912,7 +2912,7 @@ if ( typeof Object.create !== 'function' ) {
 				$('<td>', {class: "ID"}).append($retort),
 				$('<td>', {class: "status"}).append($batch),
 				$('<td>', {class: "status"}).append(
-					$('<input type="number" class="inputtext" name="retort[qty][]">')
+					$('<input>', {class:'inputtext', type:'number', name:'retort[qty][]', value:data.qty})
 				),
 				$('<td>', {class: 'actions', style:"text-align: center;"}).append( 
 					$('<span>', {class:"gbtn"}).append(
@@ -2930,7 +2930,8 @@ if ( typeof Object.create !== 'function' ) {
 				)
 			);
 
-			$tr.find('[data-id='+data.id+']').prop('selected', true);
+			$tr.find('select.js-select-retort').find('[data-id='+data.rt_id+']').prop('selected', true);
+			$tr.find('select.js-select-batch').find('[data-id='+data.batch+']').prop('selected', true);
 
 			return $tr;
 		}

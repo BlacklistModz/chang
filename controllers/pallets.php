@@ -104,6 +104,7 @@ class Pallets extends Controller {
         $this->view->setData('warehouse', $this->model->warehouse());
         $this->view->setData('brands', $this->model->query('products')->brand());
         $this->view->setData('batch', $this->model->batch());
+        $this->view->setData('retort', $this->model->retort());
 
         $this->view->render('pallets/forms/add');
     }
@@ -139,6 +140,7 @@ class Pallets extends Controller {
         $this->view->setData('warehouse', $this->model->warehouse());
         $this->view->setData('brands', $this->model->query('products')->brand());
         $this->view->setData('batch', $this->model->batch());
+        $this->view->setData('retort', $this->model->retort());
 
         $this->view->render('pallets/forms/add');
     }
@@ -189,9 +191,9 @@ class Pallets extends Controller {
                 $arr['error']['pallet_qty'] = 'ช่องนี้เว้นว่างไว้ไม่ได้';
             } */
 
-            if( empty($item) ){
-                $postData['pallet_qty'] = $_POST['pallet_qty'];
-            }
+            // if( empty($item) ){
+            //     $postData['pallet_qty'] = $_POST['pallet_qty'];
+            // }
 
             if( !empty($postData['pallet_code']) ){
                 $has_code = true;
@@ -243,45 +245,97 @@ class Pallets extends Controller {
                     $id = $postData['id'];
                 }
 
-                if( !empty($postData['pallet_qty']) && !empty($id) ){
+                $postRetort = array();
+                for($i=0;$i<=count($_POST["retort"]["id"]);$i++){
+                    if( empty($_POST["retort"]["id"][$i]) || empty($_POST["retort"]["batch"][$i]) || empty($_POST["retort"]["qty"][$i]) ) continue;
+
+                    $postRetort[] = array(
+                        'prt_rt_id'=>$_POST["retort"]["id"][$i],
+                        'prt_batch'=>$_POST["retort"]["batch"][$i],
+                        'prt_qty'=>$_POST["retort"]["qty"][$i]
+                    );
+                }
+
+                $pallet_qty = 0;
+
+                if( !empty($postRetort) && !empty($id) ){
 
                     $_items = array();
                     if( !empty($item) ){
                         foreach ($item['items'] as $key => $value) {
-                            $_items[] = $value;
+                            $_items[] = $value['id'];
                         }
                     }
 
-                    for($i=1;$i<=$postData['pallet_qty'];$i++){
+                    $_retort = array();
+                    if( !empty($item['retort']) ){
+                        foreach ($item['retort'] as $key => $value) {
+                            $_retort[] = $value['id'];
+                        }
+                    }
 
-                        if( !empty($_items[$i]) ){
-                            $data['id'] = $_items[$i]['id'];
-                            unset($_items[$i]);
+                    $c=0;
+                    foreach ($postRetort as $key => $value) {
+                        for($i=1;$i<=$value["prt_qty"];$i++){
+
+                            $data = array(
+                                'item_date'=>$postData['pallet_date'],
+                                'item_type_id'=>$postData['pallet_type_id'],
+                                'item_pallet_id'=>$id,
+                                'item_pro_id'=>$postData['pallet_pro_id'],
+                                'item_pro_brand_id'=>$postData['pallet_pro_brand_id'],
+                                'item_size_id'=>$postData['pallet_size_id'],
+                                'item_weight_id'=>$postData['pallet_weight_id'],
+                                'item_grade_id'=>$postData['pallet_grade_id'],
+                                'item_breed_id'=>$postData['pallet_breed_id'],
+                                'item_old_id'=>$postData['pallet_old_id'],
+                                'item_can_id'=>$postData['pallet_can_id'],
+                                'item_can_type_id'=>$postData['pallet_can_type_id'],
+                                'item_can_brand' => $postData['pallet_can_brand'],
+                                'item_neck' => $postData['pallet_neck'],
+                                'item_ware_id' => $postData['pallet_ware_id'],
+                                'item_deep' => $postData['pallet_deep'],
+                                'item_floor' => $postData['pallet_floor'],
+                                'item_row_id' => $postData['pallet_row_id'],
+                                'item_rt_id' => $value['prt_rt_id'],
+                                'item_batch' => $value['prt_batch'],
+                                'item_status' => 1;
+                            );
+
+                            if( !empty($_items[$c]) ){
+                                $data['id'] = $_items[$c];
+                                unset($_items[$c]);
+                            }
+
+                            $this->model->setItem($data);
+                            $c++;
                         }
 
-                        $data['item_date'] = $postData['pallet_date'];
-                        $data['item_type_id'] = $postData['pallet_type_id'];
-                        $data['item_pallet_id'] = $id;
-                        $data['item_pro_id'] = $postData['pallet_pro_id'];
-                        $data['item_pro_brand_id'] = $postData['pallet_pro_brand_id'];
-                        $data['item_size_id'] = $postData['pallet_size_id'];
-                        $data['item_weight_id'] = $postData['pallet_weight_id'];
-                        $data['item_grade_id'] = $postData['pallet_grade_id'];
-                        $data['item_breed_id'] = $postData['pallet_breed_id'];
-                        $data['item_old_id'] = $postData['pallet_old_id'];
-                        $data['item_can_id'] = $postData['pallet_can_id'];
-                        $data['item_can_type_id'] = $postData['pallet_can_type_id'];
-                        $data['item_can_brand'] = $postData['pallet_can_brand'];
-                        $data['item_neck'] = $postData['pallet_neck'];
-                        $data['item_ware_id'] = $postData['pallet_ware_id'];
-                        $data['item_deep'] = $postData['pallet_deep'];
-                        $data['item_floor'] = $postData['pallet_floor'];
-                        $data['item_row_id'] = $postData['pallet_row_id'];
-                        $data['item_status'] = 1;
+                        $pallet_qty += $value["prt_qty"];
 
-                        $this->model->setItem($data);
+                        if( !empty($_retort[$key]) ){
+                            $value['id'] = $_retort[$key];
+                            unset($_retort[$key]);
+                        }
+
+                        $value['prt_pallet_id'] = $id;
+                        $this->model->setRetort($value);
                     }
                 }
+
+                if( !empty($_items) ){
+                    foreach ($_items as $key => $value) {
+                        $this->model->delItem($value);
+                    }
+                }
+
+                if( !empty($_retort) ){
+                    foreach ($_retort as $key => $value) {
+                        $this->model->unsetRetort($value);
+                    }
+                }
+
+                $this->model->update($id, array('pallet_qty'=>$pallet_qty));
 
                 $arr['message'] = 'บันทึกข้อมูลเรียบร้อย';
                 $arr['url'] = isset($_REQUEST["url"]) ? $_REQUEST["url"] : 'refresh';
@@ -456,11 +510,17 @@ class Pallets extends Controller {
 
             $has_name = true;
             if( !empty($item) ){
-                if( $postData['tr_name'] == $item['name'] ) $has_name = false;
+                if( $postData['rt_name'] == $item['name'] ) $has_name = false;
             }
+            if( $this->model->is_retort($postData['rt_name']) && $has_name ){
+                $arr['error']['rt_name'] = 'มีชื่อนี้อยู่ในระบบแล้ว';
+            }
+<<<<<<< HEAD
             // if( $this->model->is_brand($postData['rt_name']) && $has_name ){
             //     $arr['error']['rt_name'] = 'มีชื่อนี้อยู่ในระบบแล้ว';
             // }
+=======
+>>>>>>> 907ef6c20af9d97b8aad921c4f1bc29d82f3f40f
 
             if( empty($arr['error']) ){
                 if( !empty($item) ){

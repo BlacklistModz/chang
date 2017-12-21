@@ -18,7 +18,7 @@ $options = $this->fn->stringify( array(
 		'rows' => !empty($this->item['row_id']) ? $this->item['row_id'] : '',
 		'deep' => !empty($this->item['deep']) ? $this->item['deep'] : '',
 		'items'=> !empty($this->item['retort']) ? $this->item['retort'] : array(),
-		'retort' => array(),
+		'retort' => $this->retort,
 		'batch' => $this->batch
 	) );
 
