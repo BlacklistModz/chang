@@ -40,9 +40,9 @@ for($i=6;$i>=1;$i--){
       <div class="uiBoxWhite pas pam mtl">
         <div>
           <div>
-            <svg xmlns="http://www.w3.org/2000/svg" style="margin:-15px 5px 5px 70px; position: absolute;" width="30" height="600"><text transform="rotate(270, 12, 0) translate(-435,0)">|--------------------- จำนวนชั้นของ pallet(ชั้น)------------------→</text></svg><br>
 
-            <table class="blueTable"><?=$body?></table>
+
+            <table class="blueTable"><?=$body?><svg xmlns="http://www.w3.org/2000/svg" style="margin:-15px 5px 5px 70px; position: absolute;" width="30" height="600"><text transform="rotate(270, 12, 0) translate(-435,0)">|--------------------- จำนวนชั้นของ pallet(ชั้น)------------------→</text></svg><br></table>
             <p style="margin: 5px 0px 10px 280px;" width="300">&#8592;-------------------------ความลึกของแถว(ตั้ง)---------------------------|</p>
           </div>
         </div>

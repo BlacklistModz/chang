@@ -1,12 +1,4 @@
-<?php
-$data = array();
-foreach ($this->item['rows']['lists'] as $key => $value) {
-  $type = substr($value['name'],0,1);
-  $data[$type][] = $value;
 
-}
-
-?>
 <div ref="header" class="listpage2-header clearfix">
   <div ref="actions" class="listpage2-actions">
     <div id="mainContainer" class="profile clearfix" data-plugins="main">
@@ -60,25 +52,27 @@ foreach ($this->item['rows']['lists'] as $key => $value) {
                   <div class="lfloat">
                       <div class="pas pam">
                     <ul>
+
                       <?php
 
+                      $data = array();
+                      foreach ($this->item['rows']['lists'] as $key => $value) {
+                        $type = substr($value['name'],0,1);
+                        $data[$type][] = $value;
+                      }
 
-                      foreach ($this->item['rows']['lists'] as $key => $value) {?>
+                      foreach($data as $zone => $rows){?>
+                         <div class="span2">
+                                  <div class="uiBoxWhite pas pam">
+                                  <h2>GROUP : <?=$zone?> </h2>
+                              <?php  foreach ($rows as $key => $value) {?>
+                                          <a href="<?=URL?>warehouse/showRow/<?=$value['id']?>" class="btn btn-zline"><?=$value['name'];?></a>
 
-                        <ul class="lfloat" ref="actions">
-                          <li class="divider"></li>
 
-                          <li class="mt">
-                            <div class="rfloat">
-                              <a href="<?=URL?>warehouse/showRow/<?=$value['id']?>" class="btn btn-zline">
-                                <span><?=$value['name']?></span></a>
-                              </div>
-                            </li>
-
-                          </ul>
-
-                        <?php	}?>
-
+                              <?php }
+                              echo '</div>
+                            </div>';
+                            }?>
 
                       </ul>
 
