@@ -299,7 +299,7 @@ class Pallets extends Controller {
                                 'item_row_id' => $postData['pallet_row_id'],
                                 'item_rt_id' => $value['prt_rt_id'],
                                 'item_batch' => $value['prt_batch'],
-                                'item_status' => 1;
+                                'item_status' => 1
                             );
 
                             if( !empty($_items[$c]) ){
