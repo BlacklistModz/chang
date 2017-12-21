@@ -459,7 +459,7 @@ class Pallets extends Controller {
                 if( $postData['tr_name'] == $item['name'] ) $has_name = false;
             }
             // if( $this->model->is_brand($postData['rt_name']) && $has_name ){
-            //     $arr['error']['brand_name'] = 'มีชื่อนี้อยู่ในระบบแล้ว';
+            //     $arr['error']['rt_name'] = 'มีชื่อนี้อยู่ในระบบแล้ว';
             // }
 
             if( empty($arr['error']) ){

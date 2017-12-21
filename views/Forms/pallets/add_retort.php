@@ -15,7 +15,7 @@ $form = $form->create()
 	->addClass('form-insert');
 
 $form 	->field("rt_name")
-    	->label('ชื่อ*')
+    		->label('ชื่อ*')
         ->autocomplete('off')
         ->addClass('inputtext')
         ->placeholder('')
