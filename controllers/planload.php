@@ -3,7 +3,7 @@
 class Planload extends Controller  {
 
     public function __construct() {
-        parent::__construct();        
+        parent::__construct();
     }
 
     #JSON
@@ -27,7 +27,8 @@ class Planload extends Controller  {
         if( empty($this->me) || $this->format!='json' ) $this->error();
         echo json_encode($this->model->query('planning')->listsWeight( array('type'=>$id, 'size'=>$size) ));
     }
-    
+    #END JSON
+
     public function index($id=null) {
     	$id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
 
