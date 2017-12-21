@@ -12,7 +12,7 @@ $form 	->field("plan_date")
 		->type("date")
 		->value( !empty($this->item["date"]) ? $this->item["date"] : "" );
 
-$form 	->field("plan_platform")
+$form 	->field("plan_platform_id")
 		->label("ซานชลา")
 		->addClass("inputtext")
 		->autocomplete("off")
@@ -37,12 +37,11 @@ $form 	->field("plan_pro_id")
 		->label("Fruit")
 		->addClass('inputtext')
 		->autocomplete('off')
-		->attr("data-name", "pro_id")
 		->select( array() );
 
 $form 	->field("plan_grade")
 		->label("Grade")
-		->text( "" );
+		->text( '<div class="grade"></div>' );
 
 $form 	->field("plan_size_id")
 		->label("Size")
@@ -140,15 +139,27 @@ $form 	->field("plan_approvel")
 		->value( !empty($this->item['approvel']) ? $this->item['approvel'] : '' );
 
 $form 	->field("plan_package_carton")
-		->label("package_carton")
+		->label("บรรจุภัณฑ์ (กล่อง)")
 		->addClass("inputtext")
 		->autocomplete("off")
 		->value( !empty($this->item['package_carton']) ? $this->item['package_carton'] : '' );
+
+$form 	->field("plan_package_label")
+		->label("บรรจุภัณฑ์ (ฉลาก)")
+		->addClass("inputtext")
+		->autocomplete("off")
+		->value( !empty($this->item['package_label']) ? $this->item['package_label'] : '' );
+
+$form 	->field("plan_carton_remark")
+		->label("CARTON REMARK")
+		->autocomplete("off")
+		->addClass('inputtext')
+		->value( !empty($this->item['carton_remark']) ? $this->item['carton_remark'] : '' );
 ?>
 <div id="mainContainer" class="report-main clearfix" data-plugins="main">
 	<div role="content">
 		<div role="main" class="pal">
-			<form class="js-submit-form" action="<?=URL?>job/save">
+			<form class="js-submit-form" action="<?=URL?>planload/save" data-plugins="planloadForm">
 				<h3 class="fwb mbm"><i class="icon-shopping-cart"></i> Planload en Create</h3>
 				<div class="clearfix">
 					<div class="uiBoxWhite pam pas" style="width: 950px;">
