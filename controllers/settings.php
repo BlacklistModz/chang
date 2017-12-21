@@ -19,7 +19,6 @@ class Settings extends Controller {
       $this->view->setData('_tap', $tap);
 
       if( empty($this->permit['company']['view']) ) $this->error();
-      // print_r($this->permit); die;
 
       if( $tap != 'basic' ){
 
@@ -115,6 +114,27 @@ class Settings extends Controller {
 
         if( !empty($id) ){
           $item = $this->model->query('customers')->get($id);
+          if( empty($item) ) $this->error();
+
+          $this->view->setData('item', $item);
+        }
+        $data = array();
+      }
+      elseif( $tap=='customers_brands' ){
+        if( $this->format=='json' ){
+          $this->view->setData('results', $this->model->query('brands')->lists());
+          $render = 'settings/sections/accounts/customers_brands/lists/json';
+        }
+        $this->view->setData('status', $this->model->query('brands')->status());
+
+        $data = array();
+      }
+      elseif( $tap=="setBrands" ){
+        $this->view->setData('name', $this->model->query('brands')->lists());
+        $this->view->setData('status', $this->model->query('brands')->status());
+
+        if( !empty($id) ){
+          $item = $this->model->query('brands')->get($id);
           if( empty($item) ) $this->error();
 
           $this->view->setData('item', $item);

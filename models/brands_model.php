@@ -17,11 +17,11 @@ class Brands_Model extends Model{
         foreach ($data as $key => $value) {
             $_data[ $this->_cutNamefield.$key ] = trim($value);
         }
-        
+
         return $_data;
     }
     public function insert(&$data) {
-        
+
         $this->db->insert($this->_objType, $this->_modifyData( $data ) );
         $data[$this->_cutNamefield.'id'] = $this->db->lastInsertId();
         $data = $this->convert($data);
@@ -41,9 +41,9 @@ class Brands_Model extends Model{
 
             'sort' => isset($_REQUEST['sort'])? $_REQUEST['sort']: 'id',
             'dir' => isset($_REQUEST['dir'])? $_REQUEST['dir']: 'DESC',
-            
+
             'time'=> isset($_REQUEST['time'])? $_REQUEST['time']:time(),
-            
+
             'q' => isset($_REQUEST['q'])? $_REQUEST['q']:null,
 
         ), $options);
@@ -52,6 +52,26 @@ class Brands_Model extends Model{
 
         $where_str = "";
         $where_arr = array();
+
+
+// search
+//////////////////////////////////////////////////////////////////////////////
+    if( !empty($options['q']) ){
+        $where_str .= !empty($where_str) ? " AND " : "";
+        $where_str .= "brand_name LIKE :q";
+        $where_arr[":q"] = "%{$options["q"]}%";
+
+    }
+//////////////////////////////////////////////////////////////////////////////
+if (isset($_REQUEST['status'])) {
+  $options['status'] = $_REQUEST['status'];
+}
+if( !empty($options['status']) ){
+    $where_str .= !empty($where_str) ? " AND " : "";
+    $where_str .= "brand_status = :status";
+    $where_arr[":status"] = $options["status"];
+
+}
 
         $arr['total'] = $this->db->count($this->_table, $where_str, $where_arr);
 
@@ -75,7 +95,7 @@ class Brands_Model extends Model{
         return $data;
     }
     public function get($id){
-        
+
         $sth = $this->db->prepare("SELECT {$this->_field} FROM {$this->_table} WHERE {$this->_cutNamefield}id=:id LIMIT 1");
         $sth->execute( array(
             ':id' => $id
@@ -86,8 +106,29 @@ class Brands_Model extends Model{
         } return array();
     }
     public function convert($data){
-
         $data = $this->cut($this->_cutNamefield, $data);
+        $data['status'] = $this->getStatus($data['status']);
+
         return $data;
     }
+
+    public function status(){
+      $a[] = array('id'=>'A', 'name'=>'Active');
+      $a[] = array('id'=>'I', 'name'=>'Inactive');
+
+      return $a;
+    }
+
+    public function getStatus($id){
+        $data = array();
+        foreach ($this->status() as $key => $value) {
+            if( $value['id'] == $id ){
+                $data = $value;
+                break;
+            }
+        }
+
+        return $data;
+    }
+
 }
