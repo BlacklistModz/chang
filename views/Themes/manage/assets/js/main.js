@@ -3598,6 +3598,140 @@ if ( typeof Object.create !== 'function' ) {
 	$.fn.joForm.options = {
 		items: []
 	}
+
+	var planloadForm = {
+		init:function(options, elem){
+			var self = this;
+			self.$elem = $(elem);
+			self.options = $.extend( {}, $.fn.planloadForm.options, options );
+
+			self.$type = self.$elem.find('#plan_type_id');
+			self.$pro = self.$elem.find('#plan_pro_id');
+			self.$grade = self.$elem.find(".grade");
+			self.$size = self.$elem.find("#plan_size_id");
+			self.$weight = self.$elem.find("#plan_weight_id");
+
+			self.currGrade = [];
+			self.currGradeArr = [];
+			self.number = -1;
+
+			self.currPro = self.options.pro_id;
+			self.currGrade = self.options.grade;
+			self.currWeight = self.options.weight_id;
+
+			self.setElem();
+			self.Events();
+		},
+		setElem:function(){
+			var self = this;
+			self.$elem.find("#plan_grade_fieldset").addClass("hidden_elem");
+		},
+		Events:function(){
+			var self = this;
+
+			self.$type.change(function(){
+				self.setProducts();
+				self.setGrade();
+				self.setSize();
+				// self.setWeight();
+			});
+
+			self.$size.change(function(){
+				self.setWeight();
+			})
+		},
+		setProducts:function(){
+			var self = this;
+
+			var type = self.$type.val();
+			$.get( Event.URL + 'planload/listsProducts/' + type, function(res) {
+				self.$pro.empty();
+				var li = ( $('<option>', {value: '', text: '-'}) );
+				self.$pro.append( li );
+				$.each( res, function (i, obj) {
+					var li = $('<option>', {value: obj.id, text: obj.code, "data-id":obj.id, "data-amount":obj.amount});
+					if( self.currPro == obj.id ){
+						li.prop('selected', true);
+					}
+					self.$pro.append( li );
+				} );
+			}, 'json');
+		},
+		setGrade: function(){
+			var self = this;
+
+			var type = self.$type.val();
+			var number = self.number;
+			$.get(Event.URL + 'planload/listsGrade/'+type, function( res ){
+
+				if( res.length > 0 ){
+					self.$elem.find("#plan_grade_fieldset").removeClass("hidden_elem");
+				}
+				else{
+					self.$elem.find("#plan_grade_fieldset").addClass("hidden_elem");
+				}
+
+				self.$grade.empty();
+				$.each( res, function(i, obj){
+					var li = $('<label>', {class: 'checkbox mrl'}).append(
+								$('<input>', {type: 'checkbox', name:'plan[grade]['+number+'][]', "data-id":obj.id, value:obj.id})
+								, obj.name
+							  );
+
+					if( jQuery.inArray(obj.id, self.currGradeArr) !== -1 ){
+						li.find('[data-id='+obj.id+']').prop('checked', true);
+					}
+
+					self.$grade.append( li );
+				});
+			},'json');
+		},
+		setSize: function(box, size){
+			var self = this;
+
+			var type = self.$type.val();
+
+			$.get(Event.URL + 'planload/listsSize/'+type, function( res ){
+
+				self.$size.empty();
+				var li = $('<option>', {value: "", text: "-"});
+				self.$size.append( li );
+				$.each( res, function(i, obj){
+					var li = $('<option>', {value: obj.id, text: obj.name, "data-id":obj.id});
+					 if( size == obj.id ){
+						li.prop('selected', true);
+					} 
+					self.$size.append( li );
+				});
+			},'json');
+		},
+		setWeight: function(){
+			var self = this;
+
+			var type = self.$type.val();
+
+			$.get( Event.URL + 'planload/listsWeight/'+type, {size:self.$size.val()}, function (res) {
+				self.$weight.empty();
+				var li = $('<option>', {value: "", text: "-"});
+				self.$weight.append( li );
+				$.each( res, function(i, obj){
+					var li = $('<option>', {value: obj.id, text: obj.dw+'/'+obj.nw, "data-id":obj.id});
+					 if( self.currWeight == obj.id ){
+						li.prop('selected', true);
+					} 
+					self.$weight.append( li );
+				});
+			}, 'json');
+		}
+	}
+	$.fn.planloadForm = function( options ) {
+		return this.each(function() {
+			var $this = Object.create( planloadForm );
+			$this.init( options, this );
+			$.data( this, 'planloadForm', $this );
+		});
+	};
+	$.fn.joForm.options = {}
 	
 })( jQuery, window, document );
 

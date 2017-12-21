@@ -119,7 +119,16 @@ class job_Model extends Model
 
     #ITEMS
     public function listsItems($id){
-    	return $this->buildFragItem( $this->db->select("SELECT * FROM job_orders_items WHERE item_job_id=:id ORDER BY item_id ASC", array(":id"=>$id)) );
+    	return $this->buildFragItem( $this->db->select("SELECT oi.*, t.type_name, p.pro_code, s.size_name, c.can_name, b.brand_name, w.weight_dw, w.weight_nw FROM job_orders_items oi 
+            LEFT JOIN products_types t ON oi.item_type_id=t.type_id 
+            LEFT JOIN products p ON oi.item_pro_id=p.pro_id
+            LEFT JOIN products_size s ON oi.item_size_id=s.size_id
+            LEFT JOIN products_cans c ON oi.item_can_id=c.can_id
+            LEFT JOIN brands b ON oi.item_brand=b.brand_id
+            LEFT JOIN products_weight w ON oi.item_weight_id=w.weight_id
+            WHERE item_job_id=:id 
+            ORDER BY item_id ASC", array(":id"=>$id) ) 
+        );
     }
     public function buildFragItem($results){
     	$data = array();

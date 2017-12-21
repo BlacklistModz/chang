@@ -22,10 +22,12 @@ $sub[] = array('text'=> $this->lang->translate('Department'),'key'=>'department'
 $sub[] = array('text'=> $this->lang->translate('Position'),'key' => 'position','url' => URL.'settings/accounts/position');
 $sub[] = array('text'=> $this->lang->translate('Employees'),'key' => 'employees','url' => URL.'settings/accounts/');
 $sub[] = array('text'=> $this->lang->translate('Customers'),'key' => 'customers','url' => URL.'settings/accounts/customers');
+$sub[] = array('text'=> $this->lang->translate('Customers brand'),'key' => 'customers_brands','url' => URL.'settings/accounts/customers_brands');
 
-foreach ($sub as $key => $value) {
-	if( empty($this->permit[$value['key']]['view']) ) unset($sub[$key]);
-}
+
+// foreach ($sub as $key => $value) {
+// 	if( empty($this->permit[$value['key']]['view']) ) unset($sub[$key]);
+// }
 if( !empty($sub) ){
 	$this->count_nav+=count($sub);
 	$menu[] = array('text'=> $this->lang->translate('Accounts'),'sub' => $sub, 'url' => URL.'settings/accounts/');
@@ -90,4 +92,13 @@ $sub[] = array('text'=> 'การจัดการโฮล','key'=>'manage','
 if( !empty($sub) ){
 	$this->count_nav+=count($sub);
 	$menu[] = array('text'=> 'HOLD','sub' => $sub, 'url' => URL.'settings/hold/');
+}
+
+// platform//////////////////////////////////////////////////////////////////
+$sub = array();
+$sub[] = array('text'=> 'ชานชาลา','key'=>'platform','url'=>URL.'settings/planload/platform');
+
+if( !empty($sub) ){
+	$this->count_nav+=count($sub);
+	$menu[] = array('text'=> 'PLANLOAD','sub' => $sub, 'url' => URL.'settings/planload/');
 }

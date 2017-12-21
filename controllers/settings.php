@@ -19,7 +19,6 @@ class Settings extends Controller {
       $this->view->setData('_tap', $tap);
 
       if( empty($this->permit['company']['view']) ) $this->error();
-      // print_r($this->permit); die;
 
       if( $tap != 'basic' ){
 
@@ -115,6 +114,27 @@ class Settings extends Controller {
 
         if( !empty($id) ){
           $item = $this->model->query('customers')->get($id);
+          if( empty($item) ) $this->error();
+
+          $this->view->setData('item', $item);
+        }
+        $data = array();
+      }
+      elseif( $tap=='customers_brands' ){
+        if( $this->format=='json' ){
+          $this->view->setData('results', $this->model->query('brands')->lists());
+          $render = 'settings/sections/accounts/customers_brands/lists/json';
+        }
+        $this->view->setData('status', $this->model->query('brands')->status());
+
+        $data = array();
+      }
+      elseif( $tap=="setBrands" ){
+        $this->view->setData('name', $this->model->query('brands')->lists());
+        $this->view->setData('status', $this->model->query('brands')->status());
+
+        if( !empty($id) ){
+          $item = $this->model->query('brands')->get($id);
           if( empty($item) ) $this->error();
 
           $this->view->setData('item', $item);
@@ -294,4 +314,26 @@ class Settings extends Controller {
       $a[] = array( "id"=>"C", "name"=>"C", "C"=>"LOWER USD 100,000");
       return $a;
     }
+
+    public function planload($tap='platform'){
+      $this->view->setPage('title', "Setting Planload - ".ucfirst($tap));
+
+      $this->view->setPage('on', 'settings');
+      $this->view->setData('section', 'planload');
+      $this->view->setData('tap', $tap);
+      $render = 'settings/display';
+
+      if( $tap=='platform' ){
+        $data = $this->model->query('platform')->lists();
+      }
+      else{
+        $this->error();
+      }
+
+      $this->view->setData('data', $data);
+      $this->view->render( $render );
+    }
+
+
+
 }

@@ -1,12 +1,21 @@
 <?php
 
 $job[] = array('key'=>'job', 'text'=>'JOB ORDER', 'link'=>$url.'job', 'icon'=>'clipboard');
+$job[] = array('key'=>'planload', 'text'=>'PLANLOAD', 'link'=>$url.'planload', 'icon'=>'file-text-o');
 // foreach ($job as $key => $value) {
 // 	if( empty($this->permit[$value['key']]['view']) ) unset($job[$key]);
 // }
 if( !empty($job) ){
 	echo $this->fn->manage_nav($job, $this->getPage('on'));
 }
+
+// $plan[] = array('key'=>'planload', 'text'=>'PLANLOAD', 'link'=>$url.'plan', 'icon'=>'file-text-o');
+// foreach ($job as $key => $value) {
+// 	if( empty($this->permit[$value['key']]['view']) ) unset($job[$key]);
+// }
+// if( !empty($plan) ){
+// 	echo $this->fn->manage_nav($plan, $this->getPage('on'));
+// }
 
 #Order
 // $order[] = array('key'=>'planning', 'text'=>'แผนการผลิต', 'link'=>$url.'planning', 'icon'=>'angle-double-right ');

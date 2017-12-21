@@ -10084,41 +10084,7 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
     padding: 20px
 }
 /* OLD CSS */
-/* #pallet_can_id_fieldset, #pallet_size_id_fieldset, #pallet_can_type_id_fieldset{
-																																						float: left;
-																																						margin-right: 20px;
-																																						width: 210px;
-																																					}
-
-																																					#pallet_code_fieldset{
-																																					float: left;
-																																					margin-right: 20px;
-																																					width: 180px;
-																																				}
-
-																																				#pallet_pro_id_fieldset{
-																																				float: left;
-																																				margin-right: 20px;
-																																				width: 110px;
-																																			}
-
-																																			#pallet_row_id_fieldset, #pallet_deep_fieldset{
-																																			float: left;
-																																			margin-right: 20px;
-																																			width: 135px;
-																																		}
-
-																																		#pallet_brand_id_fieldset{
-																																		float: left;
-																																		margin-right: 20px;
-																																		width: 300px;
-																																	}
-
-																																	#pallet_pro_id_fieldset .notification, #pallet_size_id_fieldset .notification, #pallet_code_fieldset .notification{
-																																	position: absolute;
-																																}
-																																#pallet_can_id_fieldset, #pallet_neck_fieldset, #pallet_size_id_fieldset{
-																																clear: both;
+/* #pallet_can_id_fieldset, #pallet_size_id_fieldset, #pallet_can_type_id_fieldset{																														clear: both;
 																																} */
 /* FROM ADD */
 /* PRODUCTS */
@@ -10167,6 +10133,51 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
 .form-pallet #pallet_note_fieldset {
     clear: both;
 }
+
+/* PLANLOAD CSS */
+.form-planload #plan_date_fieldset{
+    float: left;
+    margin-right: 20px;
+    width: 400px;
+}
+.form-planload #plan_cabinet_return_fieldset,
+.form-planload #plan_closed_date_fieldset,
+.form-planload #plan_cabinet_get_fieldset,
+.form-planload #plan_etd_date_fieldset,
+.form-planload #plan_ship_fieldset{
+    float: left;
+    margin-right: 20px;
+    width: 285px;
+}
+.form-planload #plan_type_id_fieldset,
+.form-planload #plan_size_id_fieldset{
+    float: left;
+    margin-right: 20px;
+    width: 48%;
+}
+.form-planload #plan_fcl_fieldset,
+.form-planload #plan_cartons_fieldset,
+.form-planload #plan_job_id_fieldset{
+    float: left;
+    margin-right: 20px;
+    width: 23%;
+}
+.form-planload #plan_platform_id_fieldset{
+    float:  right;
+    /* margin-right: 20px; */
+    width: 300px;
+}
+.form-planload #plan_cus_id_fieldset,
+.form-planload #plan_grade_fieldset,
+.form-planload #plan_size_id_fieldset,
+.form-pladload #plan_fcl_fieldset,
+.form-pladload #plan_cabinet_return_fieldset,
+.form-planload #plan_etd_date_fieldset,
+.form-planload #plan_remark{
+    clear: both;
+}
+
+
 .listpage2-table [ref=tablelists] .hold td {
     background-color: #f7aaaa;
 }
