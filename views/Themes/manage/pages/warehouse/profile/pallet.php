@@ -47,6 +47,7 @@ for($i=6;$i>=1;$i--){
           </div>
         </div>
       </div>
+
       <div class="uiBoxWhite pas pam mtl">
         <a href="<?=URL?>warehouse/<?=$this->item['ware_id']?>" class="btn" role="dialog-close"><span class="btn-text">กลับไปยังหน้าเดิม</span></a>
       </div>

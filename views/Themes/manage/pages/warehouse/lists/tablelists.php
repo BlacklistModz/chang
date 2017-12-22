@@ -25,7 +25,6 @@ foreach ($this->item['rows']['lists'] as $key => $value) {
                 </ul>
               </div>
 
-
               <div class="clearfix">
 
                 <div class="span10">
