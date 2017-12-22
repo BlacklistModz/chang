@@ -129,18 +129,6 @@ class Settings extends Controller {
 
         $data = array();
       }
-      elseif( $tap=="setBrands" ){
-        $this->view->setData('name', $this->model->query('brands')->lists());
-        $this->view->setData('status', $this->model->query('brands')->status());
-
-        if( !empty($id) ){
-          $item = $this->model->query('brands')->get($id);
-          if( empty($item) ) $this->error();
-
-          $this->view->setData('item', $item);
-        }
-        $data = array();
-      }
       else{
         $this->error();
       }
@@ -307,14 +295,6 @@ class Settings extends Controller {
       $this->view->render( $render );
     }
 
-    // กลุ่มสร้างกลุ่มใหม่สำหรับ customers
-    public function group() {
-      $a[] = array( "id"=>"A", "name"=>"A", "A"=>"UP TO USD 200,000");
-      $a[] = array( "id"=>"B", "name"=>"B", "B"=>"USD 100,000-200,000");
-      $a[] = array( "id"=>"C", "name"=>"C", "C"=>"LOWER USD 100,000");
-      return $a;
-    }
-
     public function planload($tap='platform'){
       $this->view->setPage('title', "Setting Planload - ".ucfirst($tap));
 
@@ -333,7 +313,4 @@ class Settings extends Controller {
       $this->view->setData('data', $data);
       $this->view->render( $render );
     }
-
-
-
 }
