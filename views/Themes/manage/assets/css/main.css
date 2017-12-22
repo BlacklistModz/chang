@@ -10306,9 +10306,7 @@ table.blueTable tfoot .links a {
     text-align: center;
     border-radius: 8px;
     box-shadow: 3px 4px 20px 0px;
-    background: rgb(255, 255, 255);;
-    "
-
+    background: rgb(255, 255, 255);
 }
 .pallet-bg {
     background-image: url('/chang/public/images/icon/boxx.png');
