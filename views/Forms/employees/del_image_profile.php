@@ -1,6 +1,6 @@
 <?php
 
-$arr['title'] = $this->lang->translate('ยืนยันการลบข้อมูล');
+$arr['title'] = $this->lang->translate('ยืนยันการลบ');
 $arr['body'] = $this->lang->translate('คุณต้องการที่จะลบรูปหรือไม่');
 $arr['form'] = '<form action="'.URL.'employees/del_image_profile"></form>';
 $arr['hiddenInput'][] = array('name'=>'id','value'=>$this->id);

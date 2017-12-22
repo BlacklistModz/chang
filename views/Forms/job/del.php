@@ -1,6 +1,6 @@
 <?php
 
-$arr['title'] = 'ยืนยันการลบข้อมูล';
+$arr['title'] = 'ยืนยันการลบ';
 
 $next = isset($_REQUEST['next']) ? '?next='.$_REQUEST['next']:'';
 

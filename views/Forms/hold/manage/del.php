@@ -1,6 +1,6 @@
 <?php
 
-$arr['title'] = 'ยืนยันการลบข้อมูล';
+$arr['title'] = 'ยืนยันการลบ';
 // if ( !empty($item['permit']['del']) ) {
 	
 	$arr['form'] = '<form class="js-submit-form" action="'.URL. 'hold/del_manage"></form>';
