@@ -19,7 +19,7 @@ class pallets_Model extends Model
     				   LEFT JOIN products_brix pb ON p.pallet_brix_id=pb.brix_id
                        LEFT JOIN warehouse w ON p.pallet_ware_id=w.ware_id
                        LEFT JOIN warehouse_rows wr ON p.pallet_row_id=wr.row_id";
-    private $_field = "p.*, type_name, pro_code, pro_amount, grade_name, size_name, weight_dw, weight_nw, breed_name, old_code, can_name, brix_name, w.ware_name, wr.row_name";
+    private $_field = "p.*, type_name, type_icon, pro_code, pro_amount, grade_name, size_name, weight_dw, weight_nw, breed_name, old_code, can_name, brix_name, w.ware_name, wr.row_name";
     private $_cutNamefield = "pallet_";
 
     public function lists( $options=array() ){
@@ -214,7 +214,13 @@ class pallets_Model extends Model
         $data['retort'] = $this->listsRetort($data['id']);
         $data['checks'] = $this->listsCheck($data['id']);
         $data['fraction'] = $this->listsFraction($data['id']);
-        $data['total_hole'] = $this->summaryHold( $data['id'] );
+        $data['manage'] = $this->listsHoldManage($data['id']);
+
+        if( !empty($options["summary"]) ){
+            $data['total_hole'] = $this->summaryHold( $data['id'] );
+            $data['total_pound'] = $this->summaryPound( $data['id'] );
+            $data['total_check'] = $this->summaryCheck($data['id']);
+        }
 
         $data['permit']['del'] = true;
 
@@ -389,6 +395,7 @@ class pallets_Model extends Model
         $a[] = array('id'=>5, 'name'=>'Downgrade');
         $a[] = array('id'=>6, 'name'=>'บุบ');
         $a[] = array('id'=>7, 'name'=>'เสียหาย/ทำลาย');
+        $a[] = array('id'=>8, 'name'=>'PACKED');
         // $a[] = array('id'=>4, 'name'=>'Move Pallet');
 
         return $a;
@@ -526,7 +533,27 @@ class pallets_Model extends Model
 
     #SUMMARY
     public function summaryHold($id){
-        $sth = $this->db->prepare("SELECT SUM(hold_qty) AS total FROM hold WHERE hold_parent_id=:id");
+        $sth = $this->db->prepare("SELECT SUM(hold_qty) AS total FROM hold WHERE hold_parent_id=:id AND hold_status=:status");
+        $sth->execute( array(
+            ':id' => $id,
+            ':status' => 1
+        ) );
+
+        $data = $sth->fetch( PDO::FETCH_ASSOC );
+        return !empty($data['total']) ? $data['total'] : 0;
+    }
+    public function summaryPound($id){
+        $sth = $this->db->prepare("SELECT COUNT(*) AS total FROM pallets_items WHERE item_pallet_id=:id AND item_status=:status");
+        $sth->execute( array(
+            ':id' => $id,
+            ':status' => 6
+        ) );
+
+        $data = $sth->fetch( PDO::FETCH_ASSOC );
+        return !empty($data['total']) ? $data['total'] : 0;
+    }
+    public function summaryCheck($id){
+        $sth = $this->db->prepare("SELECT SUM(check_qty) AS total FROM pallets_check WHERE check_pallet_id=:id");
         $sth->execute( array(
             ':id' => $id
         ) );
@@ -618,5 +645,27 @@ class pallets_Model extends Model
     }
     public function delAllFraction($id){
         $this->db->delete("pallets_fraction", "frac_pallet_id={$id}", $this->db->count("pallets_fraction", "frac_pallet_id={$id}"));
+    }
+
+    #HOLE MANAGE
+    public function listsHoldManage($id){
+        return $this->db->select("SELECT mge_id AS id, mge_hold_id AS hold_id, mge_manage_id AS manage_id, manage_name, mge_qty AS qty, mge_remark AS remark FROM pallets_hold_manage hm LEFT JOIN hold_manage m ON hm.mge_manage_id=m.manage_id WHERE mge_pallet_id={$id}");
+    }
+    public function setHoldManage($data){
+        if( !empty($data['id']) ){
+            $id = $data['id'];
+            unset($data['id']);
+            $this->db->update('pallets_hold_manage', $data, "mge_id={$id}");
+        }
+        else{
+            $data["mge_created"] = date("c");
+            $this->db->insert('pallets_hold_manage', $data);
+        }
+    }
+    public function delHoldManage($id){
+        $this->db->delete("pallets_hold_manage", "mge_id={$id}");
+    }
+    public function delAllHoldManage($id){
+        $this->db->delete("pallets_hold_manage", "mge_pallet_id={$id}", $this->db->count("pallets_hold_manage", "mge_pallet_id={$id}"));
     }
 }

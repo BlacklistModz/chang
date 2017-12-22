@@ -7,8 +7,9 @@ $url = URL.'customers_brands/';
 <div class="SettingCol-header"><div class="SettingCol-contentInner">
 	<div class="clearfix">
 		<ul class="clearfix lfloat SettingCol-headerActions">
-
-			<li><h2><i class="icon-user mrs"></i><span><?=$this->lang->translate('Customers brands')?></span></h2></li>
+			<li>
+				<h2><i class="icon-user mrs"></i><span><?=$this->lang->translate('BAYER BRANDS')?></span></h2>
+			</li>
 			<li><a class="btn js-refresh"><i class="icon-refresh"></i></a></li>
 			<li class="divider"></li>
 

@@ -65,6 +65,7 @@ class Planload extends Controller  {
     	$this->view->setData('types', $this->model->query('products')->type());
     	$this->view->setData('job', $this->model->query('job')->lists());
     	$this->view->setData('platform', $this->model->query('platform')->lists());
+        $this->view->setData('brands', $this->model->query('brands')->lists());
 
     	$this->view->render('planload/forms/create');
     	// $this->view->setPage('path', 'Forms/planload');
@@ -86,6 +87,7 @@ class Planload extends Controller  {
         $this->view->setData('types', $this->model->query('products')->type());
         $this->view->setData('job', $this->model->query('job')->lists());
         $this->view->setData('platform', $this->model->query('platform')->lists());
+        $this->view->setData('brands', $this->model->query('brands')->lists());
 
         $this->view->render('planload/forms/create');
     }
@@ -103,6 +105,7 @@ class Planload extends Controller  {
             $form   ->post('plan_date')
                     ->post('plan_platform_id')
                     ->post('plan_cus_id')->val('is_empty')
+                    ->post('plan_brand_id')
                     ->post('plan_type_id')->val('is_empty')
                     ->post('plan_pro_id')
                     ->post('plan_size_id')->val('is_empty')

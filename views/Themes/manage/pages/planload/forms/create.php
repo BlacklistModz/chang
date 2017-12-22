@@ -26,6 +26,13 @@ $form 	->field("plan_cus_id")
 		->select( $this->customer['lists'] )
 		->value( !empty($this->item['cus_id']) ? $this->item['cus_id'] : "" );
 
+$form 	->field("plan_brand_id")
+		->label("BRAND")
+		->addClass("inputtext")
+		->autocomplete('off')
+		->select( $this->brands['lists'] )
+		->value( !empty($this->item['brand_id']) ? $this->item['brand_id'] : "" );
+
 $form 	->field("plan_type_id")
 		->label("Product")
 		->addClass('inputtext')

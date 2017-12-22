@@ -205,67 +205,64 @@ class Hold extends Controller {
     	$id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
     	if( empty($id) || empty($this->me) || $this->format!='json' ) $this->error();
 
-    	$item = $this->model->get($id, array('items'=>true));
+    	$item = $this->model->get($id);
     	if( empty($item) ) $this->error();
 
     	if( !empty($_POST) ){
 
-            try{
-                $form = new Form();
-                $form   ->post('hold_manage_note');
-                $form->submit();
-                $postData = $form->fetch();
+            $qty = 0;
+            $manage = array();
+            for($i=0;$i<=count($_POST["manage"]["id"]);$i++){
+                if( empty($_POST["manage"]["id"][$i]) ||
+                    empty($_POST["manage"]["qty"][$i]) ) continue;
 
-                $manage = $_POST["manage"];
-                $_manage = array();
-                foreach ($manage['id'] as $key => $value) {
-                    if( empty($value) ) continue;
+                $manage[] = array(
+                    'mge_manage_id'=>$_POST["manage"]["id"][$i],
+                    'mge_qty'=>$_POST["manage"]["qty"][$i],
+                    'mge_remark'=>$_POST["manage"]["remark"][$i]
+                );
 
-                    $_manage[$key]['manage_id'] = $value;
-                    $_manage[$key]['note'] = $manage['note'][$key];
-                }
-
-                if( empty($_manage) ){
-                    $arr['error']['manage'] = 'กรุณาเลือกอย่างน้อย 1 รายการ';
-                }
-
-                if( empty($arr['error']) ){
-
-                    foreach ($_manage as $key => $value) {
-                        $_data = array(
-                            'hold_id'=>$id,
-                            'manage_id'=>$value['manage_id'],
-                            'note'=>$value['note']
-                        );
-                        $this->model->setManage($_data); #SET MANAGE
-                    }
-
-                    foreach ($item['items'] as $key => $value) {
-                        $data = array(
-                            'id'=>$value['parent_id'],
-                            'item_status'=>1,
-                        );
-                        $this->model->query('pallets')->setItem( $data ); # UPDATE ITEM ON PALLET
-
-                        $_items = array(
-                            'id'=>$value['id'],
-                            'item_status'=>2
-                        );
-                        $this->model->setItem( $_items );
-                    }
-
-                    $postData['hold_status'] = 2;
-                    $this->model->update( $id, $postData ); # UPDATE HOLD DETAIL
-
-                    $arr['message'] = 'ปล่อย Hold เรียบร้อย';
-                    $arr['url'] = 'refresh';
-                }
-
-            } catch (Exception $e) {
-                $arr['error'] = $this->_getError($e->getMessage());
+                $qty += $_POST["manage"]["qty"][$i];
             }
 
-    		echo json_encode($arr);
+            if( empty($manage) ) $arr['error']['manage'] = 'กรุณาเลือกอย่างน้อย 1 รายการ';
+            if( $qty > $item['qty'] ) $arr['error']['manage'] = 'ไม่สามารถระบุจำนวนเกินจากที่โฮลได้';
+
+            if( empty($arr['error']) ){
+                foreach ($manage as $key => $value) {
+                    $_items = $this->model->listsItems($id, array("status"=>1, "limit"=>$value['mge_qty']));
+
+                    foreach ($_items as $i => $val) {
+                        $data = array(
+                            'id'=>$val['parent_id'],
+                            'item_status'=>1
+                        );
+                        $this->model->query('pallets')->setItem($data); #ITEM ON PALLET
+
+                        $data = array(
+                            'id'=>$val['id'],
+                            'item_status'=>2
+                        );
+                        $this->model->setItem($data); #ITEM ON HOLD
+                    }
+
+                    $value["mge_pallet_id"] = $item["parent_id"];
+                    $value["mge_hold_id"] = $id;
+                    $value["mge_emp_id"] = $this->me['id'];
+                    $this->model->query('pallets')->setHoldManage($value); #SET HOLD MANAGE
+                }
+
+                $this->model->update($id, array('hold_manage_note'=>$_POST["hold_manage_note"]));
+
+                if( $qty == $item["qty"] ){
+                    $this->model->update($id, array('hold_status'=>2));
+                }
+
+                $arr['message'] = 'จัดการ HOLD เรียบร้อย';
+                $arr['url'] = 'refresh';
+            }
+
+            echo json_encode($arr);
     	}
     	else{
     		$this->view->setData('item', $item);

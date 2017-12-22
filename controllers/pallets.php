@@ -38,7 +38,7 @@ class Pallets extends Controller {
         $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
         if( empty($id) || empty($this->me) ) $this->error();
 
-        $item = $this->model->get($id);
+        $item = $this->model->get($id, array('summary'=>true));
         if( empty($item) ) $this->error();
 
         $hold = $this->model->query('hold')->lists( array('parent'=>$item['id'], 'cause'=>true) );
@@ -690,6 +690,43 @@ class Pallets extends Controller {
             $this->view->setData('item', $item);
             $this->view->setPage('path', 'Forms/pallets');
             $this->view->render('set_fraction');
+        }
+    }
+
+    public function set_item($id=null, $status=null){
+        $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
+        $status = isset($_REQUEST["status"]) ? $_REQUEST["status"] : $status;
+
+        if( empty($id) || empty($status) || empty($this->me) || $this->format!='json' ) $this->error();
+
+        $item = $this->model->get($id);
+        if( empty($item) ) $this->error();
+
+        if( !empty($_POST) ){
+            if( empty($_POST["qty"]) ) $arr['error']['qty'] = 'กรุณาระบุจำนวน';
+            if( $_POST["qty"] > $item["qty"] ) $arr['error']['qty'] = 'ไม่สามารถระบุจำนวนเกินสินค้าในพาเลทได้';
+
+            if( empty($arr['error']) ){
+                $_items = $this->model->listsItems($id, array("limit"=>$_POST["qty"], 'status'=>1));
+                foreach ($_items as $key => $value) {
+                    $data = array(
+                        'id'=>$value['id'],
+                        'item_status'=>$status
+                    );
+                    $this->model->setItem($data);
+                }
+
+                $arr['message'] = 'บันทึกข้อมูลเรียบร้อย';
+                $arr['url'] = 'refresh';
+            }
+
+            echo json_encode($arr);
+        }
+        else{
+            $this->view->setData('item', $item);
+            $this->view->setData('status', $this->model->getItemStatus($status));
+            $this->view->setPage('path', 'Forms/pallets');
+            $this->view->render('set_item');
         }
     }
 }
