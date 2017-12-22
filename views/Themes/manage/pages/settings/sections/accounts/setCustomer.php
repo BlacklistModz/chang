@@ -170,14 +170,14 @@ $form2 = $form2->create()
 	<section class="setting-section">
 		<form class="js-submit-form" method="post" action="<?=URL?>customers/save">
 
-          <table style="width:100%; height:100%;" class="uiBoxLightblue">
+          <table style="width:100%; height:100%;" class="">
 						<tr>
-							<td style="height:100%; width:50%; margin-top:10px; padding:20px;">
+							<td style="height:100%; width:50%; margin-top:10px; padding-right:3px;">
                 <div class="uiBoxWhite pam pas">
                   <?=$form->html();?>
                 </div>
 							</td>
-							<td style="height:100%; width:50%; margin-top:10px; padding:20px;">
+							<td style="height:100%; width:50%; margin-top:10px; padding-left:3px;">
                 <div class="uiBoxWhite pam pas">
                   <?=$form2->html();?>
                 </div>
@@ -185,7 +185,8 @@ $form2 = $form2->create()
 						</tr>
           </table>
 
-					<div style="margin-top:40px; width:100%; text-align:center; position:relative; bottom:20px">
+					<!-- <div style="margin-top:40px; width:100%; text-align:center; position:relative; bottom:20px"> -->
+						<div class="uiBoxWhite mts pam clearfix">
 						<div class="lfloat">
 							<a class="btn" role="dialog-close" href="<?=URL?>settings/accounts/customers"><span class="btn-text">ยกเลิก</span></a>
 						</div>
@@ -193,7 +194,7 @@ $form2 = $form2->create()
 							<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">บันทึก</span></button>
 						</div>
 					</div>
-					
+
           <?php
           if( !empty($this->item) ){
           	echo '<input type="hidden" name="id" value="'.$this->item['id'].'">';
