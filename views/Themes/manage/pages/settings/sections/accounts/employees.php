@@ -101,7 +101,7 @@ $url = URL.'employees/';
 	<div class="SettingCol-tableEmpty empty">
 		<div class="empty-loader">
 			<div class="empty-loader-icon loader-spin-wrap"><div class="loader-spin"></div></div>
-			<div class="empty-loader-text">Loading...</div>
+			<div class="empty-loader-text">กำลังโหลดข้อมูล...</div>
 		</div>
 		<div class="empty-error">
 			<div class="empty-icon"><i class="icon-link"></i></div>

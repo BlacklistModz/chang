@@ -182,10 +182,15 @@ $form2 = $form2->create()
 						</tr>
           </table>
 
-          <div style="margin-top:30px; width:100%; text-align:center; position:relative; bottom:20px">
-            <button type="submit" class="btn btn-primary btn-submit"><span class="btn-text"> บันทึก</span></button>
-            <a class="btn" role="dialog-close" href="<?=URL?>settings/accounts/customers"><span class="btn-text">ยกเลิก</span></a>
-          </div>
+					<div style="margin-top:40px; width:100%; text-align:center; position:relative; bottom:20px">
+						<div class="lfloat">
+							<a class="btn" role="dialog-close" href="<?=URL?>settings/accounts/customers"><span class="btn-text">ยกเลิก</span></a>
+						</div>
+						<div class="rfloat">
+							<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">บันทึก</span></button>
+						</div>
+					</div>
+
         </form>
       </div>
 

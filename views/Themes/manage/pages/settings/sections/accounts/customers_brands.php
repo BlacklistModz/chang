@@ -8,7 +8,7 @@ $url = URL.'customers_brands/';
 	<div class="clearfix">
 		<ul class="clearfix lfloat SettingCol-headerActions">
 
-			<li><h2><i class="icon-user mrs"></i><span><?=$this->lang->translate('brands')?></span></h2></li>
+			<li><h2><i class="icon-user mrs"></i><span><?=$this->lang->translate('Customers brands')?></span></h2></li>
 			<li><a class="btn js-refresh"><i class="icon-refresh"></i></a></li>
 			<li class="divider"></li>
 
@@ -73,7 +73,7 @@ $url = URL.'customers_brands/';
 	<div class="SettingCol-tableEmpty empty">
 		<div class="empty-loader">
 			<div class="empty-loader-icon loader-spin-wrap"><div class="loader-spin"></div></div>
-			<div class="empty-loader-text">Loading...</div>
+			<div class="empty-loader-text">กำลังโหลดข้อมูล...</div>
 		</div>
 		<div class="empty-error">
 			<div class="empty-icon"><i class="icon-link"></i></div>

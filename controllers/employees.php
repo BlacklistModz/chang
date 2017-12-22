@@ -286,7 +286,7 @@ class Employees extends Controller {
 
             $this->model->update($id, array('emp_display'=>$status));
 
-            $arr['message'] = 'Saved';
+            $arr['message'] = 'บันทึกเรียบร้อยแล้ว';
             $arr['url'] = 'refresh';
             echo json_encode($arr);
         }

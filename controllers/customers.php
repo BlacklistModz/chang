@@ -90,7 +90,7 @@ class Customers extends Controller {
                     $this->model->insert( $postData );
                 }
 
-                $arr['message'] = 'Saved';
+                $arr['message'] = 'บันทึกเรียบร้อยแล้ว';
                 $arr['url'] = URL.'settings/accounts/customers';
             }
 
