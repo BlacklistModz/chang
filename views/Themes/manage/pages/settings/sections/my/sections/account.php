@@ -24,6 +24,6 @@ $form   ->field("emp_lang")
 
 $form  	->submit()
 		->addClass("btn-submit btn btn-blue")
-		->value("Save");
+		->value("บันทึก");
 
 echo $form->html();

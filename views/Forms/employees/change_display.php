@@ -8,7 +8,7 @@ $arr['hiddenInput'][] = array('name'=>'status','value'=>$this->status);
 
 
 $this->status = ucfirst($this->status);
-$arr['body'] = "{$this->lang->translate('Change Status')}<span class=\"fwb\">{$this->item['fullname']}</span> to <span class=\"fwb fcr\">{$this->status}</span>";
+$arr['body'] = "{$this->lang->translate('Change Status')} <span class=\"fwb\">{$this->item['fullname']}</span> to <span class=\"fwb fcr\">{$this->status}</span>";
 
 $arr['button'] = '<button type="submit" class="btn btn-blue btn-submit"><span class="btn-text">บันทึก</span></button>';
 $arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">ยกเลิก</span></a>';

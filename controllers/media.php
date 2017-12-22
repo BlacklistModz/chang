@@ -3,9 +3,9 @@
 class Media extends Controller  {
 
     public function __construct() {
-        parent::__construct();        
+        parent::__construct();
     }
-    
+
     public function index() {
         $this->error();
     }
@@ -54,7 +54,9 @@ class Media extends Controller  {
         if( empty($media['error']) ){
             $media = $this->model->convert($media);
         }
-        
+
+
+        $arr['url'] = isset($_REQUEST['next']) ? $_REQUEST['next']:'refresh';
         echo json_encode( $media );
     }
 
@@ -85,19 +87,24 @@ class Media extends Controller  {
             $this->model->query('media')->del($id);
 
             $arr['message'] = 'ลบรูปแล้ว';
+
+            $arr['url'] = isset($_REQUEST['next']) ? $_REQUEST['next']:'refresh';
+
             echo json_encode($arr);
         }
         else{
 
             $this->view->setData('item', $item);
-            $this->view->setPage('path','Themes/manage/forms/media');
+            // $this->view->setPage('path','Themes/manage/forms/media');
+
+            $this->view->setPage('path','Forms/media');
             $this->view->render("del");
-        }        
+        }
     }
 
 
     public function set_caption() {
-        
+
         $id = isset($_REQUEST['id']) ? $_REQUEST['id']: $id;
         if( empty($this->me) || $this->format!='json' || empty($id) ) $this->error();
 
@@ -112,7 +119,7 @@ class Media extends Controller  {
             foreach ($caption as $key => $value) {
                 if( !empty($value) ){
                     $a[$key] = $value;
-                } 
+                }
             }
             $caption = json_encode($a);
         }
@@ -163,7 +170,7 @@ class Media extends Controller  {
     }
 
     public function lists() {
-        
+
         if( empty($this->me) || $this->format!='json' ) $this->error();
         echo json_encode( $this->model->lists() );
     }

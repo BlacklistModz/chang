@@ -32,6 +32,6 @@ $form->field("password_old")
 
 $form  	->submit()
 		->addClass("btn-submit btn btn-blue")
-		->value("Save");
-        
+		->value("บันทึก");
+
 echo $form->html();
