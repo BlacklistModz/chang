@@ -35,23 +35,20 @@
                           <ul class="lfloat">
 
                             <li><i class="icon-creamcorn _ico-center" style="width: 2.25em;"></i> <span>  ครีมคอร์น : กระป๋อง</span></li>
-                            <li><i class="icon-corn _ico-center"style="width: 2.25em;"></i> <span>  ข้าวโพดหวาน :กระป๋อง</span><li>
-                              <li><i class="icon-corncup _ico-center"style="width: 2.25em;"></i> <span>  ข้าวโพดคัพ :คัพ</span><li>
-                                <li><i class="icon-bakedlongan _ico-center"style="width: 2.25em;"></i><span>  ลำใยอบแห้ง :กระป๋อง</span><li>
-                                  <li><i class="icon-rambutan _ico-center"style="width: 2.25em;"></i><span>  เงาะ :กระป๋อง</span><li>
-                                    <li><i class="icon-longan _ico-center"style="width: 2.25em;"></i><span>  ลำไย :กระป๋อง</span><li>
-                                      <li><i class="icon-lychee _ico-center"style="width: 2.25em;"></i><span>  ลิ้นจี่ :กระป๋อง</span><li>
-                                        <li><i class="icon-mango _ico-center"style="width: 2.25em;"></i><span>  มะม่วง :กระป๋อง</span><li>
+                            <li><i class="icon-corn _ico-center"style="width: 2.25em;"></i> <span>  ข้าวโพดหวาน : กระป๋อง</span><li>
+                              <li><i class="icon-corncup _ico-center"style="width: 2.25em;"></i> <span>  ข้าวโพดคัพ : คัพ</span><li>
+                                <li><i class="icon-bakedlongan _ico-center"style="width: 2.25em;"></i><span>  ลำใยอบแห้ง : กระป๋อง</span><li>
+                                  <li><i class="icon-rambutan _ico-center"style="width: 2.25em;"></i><span>  เงาะ : กระป๋อง</span><li>
+                                    <li><i class="icon-longan _ico-center"style="width: 2.25em;"></i><span>  ลำไย : กระป๋อง</span><li>
+                                      <li><i class="icon-lychee _ico-center"style="width: 2.25em;"></i><span>  ลิ้นจี่ : กระป๋อง</span><li>
+                                        <li><i class="icon-mango _ico-center"style="width: 2.25em;"></i><span>  มะม่วง : กระป๋อง</span><li>
 
                                         </ul>
-                                      </div>
-
-                                      <br>
-
+                                      </div><br>
                                       <?php
 
-                                      $total = 1000;
-                                      $current = 200;
+                                      $total = 100;
+                                      $current = 10;
                                       $percent = $current/$total * 100;
 
                                       if($percent < 80)$percent_colour ="
