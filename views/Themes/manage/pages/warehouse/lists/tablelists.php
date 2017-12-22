@@ -84,7 +84,7 @@ foreach ($this->item['rows']['lists'] as $key => $value) {
                   </div>
                 </div>
 
-                <div class="span10">
+                <div class="span10 mtl">
                   <div class="uiBoxWhite">
                     <div class="pas pam">
                       <h3 class="mbm fwb mtl">สถานะความจุของโกดัง</h3>
