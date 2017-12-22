@@ -6,8 +6,8 @@ class planload_Model extends Model
         parent::__construct();
     }
     private $_objName = "planload";
-    private $_table = "planload";
-    private $_field = "*";
+    private $_table = "planload p LEFT JOIN platform f ON p.plan_platform_id=f.plat_id";
+    private $_field = "p.*, f.plat_name";
     private $_cutNamefield = "plan_";
 
     public function insert(&$data){

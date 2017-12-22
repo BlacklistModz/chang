@@ -87,7 +87,7 @@ $form 	->field("plan_cabinet_return")
 		->addClass("inputtext")
 		->autocomplete('off')
 		// ->attr("data-plugins", "datepicker")
-		// ->type("date")
+		->type("date")
 		->value( !empty($this->item['cabinet_return']) ? $this->item['cabinet_return'] : "" );
 
 $form 	->field("plan_closed_date")
@@ -95,7 +95,7 @@ $form 	->field("plan_closed_date")
 		->addClass("inputtext")
 		->autocomplete("off")
 		// ->attr("data-plugins", "datepicker")
-		// ->type("date")
+		->type("date")
 		->value( !empty($this->item['closed_date']) ? $this->item['closed_date'] : "" );
 
 $form 	->field("plan_cabinet_get")
@@ -103,7 +103,7 @@ $form 	->field("plan_cabinet_get")
 		->addClass("inputtext")
 		->autocomplete("off")
 		// ->attr("data-plugins", "datepicker")
-		// ->type("date")
+		->type("date")
 		->value( !empty($this->item['cabinet_get']) ? $this->item["cabinet_get"] : "" );
 
 $form 	->field("plan_etd_date")
@@ -111,7 +111,7 @@ $form 	->field("plan_etd_date")
 		->addClass("inputtext")
 		->autocomplete("off")
 		// ->attr("data-plugins", "datepicker")
-		// ->type("date")
+		->type("date")
 		->value( !empty($this->item['etd_date']) ? $this->item["etd_date"] : "" );
 
 $form 	->field("plan_ship")
@@ -159,11 +159,18 @@ $form 	->field("plan_carton_remark")
 		->type('textarea')
 		->attr('data-plugins', 'autosize')
 		->value( !empty($this->item['carton_remark']) ? $this->item['carton_remark'] : '' );
+
+$options = $this->fn->stringify( array(
+				'grade' => !empty($this->item['plan_grade']) ? $this->item['plan_grade'] : array(),
+				'pro_id' => !empty($this->item['pro_id']) ? $this->item['pro_id'] : '',
+				'size_id' => !empty($this->item['size_id']) ? $this->item['size_id'] : '',
+				'weight_id' => !empty($this->item['weight_id']) ? $this->item['weight_id'] : ''
+		   ) );
 ?>
 <div id="mainContainer" class="report-main clearfix" data-plugins="main">
 	<div role="content">
 		<div role="main" class="pal">
-			<form class="js-submit-form" action="<?=URL?>planload/save" data-plugins="planloadForm">
+			<form class="js-submit-form" action="<?=URL?>planload/save" data-plugins="planloadForm" data-options="<?=$options?>">
 				<h3 class="fwb mbm"><i class="icon-shopping-cart"></i> Planload en Create</h3>
 				<div class="clearfix">
 					<div class="uiBoxWhite pam pas" style="width: 950px;">
@@ -171,11 +178,16 @@ $form 	->field("plan_carton_remark")
 					</div>
 					<div class="uiBoxWhite pam pas"  style="width: 950px;">
 						<div class="clearfix">
-							<a herf="<?=URL?>planload" class="btn btn-red">กลับ	</a>
+							<a href="<?=URL?>planload" class="btn btn-red">กลับ</a>
 							<button type="submit" class="js-submit btn btn-blue rfloat">บันทึก</button>
 						</div>
 					</div>
 				</div>
+				<?php 
+				if( !empty($this->item) ){
+					echo '<input type="hidden" name="id" value="'.$this->item['id'].'">';
+				}
+				?>
 			</form>
 		</div>
 	</div>
