@@ -11,7 +11,7 @@ $form = $form->create()
 $table = '<div class="lists-items" role="listsitems">
 <table class="lists-items-listbox table-bordered">
     <thead>
-    <tr style="background-color: beige;">                
+    <tr style="background-color: beige;">
         <th class="no">No.</th>
         <th class="name">จัดการ</th>
         <th class="number">ค่า</th>
@@ -50,6 +50,7 @@ $arr['body'] = $form->html();
 # fotter: button
 $arr['button'] = '<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">บันทึก</span></button>';
 $arr['bottom_msg'] = '<a class="btn btn-red" role="dialog-close"><span class="btn-text">ยกเลิก</span></a>';
+
 
 $arr['width'] = 650;
 $arr['height'] = 'full';

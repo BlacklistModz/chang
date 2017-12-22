@@ -49,6 +49,11 @@
 					</table>
 				</div>
 			</div>
+
+			<div class="uiBoxWhite pam pas mtm">
+				<a class="btn btn-text" role="dialog-close" href="<?=URL?>/job"><span class="btn-text">กลับ</span></a>
+			</div>
+			
 		</div>
 	</div>
 </div>

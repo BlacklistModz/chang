@@ -7,7 +7,7 @@ $url = URL .'employees/';
 
 <div class="rfloat">
 
-	<span class="gbtn"><a class="btn btn-blue" data-plugins="dialog" href="<?=$url?>add_position"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></span>
+	<span class=""><a class="btn btn-blue" data-plugins="dialog" href="<?=$url?>add_position"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></span>
 
 </div>
 
@@ -56,7 +56,7 @@ $url = URL .'employees/';
                         'settings' =>array(
                             'axisX'=> 'right',
                             'parent'=>'.setting-main'
-                        ) 
+                        )
                     ) ).'"><i class="icon-ellipsis-v"></i></a>'.
 
             '</div>';

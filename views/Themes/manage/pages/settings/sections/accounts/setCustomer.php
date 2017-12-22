@@ -186,11 +186,11 @@ $form2 = $form2->create()
           </table>
 
           <div style="margin-top:30px; width:100%; text-align:center; position:relative; bottom:20px">
-            <button type="submit" class="btn btn-primary btn-submit"><span class="btn-text"> Save</span></button>
-            <a class="btn" role="dialog-close" href="<?=URL?>settings/accounts/customers"><span class="btn-text">Cancel</span></a>
+            <button type="submit" class="btn btn-primary btn-submit"><span class="btn-text"> บันทึก</span></button>
+            <a class="btn" role="dialog-close" href="<?=URL?>settings/accounts/customers"><span class="btn-text">ยกเลิก</span></a>
           </div>
 
-          <?php 
+          <?php
           if( !empty($this->item) ){
           	echo '<input type="hidden" name="id" value="'.$this->item['id'].'">';
           }

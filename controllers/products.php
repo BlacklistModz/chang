@@ -372,7 +372,7 @@ class Products extends Controller {
 
         if( !empty($_POST) ){
             if( !empty($item["permit"]["del"]) ){
-                $this->model->del_brand( $id );
+                $this->model->delBrand( $id );
                 $arr["message"] = "ลบข้อมูลเรียบร้อย";
                 $arr["url"] = "refresh";
             }

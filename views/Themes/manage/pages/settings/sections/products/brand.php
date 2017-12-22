@@ -12,7 +12,7 @@ $path = !empty($_GET["type"]) ? "?type={$_GET["type"]}" : "";
 
 </div>
 
-<div class="setting-title"><?=$this->lang->translate('Products Brand')?></div>
+<div class="setting-title"><?=$this->lang->translate('แบนด์')?></div>
 </div>
 
 <section class="setting-section">
@@ -30,10 +30,10 @@ $path = !empty($_GET["type"]) ? "?type={$_GET["type"]}" : "";
 			<td class="status" style="width: 90px;"><?=$item["status_arr"]["name"]?></td>
 
 			<td class="actions whitespace">
-				
-				<span class=""><a data-plugins="dialog" href="<?=$url?>edit_brand/<?=$item['id'];?>" class="btn btn-orange"><i class="icon-pencil"></i></a></span>
-				<span class=""><a data-plugins="dialog" href="<?=$url?>del_brand/<?=$item['id'];?>" class="btn btn-red"><i class="icon-trash"></i></a></span>
-					
+
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>edit_brand/<?=$item['id'];?>" class="btn btn-orange btn-no-padding"><i class="icon-pencil"></i></a></span>
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>del_brand/<?=$item['id'];?>" class="btn btn-red btn-no-padding"><i class="icon-trash"></i></a></span>
+
 			</td>
 
 		</tr>

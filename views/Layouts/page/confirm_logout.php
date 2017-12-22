@@ -9,7 +9,7 @@ $arr['hiddenInput'][] = array('name'=>'ref','value'=>'mb');
 $arr['hiddenInput'][] = array('name'=>'h','value'=>'AfcbKa6ETzqgrsz2');
 
 $arr['title'] = 'ยืนยันการออกจากระบบ';
-$arr['body'] = "คุณต้องการออกจากระบบหรือไม่?";
+$arr['body'] = "คุณต้องการออกจากระบบหรือไม่";
 
 
 $arr['form'] = '<form action="'.URL.'logout/admin" method="post">';

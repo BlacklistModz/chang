@@ -3,10 +3,10 @@
 $tr = "";
 $tr_total = "";
 $url = URL .'products/';
-if( !empty($this->results['lists']) ){ 
+if( !empty($this->results['lists']) ){
 
     $seq = 0;
-    foreach ($this->results['lists'] as $i => $item) { 
+    foreach ($this->results['lists'] as $i => $item) {
 
         // $item = $item;
         $cls = $i%2 ? 'even' : "odd";
@@ -17,7 +17,7 @@ if( !empty($this->results['lists']) ){
             '<td class="name">'.
 
                 '<div class="anchor clearfix">'.
-                    
+
                     '<div class="content"><div class="spacer"></div><div class="massages">'.
 
                         '<div class="fullname"><a class="fwb">'. $item['name'].'</a></div>'.
@@ -31,12 +31,12 @@ if( !empty($this->results['lists']) ){
             '</td>'.
 
             '<td class="actions whitespace">
-                <span class=""><a data-plugins="dialog" href="'.$url.'edit_grade/'.$item['id'].'" class="btn btn-no-padding btn-orange"><i class="icon-pencil"></i></a></span>
-                <span class=""><a data-plugins="dialog" href="'.$url.'del_grade/'.$item['id'].'" class="btn btn-no-padding btn-red"><i class="icon-trash"></i></a></span>
+                <span class="gbtn"><a data-plugins="dialog" href="'.$url.'edit_grade/'.$item['id'].'" class="btn btn-no-padding btn-orange"><i class="icon-pencil"></i></a></span>
+                <span class="gbtn"><a data-plugins="dialog" href="'.$url.'del_grade/'.$item['id'].'" class="btn btn-no-padding btn-red"><i class="icon-trash"></i></a></span>
             </td>'.
-              
+
         '</tr>';
-        
+
     }
 }
 

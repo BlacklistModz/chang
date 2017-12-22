@@ -1,7 +1,7 @@
 <?php
 
 # title
-$title = $this->lang->translate('Products Brand');
+$title = $this->lang->translate('แบนด์');
 $arr['title']= $title;
 if( !empty($this->item) ){
 	$arr['hiddenInput'][] = array('name'=>'id','value'=>$this->item['id']);
@@ -45,7 +45,7 @@ $arr['form'] = '<form class="js-submit-form" method="post" action="'.URL. 'produ
 $arr['body'] = $form->html();
 
 # fotter: button
-$arr['button'] = '<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">Save</span></button>';
-$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">Cancel</span></a>';
+$arr['button'] = '<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">บันทึก</span></button>';
+$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">ยกเลิก</span></a>';
 
 echo json_encode($arr);

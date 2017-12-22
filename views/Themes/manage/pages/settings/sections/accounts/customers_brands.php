@@ -46,7 +46,7 @@ $url = URL.'customers_brands/';
 		<ul class="rfloat SettingCol-headerActions clearfix">
 
 			<li>
-				<label for="search-query">Search:</label>
+				<label for="search-query">ค้นหา:</label>
 				<form class="form-search" action="#">
 				<input class="search-input inputtext" type="text" id="search-query" placeholder="ค้นหา" name="q" autocomplete="off">
 				<span class="search-icon">

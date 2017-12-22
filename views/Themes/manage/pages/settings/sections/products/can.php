@@ -11,7 +11,7 @@ $url = URL .'products/';
 
 </div>
 
-<div class="setting-title"><?=$this->lang->translate('Category Can')?></div>
+<div class="setting-title"><?=$this->lang->translate('กระป๋อง')?></div>
 </div>
 
 <section class="setting-section">
@@ -22,17 +22,17 @@ $url = URL .'products/';
 
 		</tr>
 
-		<?php foreach ($this->data as $key => $item) { 
+		<?php foreach ($this->data as $key => $item) {
 			$code = !empty($item['code']) ? '('.$item['code'].')' : '';
 		?>
 		<tr>
 			<td class="name"><?=$item['name']?> <?=$code?></td>
 
 			<td class="actions whitespace">
-				
-				<span class=""><a data-plugins="dialog" href="<?=$url?>edit_can/<?=$item['id'];?>" class="btn btn-orange"><i class="icon-pencil"></i></a></span>
-				<span class=""><a data-plugins="dialog" href="<?=$url?>del_can/<?=$item['id'];?>" class="btn btn-red"><i class="icon-trash"></i></a></span>
-					
+
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>edit_can/<?=$item['id'];?>" class="btn btn-orange btn-no-padding"><i class="icon-pencil"></i></a></span>
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>del_can/<?=$item['id'];?>" class="btn btn-red btn-no-padding"><i class="icon-trash"></i></a></span>
+
 			</td>
 
 		</tr>

@@ -20,7 +20,7 @@ $url = URL .'products/';
 			<!-- <th class="ID"></th> -->
 			<th class="number"><?=$this->lang->translate('Code')?></th>
 			<th class="name"><?=$this->lang->translate('Type')?></th>
-			<?php 
+			<?php
 			foreach ($this->size as $key => $value) {
 				echo '<th class="status">'.$value['name'].'</th>';
 			}
@@ -42,8 +42,8 @@ $url = URL .'products/';
 			<?php } ?>
 			<td class="actions whitespace">
 
-				<span class=""><a data-plugins="dialog" href="<?=$url?>edit_type/<?=$item['id'];?>" class="btn btn-orange"><i class="icon-pencil"></i></a></span>
-				<span class=""><a data-plugins="dialog" href="<?=$url?>del_type/<?=$item['id'];?>" class="btn btn-red"><i class="icon-trash"></i></a></span>
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>edit_type/<?=$item['id'];?>" class="btn btn-orange btn-no-padding"><i class="icon-pencil"></i></a></span>
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>del_type/<?=$item['id'];?>" class="btn btn-red btn-no-padding"><i class="icon-trash"></i></a></span>
 
 			</td>
 

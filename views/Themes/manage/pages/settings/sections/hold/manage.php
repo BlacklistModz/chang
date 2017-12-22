@@ -28,10 +28,10 @@ $url = URL .'hold/';
 			<td class="name"><?=$item['name']?></td>
 
 			<td class="actions whitespace">
-				
-				<span class=""><a data-plugins="dialog" href="<?=$url?>edit_manage/<?=$item['id'];?>" class="btn btn-orange"><i class="icon-pencil"></i></a></span>
-				<span class=""><a data-plugins="dialog" href="<?=$url?>del_manage/<?=$item['id'];?>" class="btn btn-red"><i class="icon-trash"></i></a></span>
-					
+
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>edit_manage/<?=$item['id'];?>" class="btn btn-orange btn-no-padding"><i class="icon-pencil"></i></a></span>
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>del_manage/<?=$item['id'];?>" class="btn btn-red btn-no-padding"><i class="icon-trash"></i></a></span>
+
 			</td>
 
 		</tr>

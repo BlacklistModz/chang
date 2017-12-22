@@ -11,13 +11,13 @@ $url = URL .'products/';
 
 </div>
 
-<div class="setting-title">Type of Can</div>
+<div class="setting-title">ชนิดกระป๋อง</div>
 </div>
 
 <section class="setting-section">
 	<table class="settings-table admin"><tbody>
 		<tr>
-			<th class="name"><?=$this->lang->translate('Type of can')?></th>
+			<th class="name"><?=$this->lang->translate('ชนิดกระป๋อง')?></th>
 			<th class="actions"><?=$this->lang->translate('Action')?></th>
 
 		</tr>
@@ -27,10 +27,10 @@ $url = URL .'products/';
 			<td class="name"><?=$item['name']?></td>
 
 			<td class="actions whitespace">
-				
-				<span class=""><a data-plugins="dialog" href="<?=$url?>edit_canType/<?=$item['id'];?>" class="btn btn-orange"><i class="icon-pencil"></i></a></span>
-				<span class=""><a data-plugins="dialog" href="<?=$url?>del_canType/<?=$item['id'];?>" class="btn btn-red"><i class="icon-trash"></i></a></span>
-					
+
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>edit_canType/<?=$item['id'];?>" class="btn btn-orange btn-no-padding"><i class="icon-pencil"></i></a></span>
+				<span class="gbtn"><a data-plugins="dialog" href="<?=$url?>del_canType/<?=$item['id'];?>" class="btn btn-red btn-no-padding"><i class="icon-trash"></i></a></span>
+
 			</td>
 
 		</tr>

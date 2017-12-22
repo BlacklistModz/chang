@@ -27,7 +27,7 @@ foreach ($this->pageMenu as $key => $value) {
 					$ck_del = ' checked="1"';
 				}
 			}
-			
+
 		}
 	}
 		// $menu .= '<div class="fullname fwb">'.$value['name'].'</div>';
@@ -35,7 +35,7 @@ foreach ($this->pageMenu as $key => $value) {
 	if( $value['key'] =='dashboard' || $value['key'] == 'reports' || $value['key'] == 'calendar' ){
 
 		$hidden .= '<input type="hidden" name="permission['.$value['key'].'][view]" value="0">';
-		
+
 		$menu .= '<td class="status">'.$hidden.'<label class="checkbox"><input'.$checked.' type="checkbox" name="permission['.$value['key'].'][view]" value="1"></label></td>';
 		$menu .= '<td class="status"></td>';
 		$menu .= '<td class="status"></td>';
@@ -56,9 +56,9 @@ foreach ($this->pageMenu as $key => $value) {
 	}
 
 
-	$tr .= '<tr>'. 
+	$tr .= '<tr>'.
 		// '<td class="ID"></td>'.
-		'<td class="name">'.$i.'. '.$value['name'].'</td>'. 
+		'<td class="name">'.$i.'. '.$value['name'].'</td>'.
 		$menu.
 	'</tr>';
 	/**/
@@ -76,7 +76,7 @@ $arr['body'] = '<table class="table-permit">'.
 			'<th class="status">'.$this->lang->translate('View').'</th>'.
 			'<th class="status">'.$this->lang->translate('Add').'</th>'.
 			'<th class="status">'.$this->lang->translate('Edit').'</th>'.
-			'<th class="status">'.$this->lang->translate('Delete').'</th>'.
+			'<th class="status">ลบ</th>'.
 		'</tr>'.
 	'</thead>'.
 
@@ -104,7 +104,7 @@ $arr['hiddenInput'][] = array('name'=>'type','value'=>$_REQUEST['type']);
 
 # fotter: button
 $arr['width'] = 620;
-$arr['button'] = '<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">Save</span></button>';
-$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">Cancel</span></a>';
+$arr['button'] = '<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">บันทึก</span></button>';
+$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">ยกเลิก</span></a>';
 
 echo json_encode($arr);

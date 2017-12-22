@@ -33,8 +33,8 @@ if( !empty($this->results['lists']) ){
             '<td class="status_arr">'.$item['amount'].'</td>'.
 
             '<td class="actions whitespace">
-                <span class=""><a data-plugins="dialog" href="'.$url.'edit/'.$item['id'].'" class="btn btn-no-padding btn-orange"><i class="icon-pencil"></i></a></span>
-                <span class=""><a data-plugins="dialog" href="'.$url.'del/'.$item['id'].'" class="btn btn-no-padding btn-red"><i class="icon-trash"></i></a></span>
+                <span class="gbtn"><a data-plugins="dialog" href="'.$url.'edit/'.$item['id'].'" class="btn btn-no-padding btn-orange"><i class="icon-pencil"></i></a></span>
+                <span class="gbtn"><a data-plugins="dialog" href="'.$url.'del/'.$item['id'].'" class="btn btn-no-padding btn-red"><i class="icon-trash"></i></a></span>
             </td>'.
 
         '</tr>';

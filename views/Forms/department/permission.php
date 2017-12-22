@@ -68,7 +68,7 @@ $form   ->field($value['name'])
 			->label('ตั้งค่า')
 			->text( $menu );
 		$menu = '';
-	}	
+	}
 
 }
 
@@ -86,7 +86,7 @@ $arr['hiddenInput'][] = array('name'=>'section','value'=>'permit');
 
 # fotter: button
 $arr['width'] = 620;
-$arr['button'] = '<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">Save</span></button>';
-$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">Cancel</span></a>';
+$arr['button'] = '<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">บันทึก</span></button>';
+$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">ยกเลิก</span></a>';
 
 echo json_encode($arr);

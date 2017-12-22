@@ -15,7 +15,7 @@
 				<li class="mt"><a class="btn btn-blue" href="<?=URL?>job/add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
 
 			</ul>
-			
+
 			<ul class="lfloat selection hidden_elem" ref="selection">
 				<li><span class="count-value"></span></li>
 				<li><a class="btn-icon"><i class="icon-download"></i></a></li>
@@ -32,7 +32,7 @@
 					echo '<option value="200">200</option>';
 				?></select><span id="more-link">คำนวณ...</span></li>
 			</ul>
-			
+
 		</div>
 		<div class="clearfix mbl mtm">
 			<!-- <ul class="lfloat" ref="control">
@@ -53,7 +53,7 @@
 				</form></li>
 			</ul>
 		</div>
-		
+
 	</div>
 
 </div>
