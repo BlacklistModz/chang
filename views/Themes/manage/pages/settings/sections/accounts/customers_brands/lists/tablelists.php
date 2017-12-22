@@ -16,8 +16,9 @@ if( !empty($this->results['lists']) ){
 
         $tr .= '<tr class="'.$cls.'" data-id="'.$item['id'].'">'.
 
-            '<td class="number">'.$item['status']['name'].'</td>'.
             '<td class="name">'.$item['name'].'</td>'.
+
+            '<td class="number">'.$item['status']['name'].'</td>'.
 
             '<td class="actions">'.
               '<div class="group-btn whitespace mts">'.

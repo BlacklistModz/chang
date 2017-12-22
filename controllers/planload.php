@@ -106,7 +106,7 @@ class Planload extends Controller  {
                     ->post('plan_size_id')->val('is_empty')
                     ->post('plan_weight_id')->val('is_empty')
                     ->post('plan_fcl')->val('is_empty')
-                    ->post('plan_cartons')->val('is_empty')
+                    ->post('plan_carton')->val('is_empty')
                     ->post('plan_job_id')->val('is_empty')
                     ->post('plan_inv')
                     ->post('plan_cabinet_return')
@@ -116,7 +116,7 @@ class Planload extends Controller  {
                     ->post('plan_ship')
                     ->post('plan_shipper')
                     ->post('plan_remark')
-                    ->post('plan_approvel')
+                    ->post('plan_approval')
                     ->post('plan_package_carton')
                     ->post('plan_package_label')
                     ->post('plan_carton_remark');
@@ -131,6 +131,7 @@ class Planload extends Controller  {
                     $this->model->update($id, $postData);
                 }
                 else{
+                    $postData['plan_status'] = 1;
                     $this->model->insert($postData);
                     $id = $postData['id'];
                 }
