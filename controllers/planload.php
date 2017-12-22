@@ -139,7 +139,7 @@ class Planload extends Controller  {
                 }
 
                 if( !empty($id) ){
-                    if( !empty($item['grade']) ){
+                    if( !empty($item['plan_grade']) ){
                         $this->model->delAllGrade($id);
                     }
 
