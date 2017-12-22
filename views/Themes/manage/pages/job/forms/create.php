@@ -10,7 +10,7 @@ $form = $form->create()
 			 ->addClass('form-insert');
 
 $form 	->field('job_date')
-		->label("DATE")
+		->label("วันที่")
 		->addClass('inputtext')
 		->autocomplete('off')
 		->attr('data-plugins', 'datepicker')
@@ -125,13 +125,13 @@ $options = $this->fn->stringify( array(
 				</div>
 				<div class="uiBoxWhite mts pam clearfix">
 					<div class="rfloat">
-						<button type="submit" class="btn btn-blue btn-submit">SAVE</button>
+						<button type="submit" class="btn btn-blue btn-submit">บันทึก</button>
 					</div>
 					<div class="lfloat">
-						<a href="<?=URL?>job" class="btn">CANCEL</a>
+						<a href="<?=URL?>job" class="btn">ยกเลิก</a>
 					</div>
 				</div>
-				<?php 
+				<?php
 				if( !empty($this->item) ){
 					echo '<input type="hidden" name="id" value="'.$this->item['id'].'">';
 				}

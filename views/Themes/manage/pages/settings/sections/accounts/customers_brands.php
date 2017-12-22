@@ -7,8 +7,9 @@ $url = URL.'customers_brands/';
 <div class="SettingCol-header"><div class="SettingCol-contentInner">
 	<div class="clearfix">
 		<ul class="clearfix lfloat SettingCol-headerActions">
-
-			<li><h2><i class="icon-user mrs"></i><span><?=$this->lang->translate('BRANDS')?></span></h2></li>
+			<li>
+				<h2><i class="icon-user mrs"></i><span><?=$this->lang->translate('BAYER BRANDS')?></span></h2>
+			</li>
 			<li><a class="btn js-refresh"><i class="icon-refresh"></i></a></li>
 			<li class="divider"></li>
 
@@ -73,16 +74,16 @@ $url = URL.'customers_brands/';
 	<div class="SettingCol-tableEmpty empty">
 		<div class="empty-loader">
 			<div class="empty-loader-icon loader-spin-wrap"><div class="loader-spin"></div></div>
-			<div class="empty-loader-text">Loading...</div>
+			<div class="empty-loader-text">กำลังโหลด...</div>
 		</div>
 		<div class="empty-error">
 			<div class="empty-icon"><i class="icon-link"></i></div>
-			<div class="empty-title">Connection Error.</div>
+			<div class="empty-title">การเชื่อมต่อล้มเหลว!</div>
 		</div>
 
 		<div class="empty-text">
 			<div class="empty-icon"><i class="icon-user"></i></div>
-			<div class="empty-title">No Results Found.</div>
+			<div class="empty-title">ไม่พบผลลัพธ์.</div>
 		</div>
 	</div>
 	</div>

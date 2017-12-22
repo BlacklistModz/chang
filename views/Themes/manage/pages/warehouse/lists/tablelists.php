@@ -51,15 +51,17 @@ foreach ($this->item['rows']['lists'] as $key => $value) {
                           $percent=$this->total_pallet/$total_all_pallet * 100;
 
                           if($percent < 80){
-                            $percent_colour="background: rgb(30,87,153);
-                            background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%);
-                            background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%);
-                            background: linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%);
-                            " ;
+                            $percent_colour="background: #499bea; /* Old browsers */
+                                              background: -moz-linear-gradient(top, hsla(209,79%,60%,1) 0%, hsla(212,79%,51%,1) 100%); /* FF3.6-15 */
+                                              background: -webkit-linear-gradient(top, hsla(209,79%,60%,1) 0%,hsla(212,79%,51%,1) 100%); /* Chrome10-25,Safari5.1-6 */
+                                              background: linear-gradient(to bottom, hsla(209,79%,60%,1) 0%,hsla(212,79%,51%,1) 100%);" ;
                           }
 
                           if($percent>= 80){
-                            $percent_colour =" background: rgb(248,80,50); background: -moz-linear-gradient(top, rgba(248,80,50,1) 0%, rgba(241,111,92,1) 50%, rgba(246,41,12,1) 51%, rgba(240,47,23,1) 71%, rgba(231,56,39,1) 100%); background: -webkit-linear-gradient(top, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(246,41,12,1) 51%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%); background: linear-gradient(to bottom, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(246,41,12,1) 51%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%); ";
+                            $percent_colour =" background: #ff1a00; /* Old browsers */
+                            background: -moz-linear-gradient(top, hsla(6,100%,50%,1) 0%, hsla(6,100%,50%,1) 100%); /* FF3.6-15 */
+                            background: -webkit-linear-gradient(top, hsla(6,100%,50%,1) 0%,hsla(6,100%,50%,1) 100%); /* Chrome10-25,Safari5.1-6 */
+                            background: linear-gradient(to bottom, hsla(6,100%,50%,1) 0%,hsla(6,100%,50%,1) 100%); ";
                           }?>
                           <style type="text/css">
                           .outter {

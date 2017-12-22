@@ -68,16 +68,16 @@ $url = URL.'customers/';
 	<div class="SettingCol-tableEmpty empty">
 		<div class="empty-loader">
 			<div class="empty-loader-icon loader-spin-wrap"><div class="loader-spin"></div></div>
-			<div class="empty-loader-text">Loading...</div>
+			<div class="empty-loader-text">กำลังโหลด...</div>
 		</div>
 		<div class="empty-error">
 			<div class="empty-icon"><i class="icon-link"></i></div>
-			<div class="empty-title">Connection Error.</div>
+			<div class="empty-title">การเชื่อมต่อล้มเหลว!</div>
 		</div>
 
 		<div class="empty-text">
 			<div class="empty-icon"><i class="icon-user"></i></div>
-			<div class="empty-title">No Results Found.</div>
+			<div class="empty-title">ไม่พบผลลัพธ์.</div>
 		</div>
 	</div>
 	</div>

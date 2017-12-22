@@ -10,25 +10,25 @@ $path = !empty($_GET["ware"]) ? "?ware={$_GET["ware"]}" : "";
 	<div class="clearfix">
 		<ul class="clearfix lfloat SettingCol-headerActions">
 
-			<li><h2><span>Rows</span></h2></li>
+			<li><h2><span>แถว</span></h2></li>
 			<li><a class="btn js-refresh"><i class="icon-refresh"></i></a></li>
 			<li class="divider"></li>
 
 			<li><a class="btn btn-blue" data-plugins="dialog" href="<?=$url?>add_rows<?=$path?>"><i class="icon-plus mrs"></i><span>เพิ่ม</span></a></li>
-			
+
 		</ul>
 		<ul class="rfloat SettingCol-headerActions clearfix">
 			<li id="more-link"></li>
 		</ul>
 
-	
+
 	</div>
 
 	<div class="mtm clearfix">
 		<ul class="lfloat SettingCol-headerActions clearfix">
-			<li><label>Zone:</label> 
+			<li><label>Zone:</label>
 				<select ref="selector" name="ware" class="inputtext">
-					<?php 
+					<?php
 					foreach ($this->warehouse['lists'] as $key => $value) {
 						$sel = '';
 						if( !empty($_GET["ware"]) ){
@@ -50,7 +50,7 @@ $path = !empty($_GET["ware"]) ? "?ware={$_GET["ware"]}" : "";
 				</span>
 
 			</form></li>
-			
+
 		</ul>
 	</div>
 	<!-- <div class="setting-description mtm uiBoxYellow pam">Manage your personal employee settings.</div> -->

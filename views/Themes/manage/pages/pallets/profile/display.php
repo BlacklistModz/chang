@@ -50,6 +50,7 @@
 									?>
 									</label>
 								</li>
+								<li class="mtm">
 									<label>
 										<span class="fwb">HOLD : </span> <?=$this->item['total_hole']?> กระป๋อง
 									</label>

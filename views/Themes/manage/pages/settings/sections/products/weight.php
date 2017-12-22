@@ -11,7 +11,7 @@ $url = URL .'products/';
 
 </div>
 
-<div class="setting-title">Weight</div>
+<div class="setting-title">น้ำหนัก</div>
 </div>
 
 <section class="setting-section">
@@ -27,14 +27,14 @@ $url = URL .'products/';
 			<td class="name"><span class="fwb">DW : </span><?=$item['dw']?> , <span class="fwb">NW : </span><?=$item['nw']?></td>
 
 			<td class="actions whitespace">
-				
+
 				<span class="gbtn">
 					<a data-plugins="dialog" href="<?=$url?>edit_weight/<?=$item['id'];?>" class="btn btn-no-padding btn-orange"><i class="icon-pencil"></i></a>
 				</span>
 				<span class="gbtn">
 					<a data-plugins="dialog" href="<?=$url?>del_weight/<?=$item['id'];?>" class="btn btn-no-padding btn-red"><i class="icon-trash"></i></a>
 				</span>
-					
+
 			</td>
 
 		</tr>

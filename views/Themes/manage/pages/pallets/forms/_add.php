@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 $floor = array();
-for ($i=1; $i <= 4 ; $i++) { 
+for ($i=1; $i <= 4 ; $i++) {
 	$floor[] = array('id'=>$i, 'name'=>'ชั้นที่ '.$i);
 }
 
@@ -189,8 +189,8 @@ $arr['form'] = '<form class="js-submit-form" data-plugins="palletsForm" data-opt
 $arr['body'] = $form->html();
 
 # button
-$arr['button'] = '<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">Save</span></button>';
-$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">Cancel</span></a>';
+$arr['button'] = '<button type="submit" class="btn btn-primary btn-submit"><span class="btn-text">บันทึก</span></button>';
+$arr['bottom_msg'] = '<a class="btn" role="dialog-close"><span class="btn-text">ยกเลิก</span></a>';
 
 # settings
 $arr['width'] = 750;

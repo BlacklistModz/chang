@@ -11,7 +11,7 @@ $url = URL .'products/';
 
 </div>
 
-<div class="setting-title"><?=$this->lang->translate('Products Types')?></div>
+<div class="setting-title"><?=$this->lang->translate('ประเภท/ผลไม้')?></div>
 </div>
 
 <section class="setting-section">
