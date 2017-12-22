@@ -248,7 +248,7 @@ $form2 	->field("rt_lists")
 					</div>
 					<div class="clearfix uiBoxWhite pam mtl">
 						<div class="lfloat">
-							<a href="<?=URL?>pallets/<?=$this->types['id']?>" class="btn btn-red">ยกเลิก</a>
+							<a href="<?=URL?>pallets/<?=$this->types['id']?>" class="btn btn-text">ยกเลิก</a>
 						</div>
 						<div class="rfloat">
 							<button type="submit" class="btn btn-primary btn-submit">
