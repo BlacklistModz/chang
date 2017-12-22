@@ -91,7 +91,7 @@ $url = URL.'employees/';
 <div class="SettingCol-main">
 	<div class="SettingCol-tableHeader"><div class="SettingCol-contentInner">
 		<table class="settings-table admin"><thead><tr>
-			<th class="name" data-col="0">Full Name</th>
+			<th class="name" data-col="0">ชื่อ</th>
 			<th class="email" data-col="1"></th>
 			<th class="actions" data-col="2">Action</th>
 		</tr></thead></table>

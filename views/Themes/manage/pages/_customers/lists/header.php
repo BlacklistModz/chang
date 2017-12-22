@@ -9,11 +9,11 @@
 				<h2><i class="icon-address-card-o mrs"></i><span><?=$this->lang->translate('Member')?></span></h2>
 			</li>
 		</ul>
-		
+
 		<ul class="lfloat" ref="actions">
-			
+
 			<li><a class="btn js-refresh" data-plugins="tooltip" data-options="<?=$this->fn->stringify(array('text'=>'refresh'))?>"><i class="icon-refresh"></i></a></li>
-			
+
 
 			<li class="divider"></li>
 
@@ -22,7 +22,7 @@
             <?php } ?>
 
 		</ul>
-		
+
 		<ul class="lfloat selection hidden_elem" ref="selection">
 			<li><span class="count-value"></span></li>
 			<li><a class="btn-icon"><i class="icon-download"></i></a></li>
@@ -47,14 +47,14 @@
 					<option divider></option>
 					<option value="custom"><?=$this->lang->translate('Custom')?></option>
 				</select></li>
-	
+
 				<li><label for="status" class="label">Company</label>
 				<select ref="selector" id="status" name="company" class="inputtext"><?php
 					echo '<option value="">--- All ---</option>';
 					foreach ($this->status as $key => $value) {
 						echo '<option value="'.$value['id'].'">'.$value['name'].'</option>';
 					}
-					
+
 				?></select></li>
 
 				<li><label for="status" class="label">Status</label>
@@ -65,18 +65,18 @@
 					foreach ($this->status as $key => $value) {
 						echo '<option value="'.$value['id'].'">'.$value['name'].'</option>';
 					}
-					
+
 				?></select></li>
 			</ul>
 
 			<ul class="rfloat">
 				<li class="mt"><form class="form-search" action="#">
-					<input class="inputtext search-input" type="text" id="search-query" placeholder="<?=$this->lang->translate('search')?>" name="q" autocomplete="off">
+					<input class="inputtext search-input" type="text" id="search-query" placeholder="ค้นหา" name="q" autocomplete="off">
 					<span class="search-icon"><button type="submit" class="icon-search nav-search" tabindex="-1"></button></span>
 				</form></li>
 			</ul>
 		</div>
-		
+
 	</div>
 
 </div>

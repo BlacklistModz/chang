@@ -57,7 +57,7 @@
 			</ul>
 			<ul class="rfloat" ref="control">
 				<li class="mt"><form class="form-search" action="#">
-					<input class="inputtext search-input" type="text" id="search-query" placeholder="<?=$this->lang->translate('Search')?>" name="q" autocomplete="off">
+					<input class="inputtext search-input" type="text" id="search-query" placeholder="ค้นหา" name="q" autocomplete="off">
 					<span class="search-icon">
 						<button type="submit" class="icon-search nav-search" tabindex="-1"></button>
 					</span>
