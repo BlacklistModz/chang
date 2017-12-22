@@ -13,13 +13,13 @@ $url = URL.'employees/';
 			<li class="divider"></li>
 
 			<li><a class="btn btn-blue" data-plugins="dialog" href="<?=$url?>add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
-			
+
 		</ul>
 		<ul class="rfloat SettingCol-headerActions clearfix">
 			<li id="more-link"></li>
 		</ul>
 
-	
+
 	</div>
 
 	<div class="mtm clearfix">
@@ -52,7 +52,7 @@ $url = URL.'employees/';
 						$s = ' selected="1"';
 					}
 				}
-				// 
+				//
 			 ?>
 				<option<?=$s?> value="<?=$value['id']?>"><?=$value['name']?></option>
 			<?php } ?>
@@ -82,7 +82,7 @@ $url = URL.'employees/';
 				</span>
 
 			</form></li>
-			
+
 		</ul>
 	</div>
 	<!-- <div class="setting-description mtm uiBoxYellow pam">Manage your personal employee settings.</div> -->
@@ -101,16 +101,16 @@ $url = URL.'employees/';
 	<div class="SettingCol-tableEmpty empty">
 		<div class="empty-loader">
 			<div class="empty-loader-icon loader-spin-wrap"><div class="loader-spin"></div></div>
-			<div class="empty-loader-text">กำลังโหลดข้อมูล...</div>
+			<div class="empty-loader-text">กำลังโหลด...</div>
 		</div>
 		<div class="empty-error">
 			<div class="empty-icon"><i class="icon-link"></i></div>
-			<div class="empty-title">Connection Error.</div>
+			<div class="empty-title">การเชื่อมต่อล้มเหลว!</div>
 		</div>
 
 		<div class="empty-text">
 			<div class="empty-icon"><i class="icon-users"></i></div>
-			<div class="empty-title">No Results Found.</div>
+			<div class="empty-title">ไม่พบผลลัพธ์.</div>
 		</div>
 	</div>
 	</div>
