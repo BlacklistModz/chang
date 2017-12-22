@@ -3625,6 +3625,7 @@ if ( typeof Object.create !== 'function' ) {
 
 			if( self.$type.val() != '' ){
 				self.setGrade();
+				self.setProducts();
 				self.setSize();
 				self.setWeight();
 			}
