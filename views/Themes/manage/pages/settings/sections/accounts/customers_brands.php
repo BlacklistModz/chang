@@ -63,8 +63,8 @@ $url = URL.'customers_brands/';
 <div class="SettingCol-main">
 	<div class="SettingCol-tableHeader"><div class="SettingCol-contentInner">
 		<table class="settings-table admin"><thead><tr>
-			<th class="number" data-col="0">Status</th>
-			<th class="name" data-col="1">Name</th>
+			<th class="name" data-col="0">Name</th>
+			<th class="number" data-col="1">Status</th>
 			<th class="actions" data-col="2">Action</th>
 		</tr></thead></table>
 	</div></div>

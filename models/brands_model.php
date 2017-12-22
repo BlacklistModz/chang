@@ -54,24 +54,20 @@ class Brands_Model extends Model{
         $where_arr = array();
 
 
-// search
-//////////////////////////////////////////////////////////////////////////////
-    if( !empty($options['q']) ){
-        $where_str .= !empty($where_str) ? " AND " : "";
-        $where_str .= "brand_name LIKE :q";
-        $where_arr[":q"] = "%{$options["q"]}%";
+        if( !empty($options['q']) ){
+            $where_str .= !empty($where_str) ? " AND " : "";
+            $where_str .= "brand_name LIKE :q";
+            $where_arr[":q"] = "%{$options["q"]}%";
+        }
 
-    }
-//////////////////////////////////////////////////////////////////////////////
-if (isset($_REQUEST['status'])) {
-  $options['status'] = $_REQUEST['status'];
-}
-if( !empty($options['status']) ){
-    $where_str .= !empty($where_str) ? " AND " : "";
-    $where_str .= "brand_status = :status";
-    $where_arr[":status"] = $options["status"];
-
-}
+        if (isset($_REQUEST['status'])) {
+            $options['status'] = $_REQUEST['status'];
+        }
+        if( !empty($options['status']) ){
+            $where_str .= !empty($where_str) ? " AND " : "";
+            $where_str .= "brand_status = :status";
+            $where_arr[":status"] = $options["status"];
+        }
 
         $arr['total'] = $this->db->count($this->_table, $where_str, $where_arr);
 

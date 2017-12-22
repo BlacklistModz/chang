@@ -10142,29 +10142,31 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
 }
 .form-planload #plan_cabinet_return_fieldset,
 .form-planload #plan_closed_date_fieldset,
-.form-planload #plan_cabinet_get_fieldset,
-.form-planload #plan_etd_date_fieldset,
-.form-planload #plan_ship_fieldset{
+.form-planload #plan_cabinet_get_fieldset{
     float: left;
     margin-right: 20px;
     width: 285px;
 }
 
-.form-planload #plan_approvel_fieldset,
+.form-planload #plan_approval_fieldset,
 .form-planload #plan_package_carton_fieldset{
     float: left;
     margin-right: 20px;
     width: 285px;
 }
 .form-planload #plan_type_id_fieldset,
-.form-planload #plan_size_id_fieldset{
+.form-planload #plan_size_id_fieldset,
+.form-planload #plan_ship_fieldset{
     float: left;
     margin-right: 20px;
     width: 48%;
 }
 .form-planload #plan_fcl_fieldset,
-.form-planload #plan_cartons_fieldset,
-.form-planload #plan_job_id_fieldset{
+.form-planload #plan_carton_fieldset,
+.form-planload #plan_job_id_fieldset,
+.form-planload #plan_cabinet_return_fieldset,
+.form-planload #plan_closed_date_fieldset,
+.form-planload #plan_cabinet_get_fieldset{
     float: left;
     margin-right: 20px;
     width: 23%;
@@ -10179,7 +10181,7 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
 .form-planload #plan_size_id_fieldset,
 .form-pladload #plan_fcl_fieldset,
 .form-pladload #plan_cabinet_return_fieldset,
-.form-planload #plan_etd_date_fieldset,
+.form-planload #plan_ship_fieldset,
 .form-planload #plan_remark_fieldset,
 .form-planload #plan_carton_remark_fieldset{
     clear: both;
@@ -10188,7 +10190,7 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
 .form-planload #plan_size_id_fieldset .notification,
 .form-planload #plan_weight_id_fieldset .notification,
 .form-planload #plan_fcl_fieldset .notification,
-.form-planload #plan_cartons_fieldset .notification,
+.form-planload #plan_carton_fieldset .notification,
 .form-planload #plan_job_id_fieldset .notification{
     position: absolute;
 }

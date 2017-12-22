@@ -63,11 +63,11 @@ $form 	->field("plan_fcl")
 		->autocomplete('off')
 		->value( !empty($this->item['fcl']) ? $this->item['fcl'] : '' );
 
-$form 	->field("plan_cartons")
+$form 	->field("plan_carton")
 		->label("Cartons")
 		->addClass("inputtext")
 		->autocomplete('off')
-		->value( !empty($this->item['cartons']) ? $this->item['cartons'] : '' );
+		->value( !empty($this->item['carton']) ? $this->item['carton'] : '' );
 
 $form 	->field("plan_job_id")
 		->label("JO NO.")
@@ -86,32 +86,32 @@ $form 	->field("plan_cabinet_return")
 		->label("คืนตู้")
 		->addClass("inputtext")
 		->autocomplete('off')
-		->attr("data-plugins", "datepicker")
-		->type("date")
+		// ->attr("data-plugins", "datepicker")
+		// ->type("date")
 		->value( !empty($this->item['cabinet_return']) ? $this->item['cabinet_return'] : "" );
 
 $form 	->field("plan_closed_date")
 		->label("CLOSED")
 		->addClass("inputtext")
 		->autocomplete("off")
-		->attr("data-plugins", "datepicker")
-		->type("date")
+		// ->attr("data-plugins", "datepicker")
+		// ->type("date")
 		->value( !empty($this->item['closed_date']) ? $this->item['closed_date'] : "" );
 
 $form 	->field("plan_cabinet_get")
 		->label("รับตู้")
 		->addClass("inputtext")
 		->autocomplete("off")
-		->attr("data-plugins", "datepicker")
-		->type("date")
+		// ->attr("data-plugins", "datepicker")
+		// ->type("date")
 		->value( !empty($this->item['cabinet_get']) ? $this->item["cabinet_get"] : "" );
 
 $form 	->field("plan_etd_date")
 		->label("ETD")
 		->addClass("inputtext")
 		->autocomplete("off")
-		->attr("data-plugins", "datepicker")
-		->type("date")
+		// ->attr("data-plugins", "datepicker")
+		// ->type("date")
 		->value( !empty($this->item['etd_date']) ? $this->item["etd_date"] : "" );
 
 $form 	->field("plan_ship")
@@ -134,11 +134,11 @@ $form 	->field("plan_remark")
 		->attr('data-plugins', 'autosize')
 		->value( !empty($this->item['remark']) ? $this->item['remark'] : '' );
 
-$form 	->field("plan_approvel")
+$form 	->field("plan_approval")
 		->label("ขออนุมัติส่งออก")
 		->addClass("inputtext")
 		->autocomplete("off")
-		->value( !empty($this->item['approvel']) ? $this->item['approvel'] : '' );
+		->value( !empty($this->item['approval']) ? $this->item['approval'] : '' );
 
 $form 	->field("plan_package_carton")
 		->label("บรรจุภัณฑ์ (กล่อง)")
