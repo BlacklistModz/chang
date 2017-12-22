@@ -127,9 +127,11 @@ $form 	->field("plan_shipper")
 		->value( !empty($this->item['shipper']) ? $this->item['shipper'] : '' );
 
 $form 	->field("plan_remark")
-		->label("remark")
+		->label("REMARK")
 		->addClass("inputtext")
 		->autocomplete("off")
+		->type('textarea')
+		->attr('data-plugins', 'autosize')
 		->value( !empty($this->item['remark']) ? $this->item['remark'] : '' );
 
 $form 	->field("plan_approvel")
@@ -154,6 +156,8 @@ $form 	->field("plan_carton_remark")
 		->label("CARTON REMARK")
 		->autocomplete("off")
 		->addClass('inputtext')
+		->type('textarea')
+		->attr('data-plugins', 'autosize')
 		->value( !empty($this->item['carton_remark']) ? $this->item['carton_remark'] : '' );
 ?>
 <div id="mainContainer" class="report-main clearfix" data-plugins="main">
@@ -164,6 +168,12 @@ $form 	->field("plan_carton_remark")
 				<div class="clearfix">
 					<div class="uiBoxWhite pam pas" style="width: 950px;">
 						<?=$form->html()?>
+					</div>
+					<div class="uiBoxWhite pam pas"  style="width: 950px;">
+						<div class="clearfix">
+							<a herf="<?=URL?>planload" class="btn btn-red">กลับ	</a>
+							<button type="submit" class="js-submit btn btn-blue rfloat">บันทึก</button>
+						</div>
 					</div>
 				</div>
 			</form>

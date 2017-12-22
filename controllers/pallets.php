@@ -561,4 +561,135 @@ class Pallets extends Controller {
         }
     }
 
+    public function add_check($id=null){
+        $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
+        if( empty($id) || empty($this->me) || $this->format!='json' ) $this->error();
+
+        $item = $this->model->get($id);
+        if( empty($item) ) $this->error();
+
+        $this->view->setData('pallet', $item);
+        $this->view->setPage('path', 'Forms/pallets');
+        $this->view->render('add_check');
+    }
+
+    public function save_check(){
+        if( empty($_POST) ) $this->error();
+
+        $pallet = $this->model->get($_POST["pallet_id"]);
+        if( empty($pallet) ) $this->error();
+
+        try{
+            $form = new Form();
+            $form   ->post('check_qty')->val('is_empty')
+                    ->post('check_remark');
+            $form->submit();
+            $postData = $form->fetch();
+
+            if( $postData['check_qty'] > $pallet['qty'] ){
+                $arr['error']['check_qty'] = 'ไม่สามารถระบุจำนวนเกินสินค้าใน Pallet ได้';
+            }
+
+            if( empty($arr['error']) ){
+
+                $postData['check_pallet_id'] = $_POST["pallet_id"];
+                $postData['check_emp_id'] = $this->me['id'];
+                $this->model->setCheck($postData);
+
+                $items = $this->model->listsItems($pallet['id'], array('limit'=>$postData['check_qty']));
+                foreach ($items as $key => $value) {
+                    $this->model->delItem($value['id']);
+                }
+
+                $this->model->update($pallet['id'], array('pallet_qty'=>$pallet['qty'] - $postData['check_qty']));
+
+                $arr['message'] = 'บันทึกข้อมูลเรียบร้อย';
+                $arr['url'] = 'refresh';
+            }
+
+        } catch (Exception $e) {
+            $arr['error'] = $this->_getError($e->getMessage());
+        }
+        echo json_encode($arr);
+    }
+
+    public function setFraction($id=null){
+        $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
+        if( empty($id) || empty($this->me) || $this->format!='json' ) $this->error();
+
+        $item = $this->model->get($id);
+        if( empty($item) ) $this->error();
+
+        $options = array(
+            'type'=>$item['type_id'],
+            'size'=>$item['size_id'],
+            'weight'=>$item['weight_id'],
+            'grade'=>$item['grade_id'],
+            'not'=>$item['id']
+        );
+        $pallet = $this->model->lists( $options );
+
+        if( !empty($_POST) ){
+            for($i=0;$i<=count($_POST["pallet"]["id"]);$i++){
+                if( empty($_POST["pallet"]["id"][$i]) || empty($_POST["pallet"]["qty"][$i]) ) continue;
+                $postData[] = array(
+                    'frac_pallet_id' => $item['id'],
+                    'frac_old_pallet_id' => $_POST["pallet"]["id"][$i],
+                    'frac_qty' => $_POST["pallet"]["qty"][$i]
+                );
+            }
+
+            if( empty($postData) ) $arr['error']['lists'] = 'กรุณาเลือกอย่างน้อย 1 Pallet';
+
+            if( empty($arr['error']) ){
+
+                $total_qty = 0;
+
+                foreach ($postData as $key => $value) {
+                    $_items = $this->model->listsItems($value['frac_old_pallet_id'], array('status'=>1, 'limit'=>$value['frac_qty']));
+
+                    foreach ($_items as $i => $val) {
+                        $data = array(
+                            'id'=>$val['id'],
+                            'item_pallet_id'=>$item['id']
+                        );
+                        $this->model->setItem($data);
+                    }
+
+                    $_pallet = $this->model->get($value['frac_old_pallet_id']);
+                    if( empty($_pallet['qty']) ) continue;
+
+                    if( $_pallet['qty'] < $value['frac_qty'] ){
+                        $value['frac_qty'] = $_pallet['qty'];
+                        $this->model->delete($value['frac_old_pallet_id']);
+                    }
+                    elseif( $_pallet['qty'] == $value['frac_qty'] ){
+                        $this->model->delete($value['frac_old_pallet_id']);
+                    }
+                    else{
+                        $this->model->update($value['frac_old_pallet_id'], array('pallet_qty'=>$_pallet['qty'] - $value['frac_qty']));
+                    }
+                    $total_qty += $value['frac_qty'];
+
+                    $value['frac_old_pallet_code'] = $_pallet['code'];
+                    $value['frac_date'] = date("c");
+                    $value['frac_emp_id'] = $this->me['id'];
+                    $this->model->setFraction($value);
+                }
+
+                $this->model->update($item['id'], array('pallet_qty'=>$item['qty'] + $total_qty));
+
+                $arr['message'] = 'รวมเศษเรียบร้อย';
+                $arr['url'] = 'refresh';
+            }
+
+            echo json_encode($arr);
+        }
+        else{
+            $this->view->setData('pallet', $pallet);
+            $this->view->setData('item', $item);
+            $this->view->setPage('path', 'Forms/pallets');
+            $this->view->render('set_fraction');
+        }
+    }
 }

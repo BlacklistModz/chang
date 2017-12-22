@@ -3611,10 +3611,6 @@ if ( typeof Object.create !== 'function' ) {
 			self.$size = self.$elem.find("#plan_size_id");
 			self.$weight = self.$elem.find("#plan_weight_id");
 
-			self.currGrade = [];
-			self.currGradeArr = [];
-			self.number = -1;
-
 			self.currPro = self.options.pro_id;
 			self.currGrade = self.options.grade;
 			self.currWeight = self.options.weight_id;
@@ -3661,7 +3657,6 @@ if ( typeof Object.create !== 'function' ) {
 			var self = this;
 
 			var type = self.$type.val();
-			var number = self.number;
 			$.get(Event.URL + 'planload/listsGrade/'+type, function( res ){
 
 				if( res.length > 0 ){
@@ -3674,11 +3669,11 @@ if ( typeof Object.create !== 'function' ) {
 				self.$grade.empty();
 				$.each( res, function(i, obj){
 					var li = $('<label>', {class: 'checkbox mrl'}).append(
-								$('<input>', {type: 'checkbox', name:'plan[grade]['+number+'][]', "data-id":obj.id, value:obj.id})
+								$('<input>', {type: 'checkbox', name:'plan_grade[]', "data-id":obj.id, value:obj.id})
 								, obj.name
 							  );
 
-					if( jQuery.inArray(obj.id, self.currGradeArr) !== -1 ){
+					if( jQuery.inArray(obj.id, self.currGrade) !== -1 ){
 						li.find('[data-id='+obj.id+']').prop('checked', true);
 					}
 
@@ -3729,6 +3724,112 @@ if ( typeof Object.create !== 'function' ) {
 			var $this = Object.create( planloadForm );
 			$this.init( options, this );
 			$.data( this, 'planloadForm', $this );
+		});
+	};
+	$.fn.joForm.options = {}
+
+	var fractionForm = {
+		init:function(options, elem){
+			var self = this;
+			self.$elem = $(elem);
+			self.options = $.extend( {}, $.fn.planloadForm.options, options );
+
+			self.$listsitem = self.$elem.find("[role=listsitem]");
+
+			self.setElem();
+			self.Events();
+		},
+		setElem:function(){
+			var self = this;
+			// if( self.options.items.length==0 ){
+			// 	self.getItem();
+			// }else{
+			// 	$.each( self.options.items, function (i, obj) {
+			// 		self.getItem(obj);
+			// 	} );
+			// }
+			self.getItem();
+		},
+		Events:function(){
+			var self = this;
+
+			self.$elem.delegate('.js-add-item', 'click', function () {
+				var box = $(this).closest('tr');
+
+				if( box.find(':input').first().val()=='' ){
+					box.find(':input').first().focus();
+					return false;
+				}
+
+				var setItem = self.setItem({});
+				box.after( setItem );
+				setItem.find(':input').first().focus();
+
+				// self.sortItem();
+			});
+
+			self.$elem.delegate('.js-remove-item', 'click', function () {
+				var box = $(this).closest('tr');
+
+				if( self.$listsitem.find('tr').length==1 ){
+					box.find(':input').val('');
+					box.find(':input').first().focus();
+				}
+				else{
+					box.remove();
+				}
+
+				// self.sortItem();
+			});
+		},
+		getItem: function(data){
+			var self = this;
+
+			self.$listsitem.append( self.setItem( data || {} ) );
+			// self.sortItem();
+		},
+		setItem: function ( data ) {
+			var self = this;
+
+			var $select = $('<select>', {class:'inputtext js-select-pallet', name:'pallet[id][]'});
+			$select.append( $('<option>', {value:'', text:'-'}) );
+			$.each( self.options.pallet, function(i,obj) {
+				$select.append( $('<option>', {value:obj.id, text:obj.code+' (QTY : '+obj.qty+')', "data-id":obj.id}) );
+			});
+
+			$tr = $('<tr>');
+			$tr.append(
+				$('<td>', {class: "name"}).append($select),
+				// $('<td>', {class: "number"}).html( '<div class="js-qty"></di>' ),
+				$('<td>', {class: "name"}).append(
+					$('<input>', {class:'inputtext', type:'number', name:'pallet[qty][]'})
+				),
+				$('<td>', {class: 'actions tac'}).append(
+					$('<span class="gbtn">').append(
+						$('<button>', {
+					  	type:"button",
+					  	class:"btn js-add-item btn-no-padding btn-blue",
+						}).html( $('<i>', {class: 'icon-plus'}) ), 
+					),
+					$('<span class="gbtn">').append(
+						$('<button>', {
+					  	type:"button",
+					  	class:"btn js-remove-item btn-no-padding btn-red",
+						}).html( $('<i>', {class: 'icon-remove'}) ),
+					)
+				),
+			);
+
+			// $tr.find('.js-select-type').find('[data-id='+data.type_id+']').prop('selected', true);
+
+			return $tr;
+		}
+	}
+	$.fn.fractionForm = function( options ) {
+		return this.each(function() {
+			var $this = Object.create( fractionForm );
+			$this.init( options, this );
+			$.data( this, 'fractionForm', $this );
 		});
 	};
 	$.fn.joForm.options = {}

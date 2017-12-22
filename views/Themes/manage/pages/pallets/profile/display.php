@@ -25,6 +25,10 @@
 							</ul>
 						</div>
 						<div class="rfloat">
+							<?php if( $this->item['qty'] > 0 ) { ?>
+							<a href="<?=URL?>pallets/add_check/<?=$this->item['id']?>" class="btn btn-red" data-plugins="dialog"><i class="icon-hand-lizard-o"></i> ดึงตรวจสินค้า</a>
+							<?php } ?>
+							<a href="<?=URL?>pallets/setFraction/<?=$this->item['id']?>" class="btn btn-orange" data-plugins="dialog"><i class="icon-plus"></i> รวมเศษ</a>
 							<a href="<?=URL?>hold/add/<?=$this->item['id']?>" class="btn btn-blue" data-plugins="dialog"><i class="icon-plus"></i> เพิ่มรายการ Hold</a>
 						</div>
 					</div>
@@ -44,6 +48,17 @@
 								</li>
 								<li>
 									<label><span class="fwb">วันที่ผลิต : </span><?=date("d/m/Y", strtotime($this->item['date']))?></label>
+								</li>
+								<li>
+									<label><span class="fwb">RETORT : </span></label>
+									<?php 
+									$retort = '';
+									foreach ($this->item['retort'] as $key => $value) {
+										$retort .= !empty($retort) ? " , " : "";
+										$retort .= $value['rt_name'].'/'.$value['batch'].' : <span class="fwb">'.$value['qty'].'</span>';
+									}
+									echo $retort;
+									?>
 								</li>
 							</ul>
 						</div>
@@ -128,6 +143,75 @@
 						</div>
 					</div>
 
+				</div>
+
+				<div class="clearfix">
+
+					<div class="span11 mtm">
+						<div class="uiBoxWhite pam">
+							<h3 class="mbm fwb"><i class="icon-list-alt"></i> ประวัติการดึงตรวจ</h3>
+							<div ref="table" class="listpage2-table">
+								<?php if( !empty($this->item['checks']) ) { ?>
+								<table class="table-bordered">
+									<thead>
+										<tr>
+											<th width="15%">ลำดับ</th>
+											<th width="15%">วันที่</th>
+											<th width="15%">จำนวน</th>
+											<th width="55%">สาเหตุ</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php $num=0; foreach ($this->item['checks'] as $key => $value) { $num++; ?>
+										<tr>
+											<td style="text-align: center;"><?=$num?></td>
+											<td style="text-align: center;"><?=date("d/m/Y", strtotime($value['created']))?></td>
+											<td style="text-align: center;"><?=$value['qty']?></td>
+											<td><?=nl2br($value['remark'])?></td>
+										</tr>
+										<?php } ?>
+									</tbody>
+								</table>
+								<?php }
+								else{
+									echo '<div class="tac"><h3 class="fwb">ไม่พบประวัติการดึงตรวจ</h3></div>';
+								} ?>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="clearfix">
+					<div class="span11 mtm">
+						<div class="uiBoxWhite pam">
+							<h3 class="mbm fwb"><i class="icon-list-alt"></i> ประวัติการรวมเศษ</h3>
+							<div ref="table" class="listpage2-table">
+								<?php if( !empty($this->item['fraction']) ) { ?>
+								<table class="table-bordered">
+									<thead>
+										<tr>
+											<th width="30%">DATE</th>
+											<th width="30%">PALLET NO.</th>
+											<th width="30%">จำนวน</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php foreach ($this->item['fraction'] as $key => $value) { ?>
+										<tr>
+											<td class="fwb" style="text-align: center;"><?=date("d/m/Y", strtotime($value['date']))?></td>
+											<td class="fwb" style="text-align: center;"><?=$value['old_pallet_code']?></td>
+											<td class="fwb" style="text-align: center;"><?=$value['qty']?></td>
+										</tr>
+										<?php } ?>
+									</tbody>
+								</table>
+								<?php }
+								else{
+									echo '<div class="tac"><h3 class="fwb">ไม่พบประวัติการรวมเศษ</h3></div>';
+								} ?>
+							</div>
+						</div>
+					</div>
 				</div>
 
 			</div>

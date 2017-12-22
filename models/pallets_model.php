@@ -103,6 +103,12 @@ class pallets_Model extends Model
             $where_arr[":grade"] = $options["grade"];
         }
 
+        if( !empty($options["not"]) ){
+            $where_str .= !empty($where_str) ? " AND " : "";
+            $where_str .= "{$this->_cutNamefield}id!=:not";
+            $where_arr[":not"] = $options["not"];
+        }
+
         if( !empty($options['q']) ){
 
             $arrQ = explode(' ', $options['q']);
@@ -164,7 +170,7 @@ class pallets_Model extends Model
     public function delete( $id ){
     	$this->db->delete( $this->_objName, "{$this->_cutNamefield}id={$id}" );
         $this->delItems($id);
-        $this->delPalletReport($id);
+        $this->delPalletRetort($id);
     }
     public function get($id, $options=array()){
 
@@ -206,6 +212,8 @@ class pallets_Model extends Model
         }
 
         $data['retort'] = $this->listsRetort($data['id']);
+        $data['checks'] = $this->listsCheck($data['id']);
+        $data['fraction'] = $this->listsFraction($data['id']);
         $data['total_hole'] = $this->summaryHold( $data['id'] );
 
         $data['permit']['del'] = true;
@@ -271,11 +279,10 @@ class pallets_Model extends Model
     	return $data;
     }
     public function setItem($data){
-
         if( !empty($data['id']) ){
             $id = $data['id'];
             unset($data['id']);
-            $_data['item_updated'] = date("c");
+            $data['item_updated'] = date("c");
             $this->db->update($this->i_objType, $data, "item_id={$id}");
         }
         else{
@@ -378,6 +385,10 @@ class pallets_Model extends Model
         $a[] = array('id'=>1, 'name'=>'On Pallet');
         $a[] = array('id'=>2, 'name'=>'Hold');
         $a[] = array('id'=>3, 'name'=>'QC');
+        $a[] = array('id'=>4, 'name'=>'ขายแล้ว');
+        $a[] = array('id'=>5, 'name'=>'Downgrade');
+        $a[] = array('id'=>6, 'name'=>'บุบ');
+        $a[] = array('id'=>7, 'name'=>'เสียหาย/ทำลาย');
         // $a[] = array('id'=>4, 'name'=>'Move Pallet');
 
         return $a;
@@ -535,7 +546,7 @@ class pallets_Model extends Model
 
     #SET RETORT
     public function listsRetort($id){
-        return $this->db->select("SELECT prt_id AS id , prt_rt_id AS rt_id, prt_pallet_id AS pallet_id, prt_batch AS batch, prt_qty AS qty FROM pallets_retort WHERE prt_pallet_id={$id} ORDER BY prt_id ASC");
+        return $this->db->select("SELECT prt_id AS id , prt_rt_id AS rt_id, prt_pallet_id AS pallet_id, prt_batch AS batch, prt_qty AS qty, rt_name FROM pallets_retort pr LEFT JOIN retort r ON pr.prt_rt_id=r.rt_id WHERE prt_pallet_id={$id} ORDER BY prt_id ASC");
     }
     public function setRetort($data){
         if( !empty($data['id']) ){
@@ -550,7 +561,62 @@ class pallets_Model extends Model
     public function unsetRetort($id){
         $this->db->delete("pallets_retort", "prt_id={$id}");
     }
-    public function delPalletReport($id){
+    public function delPalletRetort($id){
         $this->db->delete("pallets_retort", "prt_pallet_id={$id}", $this->db->count("pallets_retort", "prt_pallet_id={$id}"));
+    }
+
+    public function listsCheck($id=null){
+        return $this->db->select("SELECT check_id AS id , check_pallet_id AS pallet_id , check_qty AS qty, check_created AS created, check_remark AS remark FROM pallets_check WHERE check_pallet_id={$id}");
+    }
+    public function setCheck($data){
+        if( !empty($data['id']) ){
+            $id = $data['id'];
+            unset($data['id']);
+
+            $data["check_updated"] = date("c");
+            $this->db->update("pallets_check", $data, "check_id={$id}");
+        }
+        else{
+            $data["check_created"] = date("c");
+            $data["check_updated"] = date("c");
+            $this->db->insert("pallets_check", $data);
+        }
+    }
+    public function delCheck($id){
+        $this->db->delete("pallets_check", "check_id={$id}");
+    }
+    public function delAllCheck($id){
+        $this->db->delete("pallets_check", "check_pallet_id={$id}", $this->db->count("pallets_check", "check_pallet_id={$id}"));
+    }
+
+    #FRACTION
+    public function listsFraction($id=null){
+        return $this->db->select("SELECT frac_id AS id
+            , frac_old_pallet_id AS old_pallet_id
+            , frac_old_pallet_code AS old_pallet_code
+            , frac_pallet_id AS pallet_id
+            , frac_date AS date
+            , frac_qty AS qty 
+        FROM pallets_fraction WHERE frac_pallet_id={$id}");
+    }
+    public function setFraction($data){
+        if( !empty($data['id']) ){
+            $id = $data['id'];
+            unset($data['id']);
+
+            $data["frac_updated"] = date("c");
+            $this->db->update("pallets_fraction", $data, "frac_id={$id}");
+        }
+        else{
+            $data["frac_created"] = date("c");
+            $data["frac_updated"] = date("c");
+            $this->db->insert("pallets_fraction", $data);
+        }
+    }
+    public function delFrac($id){
+        $this->db->delete("pallets_fraction", "frac_id={$id}");
+    }
+    public function delAllFraction($id){
+        $this->db->delete("pallets_fraction", "frac_pallet_id={$id}", $this->db->count("pallets_fraction", "frac_pallet_id={$id}"));
     }
 }

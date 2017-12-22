@@ -39,10 +39,10 @@
 			<ul class="lfloat" ref="control" data-plugins="search_Pallets" data-options="<?=$options = $this->fn->stringify( array('type'=>$this->item['id']) )?>">
 				<li>
 					<label for="closedate" class="label">เลือกวันที่</label><select ref="closedate" name="closedate" class="inputtext">
-						<option selected value="daily">วันนี้</option>
+						<option value="daily">วันนี้</option>
 						<option value="yesterday">เมื่อวานนี้</option>
 						<option value="weekly">สัปดาห์นี้</option>
-						<option value="monthly">เดือนนี้</option>
+						<option selected value="monthly">เดือนนี้</option>
 						<option value="custom">กำหนดเอง</option>
 					</select>
 				</li>

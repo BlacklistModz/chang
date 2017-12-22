@@ -80,6 +80,7 @@ class planload_Model extends Model
     public function convert($data, $options=array()){
     	$data = $this->cut($this->_cutNamefield, $data);
 
+        $data['plan_grade'] = $this->listsGrade($data['id']);
         $data['status'] = $this->getStatus($data['status']);
         $data['permit']['del'] = true;
 
@@ -100,5 +101,15 @@ class planload_Model extends Model
     		break;
     	}
     	return $data;
+    }
+
+    public function listsGrade($id){
+        return $this->db->select("SELECT pg.*, g.grade_name FROM planload_grade pg LEFT JOIN products_grade g ON pg.grade_id=g.grade_id WHERE pg.plan_id={$id}");
+    }
+    public function setGrade($data){
+        $this->db->insert("planload_grade", $data);
+    }
+    public function delAllGrade($id){
+        $this->db->delete("planload_grade", "plan_id={$id}", $this->db->count("planload_grade", "plan_id={$id}"));
     }
 }
