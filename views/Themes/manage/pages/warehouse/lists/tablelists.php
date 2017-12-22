@@ -26,7 +26,6 @@ foreach ($this->item['rows']['lists'] as $key => $value) {
               </div>
 
               <div class="clearfix">
-
                 <div class="span10">
                   <div class="uiBoxWhite">
                     <div class="pas pam">
@@ -67,28 +66,35 @@ foreach ($this->item['rows']['lists'] as $key => $value) {
                             height: 25px;
                             width: 600px;
                             border: solid 1px #8c8c8c;
-                            border-radius: 15px;
+                            border-radius: 5px;
                           }
                           .inner {
                             height: 23px;
                             width: <?php echo $percent?>%;
                             border-right: solid 1px #8c8c8c;
-                            border-radius: 15px;
+                            border-radius: 5px;
                             <?=$percent_colour?>
                           }
                         </style>
-                        <h3 class="mbm fwb mtl">สถานะความจุของโกดัง</h3>
-                        <div class="outter">
-                          <div class="inner" style="text-align: center;">
-                            <?php echo round($percent,2)?>%</div>
-                        </div>
-                        <?php } ?>
-
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <div class="span10">
+                  <div class="uiBoxWhite">
+                    <div class="pas pam">
+                      <h3 class="mbm fwb mtl">สถานะความจุของโกดัง</h3>
+                      <div class="outter">
+                        <div class="inner" style="text-align: center;">
+                          <?php echo round($percent,2)?>%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <?php } ?>
+
               </div>
             </div>
 
