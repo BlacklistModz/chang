@@ -15,11 +15,11 @@ class Warehouse extends Controller {
     if( empty($item) ) $this->error();
     // print_r($item);die;
 
-
     $this->view->setData('item', $item);
+    $this->view->setData('_type', $this->model->summaryType( $id ));
+    $this->view->setData('total_pallet', $this->model->summaryPallet( $id ));
     $this->view->setPage('title', 'Zone '.$item['name']);
     $this->view->render('warehouse/lists/header');
-
   }
   public function add(){
     if( empty($this->me) || $this->format!='json' ) $this->error();

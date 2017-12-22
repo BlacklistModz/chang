@@ -22,7 +22,7 @@ if( !empty($this->results['lists']) ){
         $ware = $floor = '<select class="inputtext" data-plugins="_update" data-options="'.$this->fn->stringify(array('url' => URL. 'pallets/setdata/'.$item['id'].'/ware_id')).'" data-name="warehouse">'.$ware.'</select>';
 
         $floor = '<option value="">-</option>';
-        for ($i=1; $i <= 4 ; $i++) { 
+        for ($i=1; $i <= 6 ; $i++) { 
             $sel = '';
             if( $item['floor'] == $i ) $sel = ' selected="1"';
             $floor .= '<option'.$sel.' value="'.$i.'">'.$i.'</option>';

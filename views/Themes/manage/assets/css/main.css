@@ -10184,6 +10184,14 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
 .form-planload #plan_carton_remark_fieldset{
     clear: both;
 }
+.form-planload #plan_type_id_fieldset .notification,
+.form-planload #plan_size_id_fieldset .notification,
+.form-planload #plan_weight_id_fieldset .notification,
+.form-planload #plan_fcl_fieldset .notification,
+.form-planload #plan_cartons_fieldset .notification,
+.form-planload #plan_job_id_fieldset .notification{
+    position: absolute;
+}
 
 
 .listpage2-table [ref=tablelists] .hold td {

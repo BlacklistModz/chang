@@ -1,6 +1,6 @@
 <?php
 $floor = array();
-for ($i=1; $i <= 4 ; $i++) {
+for ($i=1; $i <= 6 ; $i++) {
 	$floor[] = array('id'=>$i, 'name'=>'ชั้นที่ '.$i);
 }
 
