@@ -244,4 +244,20 @@ class warehouse_Model extends Model
   public function getfurit($id){
     return $this->db->select("SELECT type_code,type_name,type_icon FROM pallets p LEFT JOIN products_types t ON p.pallet_type_id=t.type_id  WHERE pallet_id={$id}");
   }
+
+  #SUMARY
+  public function summaryType($id){
+    $data = array();
+    $results = $this->query('products')->type();
+    foreach ($results as $key => $value) {
+      $data[$key] = $value;
+
+      $total = $this->db->select("SELECT SUM(pallet_qty) AS qty FROM pallets WHERE pallet_type_id={$value['id']} AND pallet_ware_id={$id}");
+      $data[$key]['total'] = !empty($total[0]['qty']) ? $total[0]['qty'] : 0;
+    }
+    return $data;
+  }
+  public function summaryPallet($id){
+    return $this->db->count("pallets", "pallet_ware_id={$id}");
+  }
 }

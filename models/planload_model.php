@@ -1,4 +1,4 @@
-<?php 
+<?php
 class planload_Model extends Model
 {
     public function __construct()
@@ -11,19 +11,19 @@ class planload_Model extends Model
     private $_cutNamefield = "plan_";
 
     public function insert(&$data){
-        
+
         $data["{$this->_cutNamefield}created"] = date("c");
         $data["{$this->_cutNamefield}updated"] = date("c");
 
-    	$this->db->insert($this->_objType, $data);
+    	$this->db->insert($this->_objName, $data);
     	$data['id'] = $this->db->lastInsertId();
     }
     public function update($id, $data){
         $data["{$this->_cutNamefield}updated"] = date("c");
-    	$this->db->update($this->_objType, $data, "{$this->_cutNamefield}id={$id}");
+    	$this->db->update($this->_objName, $data, "{$this->_cutNamefield}id={$id}");
     }
     public function delete($id){
-    	$this->db->delete($this->_objType, "{$this->_cutNamefield}id={$id}");
+    	$this->db->delete($this->_objName, "{$this->_cutNamefield}id={$id}");
     }
 
     public function lists($options=array()){
@@ -55,7 +55,7 @@ class planload_Model extends Model
 
         if( ($options['pager']*$options['limit']) >= $arr['total'] ) $options['more'] = false;
         $arr['options'] = $options;
-        
+
         return $arr;
     }
     public function buildFrag($results, $options=array()) {
@@ -80,6 +80,7 @@ class planload_Model extends Model
     public function convert($data, $options=array()){
     	$data = $this->cut($this->_cutNamefield, $data);
 
+        $data['plan_grade'] = $this->listsGrade($data['id']);
         $data['status'] = $this->getStatus($data['status']);
         $data['permit']['del'] = true;
 
@@ -100,5 +101,15 @@ class planload_Model extends Model
     		break;
     	}
     	return $data;
+    }
+
+    public function listsGrade($id){
+        return $this->db->select("SELECT pg.*, g.grade_name FROM planload_grade pg LEFT JOIN products_grade g ON pg.grade_id=g.grade_id WHERE pg.plan_id={$id}");
+    }
+    public function setGrade($data){
+        $this->db->insert("planload_grade", $data);
+    }
+    public function delAllGrade($id){
+        $this->db->delete("planload_grade", "plan_id={$id}", $this->db->count("planload_grade", "plan_id={$id}"));
     }
 }
