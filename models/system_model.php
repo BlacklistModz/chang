@@ -351,10 +351,10 @@ class System_Model extends Model{
         $a = array();
         $a[] = array('id'=>'1', 'name'=>'Admin');
         $a[] = array('id'=>'2', 'name'=>'Manager');
-        $a[] = array('id'=>'3', 'name'=>'Person');
+        // $a[] = array('id'=>'3', 'name'=>'Person');
         $a[] = array('id'=>'4', 'name'=>'Sales');
-        $a[] = array('id'=>'5', 'name'=>'Property');
-        $a[] = array('id'=>'6', 'name'=>'PR');
+        // $a[] = array('id'=>'5', 'name'=>'Property');
+        // $a[] = array('id'=>'6', 'name'=>'PR');
 
         return $a;
     }

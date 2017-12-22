@@ -35,6 +35,8 @@ class Planload extends Controller  {
     	$this->view->setPage('on', 'planload');
     	$this->view->setPage('title', 'PLANLOAD');
 
+        // print_r($this->model->lists());die;
+
     	if( !empty($id) ){
     		$this->error();
 
@@ -71,7 +73,7 @@ class Planload extends Controller  {
 
     public function edit($id=null){
         $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
-        if( empty($id) || empty($this->me) || $this->format!='json' ) $this->error();
+        if( empty($id) || empty($this->me) ) $this->error();
 
         $item = $this->model->get($id);
         if( empty($item) ) $this->error();
@@ -137,7 +139,7 @@ class Planload extends Controller  {
                 }
 
                 if( !empty($id) ){
-                    if( !empty($item['grade']) ){
+                    if( !empty($item['plan_grade']) ){
                         $this->model->delAllGrade($id);
                     }
 

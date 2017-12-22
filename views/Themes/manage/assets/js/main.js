@@ -2828,7 +2828,7 @@ if ( typeof Object.create !== 'function' ) {
 		},
 		changeWeight: function(){
 			var self = this;
-			var size = self.$size.val();
+			var size = self.$size.val() || self.currSize;
 
 			self.$weight.empty();
 			if( size == '' ) self.$weight.append( $('<option>', {value:'', text:'-'}) );
@@ -3614,6 +3614,7 @@ if ( typeof Object.create !== 'function' ) {
 			self.currPro = self.options.pro_id;
 			self.currGrade = self.options.grade;
 			self.currWeight = self.options.weight_id;
+			self.currSize = self.options.size_id;
 
 			self.setElem();
 			self.Events();
@@ -3621,6 +3622,13 @@ if ( typeof Object.create !== 'function' ) {
 		setElem:function(){
 			var self = this;
 			self.$elem.find("#plan_grade_fieldset").addClass("hidden_elem");
+
+			if( self.$type.val() != '' ){
+				self.setGrade();
+				self.setProducts();
+				self.setSize();
+				self.setWeight();
+			}
 		},
 		Events:function(){
 			var self = this;
@@ -3673,9 +3681,11 @@ if ( typeof Object.create !== 'function' ) {
 								, obj.name
 							  );
 
-					if( jQuery.inArray(obj.id, self.currGrade) !== -1 ){
-						li.find('[data-id='+obj.id+']').prop('checked', true);
-					}
+					$.each(self.currGrade, function(j,grade){
+						if( grade.grade_id == obj.id ){
+							li.find('[data-id='+obj.id+']').prop('checked', true);
+						}
+					});
 
 					self.$grade.append( li );
 				});
@@ -3685,6 +3695,7 @@ if ( typeof Object.create !== 'function' ) {
 			var self = this;
 
 			var type = self.$type.val();
+			var size = self.currSize;
 
 			$.get(Event.URL + 'planload/listsSize/'+type, function( res ){
 
@@ -3704,8 +3715,9 @@ if ( typeof Object.create !== 'function' ) {
 			var self = this;
 
 			var type = self.$type.val();
+			var size = self.$size.val() || self.currSize;
 
-			$.get( Event.URL + 'planload/listsWeight/'+type, {size:self.$size.val()}, function (res) {
+			$.get( Event.URL + 'planload/listsWeight/'+type, {size:size}, function (res) {
 				self.$weight.empty();
 				var li = $('<option>', {value: "", text: "-"});
 				self.$weight.append( li );
