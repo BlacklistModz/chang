@@ -8,7 +8,7 @@ $url = URL.'customers/';
 	<div class="clearfix">
 		<ul class="clearfix lfloat SettingCol-headerActions">
 
-			<li><h2><i class="icon-user mrs"></i><span><?=$this->lang->translate('Customers')?></span></h2></li>
+			<li><h2><i class="icon-user mrs"></i><span><?=$this->lang->translate('BAYER')?></span></h2></li>
 			<li><a class="btn js-refresh"><i class="icon-refresh"></i></a></li>
 			<li class="divider"></li>
 

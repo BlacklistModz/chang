@@ -21,8 +21,8 @@ $sub = array();
 $sub[] = array('text'=> $this->lang->translate('Department'),'key'=>'department','url'=>URL.'settings/accounts/department');
 $sub[] = array('text'=> $this->lang->translate('Position'),'key' => 'position','url' => URL.'settings/accounts/position');
 $sub[] = array('text'=> $this->lang->translate('Employees'),'key' => 'employees','url' => URL.'settings/accounts/');
-$sub[] = array('text'=> $this->lang->translate('Customers'),'key' => 'customers','url' => URL.'settings/accounts/customers');
-$sub[] = array('text'=> $this->lang->translate('Customers brand'),'key' => 'customers_brands','url' => URL.'settings/accounts/customers_brands');
+$sub[] = array('text'=> $this->lang->translate('BAYER'),'key' => 'customers','url' => URL.'settings/accounts/customers');
+$sub[] = array('text'=> $this->lang->translate('BAYER BRANDS'),'key' => 'customers_brands','url' => URL.'settings/accounts/customers_brands');
 
 
 // foreach ($sub as $key => $value) {

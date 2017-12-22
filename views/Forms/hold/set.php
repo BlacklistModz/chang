@@ -1,6 +1,6 @@
 <?php
 
-$arr['title'] = 'ยืนยันการปล่อยโฮล';
+$arr['title'] = 'ยืนยันการปล่อยโฮล (จำนวน '.$this->item['qty'].' UNIT)';
 
 $form = new Form();
 $form = $form->create()
@@ -14,6 +14,7 @@ $table = '<div class="lists-items" role="listsitems">
     <tr style="background-color: beige;">
         <th class="no">No.</th>
         <th class="name">จัดการ</th>
+        <th class="number">จำนวน</th>
         <th class="number">ค่า</th>
         <th class="actions"></th>
     </tr>

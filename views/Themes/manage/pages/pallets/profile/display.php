@@ -7,20 +7,7 @@
 						<div class="lfloat">
 							<div class="setting-title">
 								<ul calss="lfloat" ref="action"><li class="mt">
-
-								<?php
-								// print_r($this->item['type_id']);die;
-								if($this->item['type_id'] == 1)$icon = 'rambutan';
-								elseif($this->item['type_id'] == 3)$icon = 'creamcorn';
-								elseif($this->item['type_id'] == 4)$icon = 'longan';
-								elseif($this->item['type_id'] == 5)$icon = 'lychee';
-								elseif($this->item['type_id'] == 6)$icon = 'mango';
-								elseif($this->item['type_id'] == 8)$icon = 'corncup';
-								elseif($this->item['type_id'] == 9)$icon = 'bakedlongan';
-								else $icon = 'corn';
-									?>
-								<i class="icon-<?=$icon?> _ico-center"></i> Pallet Code : <?=$this->item['code']?> (<?=$this->item['delivery_code']?>)</div>
-
+								<i class="icon-<?=$this->item['type_icon']?> _ico-center"></i> Pallet Code : <?=$this->item['code']?> (<?=$this->item['delivery_code']?>)</div>
 								</li>
 							</ul>
 						</div>
@@ -29,7 +16,9 @@
 							<a href="<?=URL?>pallets/add_check/<?=$this->item['id']?>" class="btn btn-red" data-plugins="dialog"><i class="icon-hand-lizard-o"></i> ดึงตรวจสินค้า</a>
 							<?php } ?>
 							<a href="<?=URL?>pallets/setFraction/<?=$this->item['id']?>" class="btn btn-orange" data-plugins="dialog"><i class="icon-plus"></i> รวมเศษ</a>
-							<a href="<?=URL?>hold/add/<?=$this->item['id']?>" class="btn btn-blue" data-plugins="dialog"><i class="icon-plus"></i> เพิ่มรายการ Hold</a>
+							<?php if( $this->item['total_hole'] < $this->item['qty'] ) { ?>
+							<a href="<?=URL?>hold/add/<?=$this->item['id']?>" class="btn btn-blue" data-plugins="dialog"><i class="icon-minus-circle"></i> Hold</a>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -50,7 +39,7 @@
 									<label><span class="fwb">วันที่ผลิต : </span><?=date("d/m/Y", strtotime($this->item['date']))?></label>
 								</li>
 								<li>
-									<label><span class="fwb">RETORT : </span></label>
+									<label><span class="fwb">RETORT : </span>
 									<?php 
 									$retort = '';
 									foreach ($this->item['retort'] as $key => $value) {
@@ -59,6 +48,26 @@
 									}
 									echo $retort;
 									?>
+									</label>
+								</li>
+									<label>
+										<span class="fwb">HOLD : </span> <?=$this->item['total_hole']?> กระป๋อง
+									</label>
+								</li>
+								<li>
+									<label>
+										<span class="fwb">บุบ : </span> <?=$this->item['total_pound']?> กระป๋อง
+									</label>
+								</li>
+								<li>
+									<label>
+										<span class="fwb">ดึงตรวจ/จกตรวจ : </span> <?=$this->item['total_check']?> กระป๋อง
+									</label>
+								</li>
+								<li class="mtl">
+									<div class="clearfix">
+										<a href="<?=URL?>pallets/set_item/<?=$this->item['id']?>/6" data-plugins="dialog" class="btn btn-blue rfloat"><i class="icon-eject"></i> ของบุบ</a>
+									</div>
 								</li>
 							</ul>
 						</div>
@@ -118,7 +127,17 @@
 												<?=$value['qty']?>
 											</td>
 											<td class="contact"><?= !empty($cause) ? $cause : "-" ?></td>
-											<td class="contact"><?= !empty($value['note']) ? nl2br($value['note']) : '-'?></td>
+											<td class="contact">
+												<?php if( !empty($this->item['manage']) ){ ?>
+												<ul>
+													<?php foreach ($this->item["manage"] as $item) {
+														if( $item["hold_id"] != $value["id"] ) continue;
+													?>
+													<li>- <?=$item['manage_name']?> <span class="fwb"><?=$item['qty']?></span> กระป๋อง</li>
+													<?php } ?>
+												</ul>
+												<?php } ?>
+											</td>
 											<td class="status"><?=$value['status']['name']?></td>
 											<td class="actions whitespace">
 												<span class="gbtn">

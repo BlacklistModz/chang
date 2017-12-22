@@ -124,9 +124,7 @@ class hold_Model extends Model
             $data['cause'] = $this->listsCause($data['id']);
         }
 
-        if( !empty($options['manage']) ){
-            $data['manage'] = $this->listsManage($data['id']);
-        }
+        // $data['manage'] = $this->query('pallets')->listsHoldManage($data['parent_id']);
 
         $data['status'] = $this->getStatus($data['status']);
 
@@ -149,7 +147,23 @@ class hold_Model extends Model
     					, t.type_name";
     private $i_cutNameField = "item_";
     public function listsItems($id, $options=array()){
-    	return $this->buildFragItem( $this->db->select("SELECT {$this->i_field} FROM {$this->i_table} WHERE phi.item_hold_id=:id", array(':id'=>$id) ), $options );
+
+        $w = 'phi.item_hold_id=:id';
+        $w_arr[":id"] = $id;
+
+        $limit = '';
+        if( !empty($options["limit"]) ){
+            $limit = "LIMIT {$options["limit"]}";
+        }
+
+        if( !empty($options["status"]) ){
+            $w .= !empty($w) ? " AND " : "";
+            $w .= "phi.item_status=:status";
+            $w_arr[":status"] = $options["status"];
+        }
+
+        if( !empty($w) ) $w = "WHERE {$w}";
+    	return $this->buildFragItem( $this->db->select("SELECT {$this->i_field} FROM {$this->i_table} {$w} {$limit}", $w_arr ), $options );
     }
     public function buildFragItem($results, $options=array()){
     	$data = array();
@@ -207,7 +221,7 @@ class hold_Model extends Model
 
     #HOLD Manage
     public function listsManage($id){
-        return $this->db->select("SELECT c.manage_id AS id, c.manage_name AS name, p.note FROM hold_manage_permit p LEFT JOIN hold_manage c ON p.manage_id=c.manage_id WHERE p.hold_id=:id", array(':id'=>$id));
+        // return $this->db->select("SELECT c.manage_id AS id, c.manage_name AS name, p.note FROM hold_manage_permit p LEFT JOIN hold_manage c ON p.manage_id=c.manage_id WHERE p.hold_id=:id", array(':id'=>$id));
     }
     public function setManage($data){
         $this->db->insert('hold_manage_permit', $data);
@@ -219,7 +233,7 @@ class hold_Model extends Model
     #status
     public function status(){
         $a[] = array('id'=>1, 'name'=>'HOLD');
-        $a[] = array('id'=>2, 'name'=>'RELEASE');
+        $a[] = array('id'=>2, 'name'=>'MANAGED');
 
         return $a;
     }

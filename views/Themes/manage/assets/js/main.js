@@ -3318,7 +3318,10 @@ if ( typeof Object.create !== 'function' ) {
 				$('<td>', {class: "no"}),
 				$('<td>', {class: "name"}).append($select),
 				$('<td>', {class: "number"}).append(
-					$('<input>', {class:"inputtext", name:"manage[note][]", style:"width:100%"}).val( data.note )
+					$('<input>', {class:"inputtext", name:"manage[qty][]", style:"width:100%"}).val( data.qty )
+				),
+				$('<td>', {class: "number"}).append(
+					$('<input>', {class:"inputtext", name:"manage[remark][]", style:"width:100%"}).val( data.remart )
 				),
 				$('<td>', {class: 'actions', style:"text-align: center;"}).append( 
 					$('<span>', {class:"gbtn"}).append(
