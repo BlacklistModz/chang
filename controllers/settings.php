@@ -140,7 +140,7 @@ class Settings extends Controller {
     /**/
     /* Property */
     /**/
-    public function products($tap='type') {
+    public function products($tap='products') {
       $this->view->setPage("title", "Setting Products - ".ucfirst($tap));
 
       $this->view->setPage('on', 'settings');
@@ -305,6 +305,9 @@ class Settings extends Controller {
 
       if( $tap=='platform' ){
         $data = $this->model->query('platform')->lists();
+      }
+      elseif( $tap=='trucks' ){
+        $data = $this->model->query('trucks')->lists();
       }
       else{
         $this->error();

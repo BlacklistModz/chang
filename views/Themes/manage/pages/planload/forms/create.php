@@ -1,4 +1,4 @@
-<?php 
+<?php
 $form = new Form();
 $form = $form->create()
 	// set From
@@ -185,12 +185,12 @@ $options = $this->fn->stringify( array(
 					</div>
 					<div class="uiBoxWhite pam pas"  style="width: 950px;">
 						<div class="clearfix">
-							<a href="<?=URL?>planload" class="btn btn-red">กลับ</a>
+							<a href="<?=URL?>planload" class="btn btn-text">กลับ</a>
 							<button type="submit" class="js-submit btn btn-blue rfloat">บันทึก</button>
 						</div>
 					</div>
 				</div>
-				<?php 
+				<?php
 				if( !empty($this->item) ){
 					echo '<input type="hidden" name="id" value="'.$this->item['id'].'">';
 				}

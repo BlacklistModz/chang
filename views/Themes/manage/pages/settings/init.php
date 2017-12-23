@@ -18,9 +18,9 @@ if( !empty($sub) ){
 
 /* Accounts */
 $sub = array();
+$sub[] = array('text'=> $this->lang->translate('Employees'),'key' => 'employees','url' => URL.'settings/accounts/');
 $sub[] = array('text'=> $this->lang->translate('Department'),'key'=>'department','url'=>URL.'settings/accounts/department');
 $sub[] = array('text'=> $this->lang->translate('Position'),'key' => 'position','url' => URL.'settings/accounts/position');
-$sub[] = array('text'=> $this->lang->translate('Employees'),'key' => 'employees','url' => URL.'settings/accounts/');
 $sub[] = array('text'=> $this->lang->translate('BAYER'),'key' => 'customers','url' => URL.'settings/accounts/customers');
 $sub[] = array('text'=> $this->lang->translate('BAYER BRANDS'),'key' => 'customers_brands','url' => URL.'settings/accounts/customers_brands');
 
@@ -97,6 +97,7 @@ if( !empty($sub) ){
 // platform//////////////////////////////////////////////////////////////////
 $sub = array();
 $sub[] = array('text'=> 'ชานชาลา','key'=>'platform','url'=>URL.'settings/planload/platform');
+$sub[] = array('text'=> 'รถขนส่ง','key'=>'trucks','url'=>URL.'settings/planload/trucks');
 
 if( !empty($sub) ){
 	$this->count_nav+=count($sub);

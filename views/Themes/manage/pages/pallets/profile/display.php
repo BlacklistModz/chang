@@ -40,7 +40,7 @@
 								</li>
 								<li>
 									<label><span class="fwb">RETORT : </span>
-									<?php 
+									<?php
 									$retort = '';
 									foreach ($this->item['retort'] as $key => $value) {
 										$retort .= !empty($retort) ? " , " : "";
