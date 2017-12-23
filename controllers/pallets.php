@@ -241,6 +241,7 @@ class Pallets extends Controller {
                     $this->model->updateAllItem($id,$data);
                 }
                 else{
+                    $postData['pallet_emp_id'] = $this->me['id'];
                     $this->model->insert($postData);
                     $id = $postData['id'];
                 }

@@ -226,6 +226,8 @@ class Warehouse extends Controller {
     // print_r($item);die;
     if( empty($item) ) $this->error();
 
+    $this->view->setPage('on', 'zone-'.$item['ware_id']);
+
     $this->view->setData('item', $item);
     // $this->view->setPage('path', 'Forms/warehouse/rows');
     $this->view->render('warehouse/profile/pallet');
