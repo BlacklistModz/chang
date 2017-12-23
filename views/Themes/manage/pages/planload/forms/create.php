@@ -19,12 +19,12 @@ $form 	->field("plan_platform_id")
 		->select( $this->platform['lists'] )
 		->value( !empty($this->item['platform_id']) ? $this->item['platform_id'] : "" );
 
-$form 	->field("plan_cus_id")
+/* $form 	->field("plan_cus_id")
 		->label("BUYER")
 		->addClass('inputtext')
 		->autocomplete('off')
 		->select( $this->customer['lists'] )
-		->value( !empty($this->item['cus_id']) ? $this->item['cus_id'] : "" );
+		->value( !empty($this->item['cus_id']) ? $this->item['cus_id'] : "" ); */
 
 $form 	->field("plan_brand_id")
 		->label("BRAND")

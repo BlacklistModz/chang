@@ -10183,7 +10183,8 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
 .form-pladload #plan_cabinet_return_fieldset,
 .form-planload #plan_ship_fieldset,
 .form-planload #plan_remark_fieldset,
-.form-planload #plan_carton_remark_fieldset{
+.form-planload #plan_carton_remark_fieldset,
+.form-planload #plan_brand_id_fieldset{
     clear: both;
 }
 .form-planload #plan_type_id_fieldset .notification,

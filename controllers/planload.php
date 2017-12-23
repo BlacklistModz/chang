@@ -104,7 +104,7 @@ class Planload extends Controller  {
             $form = new Form();
             $form   ->post('plan_date')
                     ->post('plan_platform_id')
-                    ->post('plan_cus_id')->val('is_empty')
+                    // ->post('plan_cus_id')->val('is_empty')
                     ->post('plan_brand_id')
                     ->post('plan_type_id')->val('is_empty')
                     ->post('plan_pro_id')
@@ -130,6 +130,7 @@ class Planload extends Controller  {
 
             $job = $this->model->query('job')->get($postData['plan_job_id']);
             $postData['plan_job_code'] = $job['code'];
+            $postData['plan_cus_id'] = $job['cus_id'];
 
             if( empty($arr['error']) ){
                 if( !empty($id) ){

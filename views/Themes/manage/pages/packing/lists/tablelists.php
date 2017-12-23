@@ -11,11 +11,6 @@ if( !empty($this->results['lists']) ){
         // $item = $item;
         $cls = $i%2 ? 'even' : "odd";
 
-        $return = $item['cabinet_return'] != "0000-00-00" ? date("d/m", strtotime($item['cabinet_return'])) : "-";
-        $closed = $item['closed_date'] != "0000-00-00" ? date("d/m", strtotime($item['closed_date'])) : "-";
-        $get = $item['cabinet_get'] != "0000-00-00" ? date("d/m", strtotime($item['cabinet_get'])) : "-";
-        $etd = $item['etd_date'] != "0000-00-00" ? date("d/m", strtotime($item['etd_date'])) : "-";
-
         $tr .= '<tr class="'.$cls.'" data-id="'.$item['id'].'">'.
 
             // '<td class="name">'.
@@ -28,18 +23,11 @@ if( !empty($this->results['lists']) ){
 
             '<td class="date fwb">'.date("d/m", strtotime($item['date'])).'</td>'.
 
-            '<td class="email">'.(!empty($item['plat_name']) ? $item['plat_name'] : "-").'</td>'.
-
             '<td class="name fwb">'.$item['job_code'].'</td>'.
 
-            '<td class="date">'.$return.'</td>'.
-            '<td class="date">'.$closed.'</td>'.
-            '<td class="date">'.$get.'</td>'.
-            '<td class="date">'.$etd.'</td>'.
-
-            '<td class="email">'.$item['ship'].'</td>'.
-            '<td class="email">'.$item['shipper'].'</td>'.
-            '<td class="type fwb">'.$item['status']['name'].'</td>'.
+            '<td class="qty">'.$item['qty'].'</td>'.
+            '<td class="qty">'.$item['pound'].'</td>'.
+            '<td class="qty">'.$item['destory'].'</td>'.
 
             '<td class="actions">
                 <div class="group-btn whitespace">

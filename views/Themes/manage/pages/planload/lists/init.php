@@ -9,6 +9,7 @@ $title[] = array('key'=>'date', 'text'=>'รับตู้');
 $title[] = array('key'=>'date', 'text'=>'ETD');
 $title[] = array('key'=>'email', 'text'=>'SHIP TO');
 $title[] = array('key'=>'email', 'text'=>'SHIPPER');
+$title[] = array('key'=>'type', 'text'=>'STATUS');
 $title[] = array('key'=>'actions', 'text'=>'');
 
 $this->tabletitle = $title;

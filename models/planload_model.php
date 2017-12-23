@@ -6,8 +6,10 @@ class planload_Model extends Model
         parent::__construct();
     }
     private $_objName = "planload";
-    private $_table = "planload p LEFT JOIN platform f ON p.plan_platform_id=f.plat_id";
-    private $_field = "p.*, f.plat_name";
+    private $_table = "planload p 
+                       LEFT JOIN platform f ON p.plan_platform_id=f.plat_id
+                       LEFT JOIN customers c ON p.plan_cus_id=c.cus_id";
+    private $_field = "p.*, f.plat_name, c.cus_name";
     private $_cutNamefield = "plan_";
 
     public function insert(&$data){
@@ -45,11 +47,41 @@ class planload_Model extends Model
         $where_str = "";
         $where_arr = array();
 
+        if( !empty($options['q']) ){
+            $where_str .= !empty($where_str) ? " AND " : "";
+            $where_str .= "plan_job_code LIKE :q 
+                           OR plan_inv LIKE :q 
+                           OR plan_ship LIKE :q
+                           OR plan_shipper LIKE :q";
+            $where_arr[":q"] = "%{$options["q"]}%";
+        }
+
+        if( isset($_REQUEST["period_start"]) && isset($_REQUEST["period_end"]) ){
+            $options["period_start"] = $_REQUEST["period_start"];
+            $options["period_end"] = $_REQUEST["period_end"];
+        }
+        if( !empty($options['period_start']) && !empty($options['period_end']) ){
+            $where_str .= !empty($where_str) ? " AND " : "";
+            $where_str .= "({$this->_cutNamefield}date BETWEEN :s AND :e)";
+            $where_arr[":s"] = $options["period_start"];
+            $where_arr[":e"] = $options["period_end"];
+        }
+
+        if( isset($_REQUEST["start"]) ){
+            $options["status"] = $_REQUEST["status"];
+        }
+        if( isset($options["status"]) ){
+            $where_str .= !empty($where_str) ? " AND " : "";
+            $where_str .= "{$this->_cutNamefield}status=:status";
+            $where_arr[":status"] = $options["status"];
+        }
+
         $arr['total'] = $this->db->count($this->_table, $where_str, $where_arr);
 
         $where_str = !empty($where_str) ? "WHERE {$where_str}":'';
         $orderby = $this->orderby( $this->_cutNamefield.$options['sort'], $options['dir'] );
         $limit = $this->limited( $options['limit'], $options['pager'] );
+        if( !empty($options["unlimit"]) ) $limit = "";
 
         $arr['lists'] = $this->buildFrag( $this->db->select("SELECT {$this->_field} FROM {$this->_table} {$where_str} {$orderby} {$limit}", $where_arr ), $options  );
 
@@ -80,6 +112,8 @@ class planload_Model extends Model
     public function convert($data, $options=array()){
     	$data = $this->cut($this->_cutNamefield, $data);
 
+        $data['name'] = $data['cus_name'].' ('.$data['job_code'].')';
+
         $data['plan_grade'] = $this->listsGrade($data['id']);
         $data['status'] = $this->getStatus($data['status']);
         $data['permit']['del'] = true;
@@ -88,9 +122,9 @@ class planload_Model extends Model
     }
 
     public function status(){
-    	$a[] = array('id'=>0, 'name'=>'รออนุมัติ');
-    	$a[] = array('id'=>1, 'name'=>'Packed');
-    	$a[] = array('id'=>2, 'name'=>'Loaded');
+    	$a[] = array('id'=>1, 'name'=>'Waiting');
+    	$a[] = array('id'=>2, 'name'=>'Packed');
+    	$a[] = array('id'=>3, 'name'=>'Loaded');
 
     	return $a;
     }

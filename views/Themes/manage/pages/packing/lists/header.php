@@ -5,14 +5,14 @@
 
 			<ul class="lfloat" ref="actions">
 				<li class="mt">
-					<h2><i class="icon-file-text-o mrs"></i><span>PLANLOAD</span></h2>
+					<h2><i class="icon-cubes mrs"></i><span>PACK</span></h2>
 				</li>
 
 				<li class="mt"><a class="btn js-refresh" data-plugins="tooltip" data-options="<?=$this->fn->stringify(array('text'=>'refresh'))?>"><i class="icon-refresh"></i></a></li>
 
 				<li class="divider"></li>
 
-				<li class="mt"><a class="btn btn-blue" href="<?=URL?>planload/add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
+				<li class="mt"><a class="btn btn-blue" href="<?=URL?>packing/add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
 
 			</ul>
 			
