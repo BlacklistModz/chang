@@ -178,7 +178,7 @@ $options = $this->fn->stringify( array(
 	<div role="content">
 		<div role="main" class="pal">
 			<form class="js-submit-form" action="<?=URL?>planload/save" data-plugins="planloadForm" data-options="<?=$options?>">
-				<h3 class="fwb mbm"><i class="icon-shopping-cart"></i> Planload en Create</h3>
+				<h3 class="fwb mbm"><i class="icon-shopping-cart"></i> Planload Create</h3>
 				<div class="clearfix">
 					<div class="uiBoxWhite pam pas" style="width: 950px;">
 						<?=$form->html()?>

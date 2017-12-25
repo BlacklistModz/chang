@@ -21,7 +21,7 @@ for($i=6;$i>=1;$i--){
         $_icon .= '<i class="icon-'.$icon['type_icon'].' _ico-center"></i>';
 
       }
-      $pallet = '<a target="_blank" href="'.URL.'pallets/profile/'.$this->item['pallets'][$j][$i]['id'].'"><div> Pallet code '.$this->item['pallets'][$j][$i]['code'].'<br><br>'.$_icon.'</div></a>' ;
+      $pallet = '<a target="_blank" href="'.URL.'pallets/profile/'.$this->item['pallets'][$j][$i]['id'].'"><div> Pallet Number '.$this->item['pallets'][$j][$i]['code'].'<br><br>'.$_icon.'</div></a>' ;
     }
     $td .= '<td><div class="'.$className.'" style="position: relative;   position: relative; border: 2px solid #bfbfbf; padding-bottom: 12px; width: 98px;">'.
     $pallet.'<span class="fwb" style="opacity: 0.3;"> ตั้ง '.$j.' / ชั้น '.$i.'</span></div></td>';

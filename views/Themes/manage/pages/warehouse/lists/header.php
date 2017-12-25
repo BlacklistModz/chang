@@ -24,30 +24,7 @@ include "tablelists.php";
 											<li>
 												<label><span class="fwb"><i class="icon-building-o"></i> แถวทั้งหมด : <?= $this->item['row_total']?></label>
 												</li>
-												<!-- <li>
-												<label><span class="fwb"> จำนวนคอร์นคัพ : </label>
-											</li>
-											<li>
-											<label><span class="fwb"> จำนวนครีมคอร์น : </label>
-										</li>
-										<li>
-										<label><span class="fwb"> จำนวนข้าวโพดหวาน : </label>
-									</li>
-									<li>
-									<label><span class="fwb"> จำนวนเงาะ : </label>
-								</li>
-								<li>
-								<label><span class="fwb"> จำนวนลำไย : </label>
-							</li>
-							<li>
-							<label><span class="fwb"> จำนวนลำไยอบแห้ง : </label>
-						</li>
-						<li>
-						<label><span class="fwb"> จำนวนลิ้นจี่ : </label>
-					</li>
-					<li>
-					<label><span class="fwb"> จำนวนมะม่วง : </label>
-				</li> -->
+												
 
 
 			</ul>

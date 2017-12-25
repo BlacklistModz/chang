@@ -7,13 +7,13 @@
 						<div class="lfloat">
 							<div class="setting-title">
 								<ul calss="lfloat" ref="action"><li class="mt">
-								<i class="icon-<?=$this->item['type_icon']?> _ico-center"></i> Pallet Code : <?=$this->item['code']?> (<?=$this->item['delivery_code']?>)</div>
+								<i class="icon-<?=$this->item['type_icon']?> _ico-center"></i> Pallet Number : <?=$this->item['code']?> (<?=$this->item['delivery_code']?>)</div>
 								</li>
 							</ul>
 						</div>
 						<div class="rfloat">
 							<?php if( $this->item['qty'] > 0 ) { ?>
-							<a href="<?=URL?>pallets/add_check/<?=$this->item['id']?>" class="btn btn-red" data-plugins="dialog"><i class="icon-hand-lizard-o"></i> ดึงตรวจสินค้า</a>
+							<a href="<?=URL?>pallets/add_check/<?=$this->item['id']?>" class="btn btn-red" data-plugins="dialog"><i class="icon-hand-lizard-o"></i> สุ่มตรวจสินค้า</a>
 							<?php } ?>
 							<a href="<?=URL?>pallets/setFraction/<?=$this->item['id']?>" class="btn btn-orange" data-plugins="dialog"><i class="icon-plus"></i> รวมเศษ</a>
 							<?php if( $this->item['total_hole'] < $this->item['qty'] ) { ?>
@@ -30,7 +30,7 @@
 							<h3 class="mbm fwb"><i class="icon-cube"></i> ข้อมูลพาเลท</h3>
 							<ul>
 								<li>
-									<label><span class="fwb">Pallet Code : </span><?=$this->item['code']?></label>
+									<label><span class="fwb">Pallet Number : </span><?=$this->item['code']?></label>
 								</li>
 								<li>
 									<label><span class="fwb">Delivery Code : </span><?=$this->item['delivery_code']?></label>
@@ -62,7 +62,7 @@
 								</li>
 								<li>
 									<label>
-										<span class="fwb">ดึงตรวจ/จกตรวจ : </span> <?=$this->item['total_check']?> กระป๋อง
+										<span class="fwb">สุ่มตรวจสินค้า : </span> <?=$this->item['total_check']?> กระป๋อง
 									</label>
 								</li>
 								<li class="mtl">
@@ -169,7 +169,7 @@
 
 					<div class="span11 mtm">
 						<div class="uiBoxWhite pam">
-							<h3 class="mbm fwb"><i class="icon-list-alt"></i> ประวัติการดึงตรวจ</h3>
+							<h3 class="mbm fwb"><i class="icon-list-alt"></i> ประวัติการสุ่มตรวจสินค้า</h3>
 							<div ref="table" class="listpage2-table">
 								<?php if( !empty($this->item['checks']) ) { ?>
 								<table class="table-bordered">
@@ -194,7 +194,7 @@
 								</table>
 								<?php }
 								else{
-									echo '<div class="tac"><h3 class="fwb">ไม่พบประวัติการดึงตรวจ</h3></div>';
+									echo '<div class="tac"><h3 class="fwb">ไม่พบประวัติการสุ่มตรวจสินค้า</h3></div>';
 								} ?>
 							</div>
 						</div>

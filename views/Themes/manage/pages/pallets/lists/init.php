@@ -1,8 +1,8 @@
 <?php
 
-$title[] = array('key'=>'ID', 'text'=>'ID', 'sort'=>'id');
+// $title[] = array('key'=>'ID', 'text'=>'ID', 'sort'=>'id');
 $title[] = array('key'=>'date', 'text'=>'วันที่ผลิต', 'sort'=>'date');
-$title[] = array('key'=>'name', 'text'=>'PALLET CODE', 'sort'=>'code');
+$title[] = array('key'=>'name', 'text'=>'PALLET NUMBER', 'sort'=>'code');
 $title[] = array('key'=>'status', 'text'=>'จำนวน(กระป๋อง)', 'sort'=>'qty');
 $title[] = array('key'=>'status', 'text'=>'SIZE');
 $title[] = array('key'=>'status', 'text'=>'WEIGHT');

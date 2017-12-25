@@ -3,11 +3,11 @@
 $tr = "";
 $tr_total = "";
 
-if( !empty($this->results['lists']) ){ 
+if( !empty($this->results['lists']) ){
     //print_r($this->results); die;
 
     $seq = 0;
-    foreach ($this->results['lists'] as $i => $item) { 
+    foreach ($this->results['lists'] as $i => $item) {
 
         $dw = !empty($item['weight_dw']) ? $item['weight_dw'] : "-";
         $nw = !empty($item['weight_nw']) ? $item['weight_nw'] : "-";
@@ -22,7 +22,7 @@ if( !empty($this->results['lists']) ){
         $ware = $floor = '<select class="inputtext" data-plugins="_update" data-options="'.$this->fn->stringify(array('url' => URL. 'pallets/setdata/'.$item['id'].'/ware_id')).'" data-name="warehouse">'.$ware.'</select>';
 
         $floor = '<option value="">-</option>';
-        for ($i=1; $i <= 6 ; $i++) { 
+        for ($i=1; $i <= 6 ; $i++) {
             $sel = '';
             if( $item['floor'] == $i ) $sel = ' selected="1"';
             $floor .= '<option'.$sel.' value="'.$i.'">'.$i.'</option>';
@@ -43,7 +43,7 @@ if( !empty($this->results['lists']) ){
 
         $tr .= '<tr class="'.$cls.'" data-id="'.$item['id'].'" data-plugins="tablePallets" data-options="'.$options.'">'.
 
-            '<td class="ID">'.$item['id'].'</td>'.
+
 
             '<td class="date">'.date("d/m/Y", strtotime($item['date'])).'</td>'.
 
@@ -84,9 +84,9 @@ if( !empty($this->results['lists']) ){
             </td>';
 
         '</tr>';
-        
+
     }
-  
+
 }
 
 $table = '<table><tbody>'. $tr. '</tbody>'.$tr_total.'</table>';

@@ -39,8 +39,8 @@ foreach ($this->item['rows']['lists'] as $key => $value) {
                             <ul class="lfloat">
 
                               <?php foreach ($this->_type as $key => $value) { ?>
-                              <li><i class="icon-<?=$value['icon']?> _ico-center" style="width: 2.25em;"></i> <span><?=$value['name']?> : <span class="fwb"><?=number_format($value['total'])?></span> UNIT</span>
-                              </li>
+                              <li><div><i class="icon-<?=$value['icon']?> _ico-center" style="width: 2.25em;"></i> <span><?=$value['name']?>ทั้งหมด : <span class="fwb"><?=number_format($value['total'])?></span> UNIT</span>
+                                  </div></li>
                               <?php } ?>
 
                             </ul>

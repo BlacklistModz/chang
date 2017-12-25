@@ -20,7 +20,7 @@
 							<h3 class="mbm fwb"><i class="icon-cube"></i> ข้อมูลพาเลท</h3>
 							<ul>
 								<li>
-									<label><span class="fwb">Pallet Code : </span><?=$this->item['code']?></label>
+									<label><span class="fwb">Pallet Number : </span><?=$this->item['code']?></label>
 								</li>
 								<li>
 									<label><span class="fwb">Delivery Code : </span><?=$this->item['delivery_code']?></label>
@@ -63,7 +63,7 @@
 									<tbody>
 										<?php
 										$no=0;
-										foreach ($this->hold['lists'] as $key => $value) { 
+										foreach ($this->hold['lists'] as $key => $value) {
 											$no++;
 											$cls = $value['status']['id'] == 1 ? "" : "disabled";
 

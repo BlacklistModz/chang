@@ -6,7 +6,7 @@ class planload_Model extends Model
         parent::__construct();
     }
     private $_objName = "planload";
-    private $_table = "planload p 
+    private $_table = "planload p
                        LEFT JOIN platform f ON p.plan_platform_id=f.plat_id
                        LEFT JOIN customers c ON p.plan_cus_id=c.cus_id";
     private $_field = "p.*, f.plat_name, c.cus_name";
@@ -49,8 +49,9 @@ class planload_Model extends Model
 
         if( !empty($options['q']) ){
             $where_str .= !empty($where_str) ? " AND " : "";
-            $where_str .= "plan_job_code LIKE :q 
-                           OR plan_inv LIKE :q 
+            $where_str .= "plan_job_code LIKE :q
+                           OR plan_id LIKE :q 
+                           OR plan_inv LIKE :q
                            OR plan_ship LIKE :q
                            OR plan_shipper LIKE :q";
             $where_arr[":q"] = "%{$options["q"]}%";

@@ -26,11 +26,13 @@ if( !empty($this->results['lists']) ){
 
             // '</td>'.
 
+
             '<td class="date fwb">'.date("d/m", strtotime($item['date'])).'</td>'.
 
             '<td class="email">'.(!empty($item['plat_name']) ? $item['plat_name'] : "-").'</td>'.
 
             '<td class="name fwb">'.$item['job_code'].'</td>'.
+            '<td class="number fwb">'.sprintf("%05d",$item['id']).'</td>'.
 
             '<td class="date">'.$return.'</td>'.
             '<td class="date">'.$closed.'</td>'.
