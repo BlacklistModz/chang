@@ -3847,7 +3847,146 @@ if ( typeof Object.create !== 'function' ) {
 			$.data( this, 'fractionForm', $this );
 		});
 	};
-	$.fn.joForm.options = {}
+	$.fn.fractionForm.options = {}
+
+	var packingForm = {
+		init:function(options,elem){
+			var self = this;
+			self.$elem = $(elem);
+			self.options = $.extend( {}, $.fn.planloadForm.options, options );
+
+			self.$listsitem = self.$elem.find("[role=listsitem]");
+
+			self.$plan = self.$elem.find('select#pack_plan_id');
+			self.currPlan = self.options.planload;
+
+			self.setElem();
+			self.Events();
+		},
+		setElem:function(){
+			var self = this;
+			if( self.options.items.length==0 ){
+				self.getItem();
+			}else{
+				$.each( self.options.items, function (i, obj) {
+					self.getItem(obj);
+				} );
+			}
+
+			if( self.$plan.val() != '' ){
+				self.setPallets();
+			}
+		},
+		Events:function(){
+			var self = this;
+
+			self.$elem.delegate('.js-add-item', 'click', function () {
+				var box = $(this).closest('tr');
+
+				if( box.find(':input').first().val()=='' ){
+					box.find(':input').first().focus();
+					return false;
+				}
+
+				var setItem = self.setItem({});
+				box.after( setItem );
+				setItem.find(':input').first().focus();
+
+				self.sortItem();
+			});
+
+			self.$elem.delegate('.js-remove-item', 'click', function () {
+				var box = $(this).closest('tr');
+
+				if( self.$listsitem.find('tr').length==1 ){
+					box.find(':input').val('');
+					box.find(':input').first().focus();
+				}
+				else{
+					box.remove();
+				}
+
+				self.sortItem();
+			});
+
+			self.$plan.change(function(){
+				self.setPallets();
+			});
+		},
+		getItem:function( data ){
+			var self = this;
+			self.$listsitem.append( self.setItem( data || {} ) );
+			self.sortItem();
+		},
+		setItem:function( data ){
+			var self = this;
+
+			var planload = self.$plan.val() || self.currPlan;
+
+			// var $select = $('<select>', {class:'inputtext js-select-pallet', name:'pallet[id][]'});
+			// $select.append( $('<option>', {value:'', text:'-'}) );
+			// $.each( Event.URL + 'packing/listsPallet/'+planload, function(i,obj) {
+			// 	$select.append( $('<option>', {value:obj.id, text:obj.code+' ('+obj.delivery_code+')', "data-id":obj.id}) );
+			// });
+
+			$tr = $('<tr>');
+			$tr.append(
+				$('<td>', {class: "no"}),
+				$('<td>', {class: "name"}).append(
+					$('<select>', {class:"inputtext js-select-pallet", name:"item[pallet_id][]", style:"width:100%;"}).append(
+						$('<option>', {value:"", text:"-"})
+					)
+				),
+				$('<td>', {class: "qty"}).append(
+					$('<input>', {class:"inputtext", type:"number", name:"item[qty][]",style:"width:100%;", value:data.qty})
+				),
+				$('<td>', {class: "qty"}).append(
+					$('<input>', {class:"inputtext", type:"number", name:"item[pound][]",style:"width:100%;", value:data.pound})
+				),
+				$('<td>', {class: "qty"}).append(
+					$('<input>', {class:"inputtext", type:"number", name:"item[destory][]",style:"width:100%;", value:data.destory})
+				),
+				$('<td>', {class: 'actions', style:"text-align:center;"}).append(
+					$('<span class="gbtn">').append(
+						$('<button>', {
+					  	type:"button",
+					  	class:"btn js-add-item btn-no-padding btn-blue",
+						}).html( $('<i>', {class: 'icon-plus'}) ), 
+					),
+					$('<span class="gbtn">').append(
+						$('<button>', {
+					  	type:"button",
+					  	class:"btn js-remove-item btn-no-padding btn-red",
+						}).html( $('<i>', {class: 'icon-remove'}) ),
+					)
+				),
+			);
+
+			return $tr;
+		},
+		sortItem: function () {
+			var self = this;
+			var no = 0;
+			$.each(self.$listsitem.find('tr'), function (i, obj) {
+				no++;
+				$(this).find('.no').text( no );
+			});
+		},
+		setPallets:function(){
+			var self = this;
+			var plan = self.$plan.val() || self.currPlan;
+		}
+	}
+	$.fn.packingForm = function( options ) {
+		return this.each(function() {
+			var $this = Object.create( packingForm );
+			$this.init( options, this );
+			$.data( this, 'packingForm', $this );
+		});
+	};
+	$.fn.packingForm.options = {
+		items:[]
+	}
 	
 })( jQuery, window, document );
 

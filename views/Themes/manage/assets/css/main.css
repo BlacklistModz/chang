@@ -10196,6 +10196,13 @@ ul.ui-list-sticker>li .inner label.textarea textarea:focus {
     position: absolute;
 }
 
+/* PACKING */
+.form-packing #pack_plan_id_fieldset{
+    float:  left;
+    margin-right: 20px;
+    width: 425px;
+}
+
 
 .listpage2-table [ref=tablelists] .hold td {
     background-color: #f7aaaa;
