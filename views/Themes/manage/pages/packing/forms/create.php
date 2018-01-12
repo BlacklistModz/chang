@@ -1,26 +1,18 @@
-<?php 
+<?php
 $form = new Form();
 $form = $form ->create()
 			  ->elem('div')
 			  ->addClass('form-insert form-packing');
 
-$form 	->field("pack_plan_id")
-		->label("PLANLOAD")
-		->addClass("inputtext")
-		->autocomplete("off")
-		->select( $this->planload['lists'], 'id', 'name' )
-		->value( !empty($this->item['plan_id']) ? $this->item['plan_id'] : '' );
 
-$form 	->field("pack_carton")
-		->label("จำนวนกล่อง")
-		->addClass("inputtext")
-		->autocomplete("off")
-		->value( !empty($this->item["carton"]) ? $this->item["carton"] : '' );
 
 $options = $this->fn->stringify( array(
 		'items' => !empty($this->item['items']) ? $this->item['items'] : array(),
 ) );
 ?>
+
+
+
 <div id="mainContainer" class="report-main clearfix" data-plugins="main">
 	<div role="content">
 		<div role="main" class="pal">
