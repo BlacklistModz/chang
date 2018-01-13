@@ -37,7 +37,7 @@ $options = $this->fn->stringify( array(
 					</div>
 				</div>
 				<div class="uiBoxWhite pas pam clearfix"  style="width:900px;">
-					<a href="" class="btn btn-red lfloat">กลับ</a>
+					<a href="<?=URL?>packing" class="btn btn-red lfloat">กลับ</a>
 					<button type="submit" class="btn btn-blue btn-submit rfloat">บันทึก</button>
 				</div>
 			</form>

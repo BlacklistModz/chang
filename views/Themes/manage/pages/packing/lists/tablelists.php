@@ -28,7 +28,6 @@ if( !empty($this->results['lists']) ){
 
 
             '<td class="date fwb">'.date("d/m", strtotime($item['date'])).'</td>'.
-            '<td class="email">'.(!empty($item['plat_name']) ? $item['plat_name'] : "-").'</td>'.
             '<td class="name fwb">'.$item['job_code'].'</td>'.
             '<td class="number fwb">'.sprintf("%05d",$item['id']).'</td>'.
 
@@ -38,9 +37,9 @@ if( !empty($this->results['lists']) ){
 
             '<td class="actions">
                 <div class="group-btn whitespace">
-                  <span class="btn">
-                    <a class="btn btn-no-padding btn-green" href="'.URL.'packing/add/'.$item['id'].'"><i class="icon-pencil"></i></a>
-                    </span>
+                  <span class="gbtn">
+                    <a class="btn btn-no-padding btn-green" href="'.URL.'packing/add/'.$item['id'].'"><i class="icon-gift"></i></a>
+                  </span>
                 </div>
             </td>';
 
