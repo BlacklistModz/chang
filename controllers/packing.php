@@ -14,7 +14,7 @@ class Packing extends Controller {
         }
         else{
             if( $this->format=='json' ){
-                $this->view->setData('results', $this->model->lists());
+                $this->view->setData('results', $this->model->query('planload')->lists(array('status'=>1)));
                 $render = 'packing/lists/json';
             }
             else{
@@ -72,6 +72,6 @@ class Packing extends Controller {
         echo json_encode($arr);
     }
     public function del($id=null){
-    	
+
     }
 }
