@@ -1,4 +1,4 @@
-<?php 
+<?php
 $form = new Form();
 $form = $form ->create()
 			  ->elem('div')
@@ -9,11 +9,14 @@ $form = $form ->create()
 // 		->addClass("inputtext")
 // 		->autocomplete("off")
 // 		->value( !empty($this->item["carton"]) ? $this->item["carton"] : '' );
-
+			  
 $options = $this->fn->stringify( array(
 		'items' => !empty($this->item['items']) ? $this->item['items'] : array(),
 ) );
 ?>
+
+
+
 <div id="mainContainer" class="report-main clearfix" data-plugins="main">
 	<div role="content">
 		<div role="main" class="pal">
@@ -41,7 +44,7 @@ $options = $this->fn->stringify( array(
 					</div>
 				</div>
 				<div class="uiBoxWhite pas pam clearfix"  style="width:900px;">
-					<a href="" class="btn btn-red lfloat">กลับ</a>
+					<a href="<?=URL?>packing" class="btn btn-red lfloat">กลับ</a>
 					<button type="submit" class="btn btn-blue btn-submit rfloat">บันทึก</button>
 				</div>
 			</form>

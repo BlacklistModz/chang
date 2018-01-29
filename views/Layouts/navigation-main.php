@@ -2,6 +2,7 @@
 
 $job[] = array('key'=>'job', 'text'=>'JOB ORDER', 'link'=>$url.'job', 'icon'=>'clipboard');
 $job[] = array('key'=>'planload', 'text'=>'PLANLOAD', 'link'=>$url.'planload', 'icon'=>'file-text-o');
+$job[] = array('key'=>'packing', 'text'=>'PACKING', 'link'=>$url.'packing', 'icon'=>'cube');
 // foreach ($job as $key => $value) {
 // 	if( empty($this->permit[$value['key']]['view']) ) unset($job[$key]);
 // }

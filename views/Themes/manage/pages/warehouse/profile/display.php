@@ -47,62 +47,62 @@
 							<h3 class="mbm fwb"><i class="icon-list-alt"></i> ประวัติการ Hold</h3>
 							<div ref="table" class="listpage2-table">
 								<?php if( !empty($this->hold['lists']) ) { ?>
-								<table class="table-bordered">
-									<thead>
-										<tr>
-											<th class="ID">ครั้งที่</th>
-											<th class="date" style="text-align: center;">วันที่ Hold</th>
-											<th class="date" style="text-align: center;">กำหนดปล่อย</th>
-											<th class="qty" style="text-align: center;">จำนวน</th>
-											<th class="contact">สาเหตุ</th>
-											<th class="contact">หมายเหตุ</th>
-											<th class="status">สถานะ</th>
-											<th class="actions">จัดการ</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-										$no=0;
-										foreach ($this->hold['lists'] as $key => $value) {
-											$no++;
-											$cls = $value['status']['id'] == 1 ? "" : "disabled";
+									<table class="table-bordered">
+										<thead>
+											<tr>
+												<th class="ID">ครั้งที่</th>
+												<th class="date" style="text-align: center;">วันที่ Hold</th>
+												<th class="date" style="text-align: center;">กำหนดปล่อย</th>
+												<th class="qty" style="text-align: center;">จำนวน</th>
+												<th class="contact">สาเหตุ</th>
+												<th class="contact">หมายเหตุ</th>
+												<th class="status">สถานะ</th>
+												<th class="actions">จัดการ</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+											$no=0;
+											foreach ($this->hold['lists'] as $key => $value) {
+												$no++;
+												$cls = $value['status']['id'] == 1 ? "" : "disabled";
 
-											$cause = '';
-											if( !empty($value['cause']) ){
-												foreach ($value['cause'] as $val) {
-													$cause .= '<p>- '.$val['name'].' '.$val['note'].'</p>';
+												$cause = '';
+												if( !empty($value['cause']) ){
+													foreach ($value['cause'] as $val) {
+														$cause .= '<p>- '.$val['name'].' '.$val['note'].'</p>';
+													}
 												}
-											}
-											?>
-										<tr>
-											<td class="ID"><?=$no?></td>
-											<td class="date" style="text-align: center;">
-												<?=date("d/m/Y", strtotime($value['start_date']))?>
-											</td>
-											<td class="date" style="text-align: center;">
-												<?=date("d/m/Y", strtotime($value['end_date']))?>
-											</td>
-											<td class="qty" style="text-align: center;">
-												<?=$value['qty']?>
-											</td>
-											<td class="contact"><?= !empty($cause) ? $cause : "-" ?></td>
-											<td class="contact"><?= !empty($value['note']) ? nl2br($value['note']) : '-'?></td>
-											<td class="status"><?=$value['status']['name']?></td>
-											<td class="actions whitespace">
-												<span class="gbtn">
-													<a href="<?=URL?>hold/set_hold/<?=$value['id']?>" data-plugins="dialog" class="btn btn-blue btn-no-padding <?=$cls?>"><i class="icon-check"></i></a>
-												</span>
-												<span class="gbtn">
-													<a href="<?=URL?>hold/edit/<?=$value['id']?>" data-plugins="dialog" class="btn btn-orange btn-no-padding <?=$cls?>"><i class="icon-pencil"></i></a>
-												</span>
-												<span class="gbtn">
-													<a href="<?=URL?>hold/del/<?=$value['id']?>" data-plugins="dialog" class="btn btn-red btn-no-padding <?=$cls?>"><i class="icon-trash"></i></a>
-												</span>
-											</td>
-										</tr>
-										<?php } ?>
-									</tbody>
-								</table>
+												?>
+												<tr>
+													<td class="ID"><?=$no?></td>
+													<td class="date" style="text-align: center;">
+														<?=date("d/m/Y", strtotime($value['start_date']))?>
+													</td>
+													<td class="date" style="text-align: center;">
+														<?=date("d/m/Y", strtotime($value['end_date']))?>
+													</td>
+													<td class="qty" style="text-align: center;">
+														<?=$value['qty']?>
+													</td>
+													<td class="contact"><?= !empty($cause) ? $cause : "-" ?></td>
+													<td class="contact"><?= !empty($value['note']) ? nl2br($value['note']) : '-'?></td>
+													<td class="status"><?=$value['status']['name']?></td>
+													<td class="actions whitespace">
+														<span class="gbtn">
+															<a href="<?=URL?>hold/set_hold/<?=$value['id']?>" data-plugins="dialog" class="btn btn-blue btn-no-padding <?=$cls?>"><i class="icon-check"></i></a>
+														</span>
+														<span class="gbtn">
+															<a href="<?=URL?>hold/edit/<?=$value['id']?>" data-plugins="dialog" class="btn btn-orange btn-no-padding <?=$cls?>"><i class="icon-pencil"></i></a>
+														</span>
+														<span class="gbtn">
+															<a href="<?=URL?>hold/del/<?=$value['id']?>" data-plugins="dialog" class="btn btn-red btn-no-padding <?=$cls?>"><i class="icon-trash"></i></a>
+														</span>
+													</td>
+												</tr>
+											<?php } ?>
+										</tbody>
+									</table>
 								<?php }
 								else{
 									echo '<div class="tac"><h3 class="fwb">ไม่พบประวัติการ Hold</h3></div>';
@@ -115,7 +115,7 @@
 
 			</div>
 
-			</div>
 		</div>
 	</div>
+</div>
 </div>

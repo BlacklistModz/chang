@@ -24,24 +24,14 @@ include "tablelists.php";
 											<li>
 												<label><span class="fwb"><i class="icon-building-o"></i> แถวทั้งหมด : <?= $this->item['row_total']?></label>
 												</li>
-												
-
-
-			</ul>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
-
-
-
-
-
-</div>
-</div>
-
-</div>					<!-- end:pas pam -->
-
-</div>	<!-- end:setting content -->
-</div>	<!-- end:maincontainer -->
-</div>
-</div>

@@ -25,29 +25,23 @@ if( !empty($this->results['lists']) ){
             //     '<div class="date-float fsm fcg">แก้ไขล่าสุด: '. ( $item['updated'] != '0000-00-00 00:00:00' ? $this->fn->q('time')->live( $item['updated'] ):'-' ) .'</div>'.
 
             // '</td>'.
-            '<td class="number fwb"><a href="'.URL.'packing/add/'.$item['id'].'">'.sprintf("%05d",$item['id']).'</a></td>'.
+            // '<td class="number fwb"><a href="'.URL.'packing/add/'.$item['id'].'">'.sprintf("%05d",$item['id']).'</a></td>'.
 
             '<td class="date fwb">'.date("d/m", strtotime($item['date'])).'</td>'.
-
-            '<td class="email">'.(!empty($item['plat_name']) ? $item['plat_name'] : "-").'</td>'.
-
-            '<td class="name fwb"><a href="'.URL.'packing/add/'.$item['id'].'">'.$item['job_code'].'</a></td>'.
-
-            '<td class="date">'.$return.'</td>'.
-            '<td class="date">'.$closed.'</td>'.
-            '<td class="date">'.$get.'</td>'.
-            '<td class="date">'.$etd.'</td>'.
+            '<td class="name fwb">'.$item['job_code'].'</td>'.
+            '<td class="number fwb"><a href="'.URL.'packing/add/'.$item['id'].'">'.sprintf("%05d",$item['id']).'</a></td>'.
 
             '<td class="email">'.$item['ship'].'</td>'.
             '<td class="email">'.$item['shipper'].'</td>'.
             '<td class="type fwb">'.$item['status']['name'].'</td>'.
 
-            // '<td class="actions">
-            //     <div class="group-btn whitespace">
-            //         <a class="btn btn-no-padding btn-orange" href="'.URL.'planload/edit/'.$item['id'].'"><i class="icon-pencil"></i></a>
-            //         <a class="btn btn-no-padding btn-red" data-plugins="dialog" href="'.URL.'planload/del/'.$item['id'].'"><i class="icon-trash"></i></a>
-            //     </div>
-            // </td>'.
+            '<td class="actions">
+                <div class="group-btn whitespace">
+                  <span class="gbtn">
+                    <a class="btn btn-no-padding btn-green" href="'.URL.'packing/add/'.$item['id'].'"><i class="icon-gift"></i></a>
+                  </span>
+                </div>
+            </td>';
 
         '</tr>';
 
