@@ -8,8 +8,10 @@ class planload_Model extends Model
     private $_objName = "planload";
     private $_table = "planload p
                        LEFT JOIN platform f ON p.plan_platform_id=f.plat_id
-                       LEFT JOIN customers c ON p.plan_cus_id=c.cus_id";
-    private $_field = "p.*, f.plat_name, c.cus_name";
+                       LEFT JOIN customers c ON p.plan_cus_id=c.cus_id
+                       LEFT JOIN brands b ON p.plan_brand_id=b.brand_id";
+
+    private $_field = "p.*, plat_name, cus_name, brand_id";
     private $_cutNamefield = "plan_";
 
     public function insert(&$data){
@@ -50,7 +52,7 @@ class planload_Model extends Model
         if( !empty($options['q']) ){
             $where_str .= !empty($where_str) ? " AND " : "";
             $where_str .= "plan_job_code LIKE :q
-                           OR plan_id LIKE :q 
+                           OR plan_id LIKE :q
                            OR plan_inv LIKE :q
                            OR plan_ship LIKE :q
                            OR plan_shipper LIKE :q";

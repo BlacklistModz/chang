@@ -23,13 +23,14 @@ class Packing extends Controller {
         }
         $this->view->render($render);
     }
-    public function add(){
+    public function add($id=null){
+        $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
         if( empty($this->me) ) $this->error();
-
+        $this->view->setData('results', $this->model->query('planload')->lists(array('status'=>1)));
         $this->view->setPage('on', 'packing');
         $this->view->setPage('title', 'Create en Pack');
 
-        $planload = $this->model->query('planload')->lists( array('status'=>1, 'unlimit'=>1) );
+        $planload = $this->model->query('planload')->get($id);
         $this->view->setData('planload', $planload);
         $this->view->render('packing/forms/create');
     }

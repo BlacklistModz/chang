@@ -1,8 +1,7 @@
 <?php
 
-
 $title[] = array('key'=>'date', 'text'=>'LOADDATE');
-$title[] = array('key'=>'name', 'text'=>'JO NO.');
+$title[] = array('key'=>'number', 'text'=>'JO NO.');
 $title[] = array('key'=>'number', 'text'=>'PLAN CODE');
 $title[] = array('key'=>'email', 'text'=>'SHIP TO');
 $title[] = array('key'=>'email', 'text'=>'SHIPPER');
