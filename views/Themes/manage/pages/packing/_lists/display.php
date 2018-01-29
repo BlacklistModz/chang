@@ -20,7 +20,7 @@
 		<!-- <div class="listpage2-table-overlay"></div> -->
 		<div class="listpage2-table-empty">
 	        <div class="empty-icon"><i class="icon-cubes"></i></div>
-	        <div class="empty-title">ไม่พบข้อมูลแผนการโหลดสินค้า</div>
+	        <div class="empty-title">ไม่พบข้อมูลการแพ็คสินค้า</div>
 		</div>
 		
 	</div>

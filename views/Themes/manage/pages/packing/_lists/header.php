@@ -11,10 +11,11 @@
 				<li class="mt"><a class="btn js-refresh" data-plugins="tooltip" data-options="<?=$this->fn->stringify(array('text'=>'refresh'))?>"><i class="icon-refresh"></i></a></li>
 
 				<li class="divider"></li>
-				<!-- <li class="mt"><a class="btn btn-blue" href="<?=URL?>planload/add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li> -->
+
+				<li class="mt"><a class="btn btn-blue" href="<?=URL?>packing/add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
 
 			</ul>
-
+			
 			<ul class="lfloat selection hidden_elem" ref="selection">
 				<li><span class="count-value"></span></li>
 				<li><a class="btn-icon"><i class="icon-download"></i></a></li>
@@ -31,7 +32,7 @@
 					echo '<option value="200">200</option>';
 				?></select><span id="more-link">คำนวณ...</span></li>
 			</ul>
-
+			
 		</div>
 		<div class="clearfix mbl mtm">
 			<ul class="lfloat" ref="control">
@@ -53,7 +54,7 @@
 				</form></li>
 			</ul>
 		</div>
-
+		
 	</div>
 
 </div>

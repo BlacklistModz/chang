@@ -4,8 +4,12 @@ $form = $form ->create()
 			  ->elem('div')
 			  ->addClass('form-insert form-packing');
 
-
-
+// $form 	->field("pack_carton")
+// 		->label("จำนวนกล่อง")
+// 		->addClass("inputtext")
+// 		->autocomplete("off")
+// 		->value( !empty($this->item["carton"]) ? $this->item["carton"] : '' );
+			  
 $options = $this->fn->stringify( array(
 		'items' => !empty($this->item['items']) ? $this->item['items'] : array(),
 ) );
@@ -139,12 +143,19 @@ $options = $this->fn->stringify( array(
 
 				<div class="uiBoxWhite pas pam" style="width:900px;">
 					<?=$form->html()?>
+					<?php
+					print_r($this->planload);die;
+					?>
 					<div class="lists-items" role="listsitems">
 						<table class="lists-items-listbox table-bordered">
 							<thead>
 								<tr>
 									<th width="5%">#</th>
+<<<<<<< HEAD
 									<th width="45%">PALLET/JO NO.</th>
+=======
+									<th width="45%">PALLET</th>
+>>>>>>> 6cd2a6e83624c726ce4eb585f22d3f57b1f69051
 									<th width="12%" style="text-align: center;">จำนวน</th>
 									<th width="12%" style="text-align: center;">บุบ</th>
 									<th width="12%" style="text-align: center;">เสียหาย</th>

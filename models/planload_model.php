@@ -117,6 +117,12 @@ class planload_Model extends Model
 
         $data['name'] = $data['cus_name'].' ('.$data['job_code'].')';
 
+        $data['type'] = $this->query('products')->getType($data['type_id']);
+        $data['pro'] = $this->query('products')->get($data['pro_id']);
+        $data['size'] = $this->query('products')->getSize($data['size_id']);
+        $data['weight'] = $this->query('products')->getWeight($data['weight_id']);
+        $data['brand'] = $this->query('brands')->get($data['brand_id']);
+
         $data['plan_grade'] = $this->listsGrade($data['id']);
         $data['status'] = $this->getStatus($data['status']);
         $data['permit']['del'] = true;

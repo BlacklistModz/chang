@@ -253,7 +253,9 @@ class Pallets extends Controller {
                     $postRetort[] = array(
                         'prt_rt_id'=>$_POST["retort"]["id"][$i],
                         'prt_batch'=>$_POST["retort"]["batch"][$i],
-                        'prt_qty'=>$_POST["retort"]["qty"][$i]
+                        'prt_qty'=>$_POST["retort"]["qty"][$i],
+                        'prt_hr'=>$_POST["retort"]["hr"][$i],
+                        'prt_min'=>$_POST["retort"]["min"][$i]
                     );
                 }
 

@@ -26,9 +26,6 @@ class Packing extends Controller {
     public function add($id=null){
         $id = isset($_REQUEST["id"]) ? $_REQUEST["id"] : $id;
         if( empty($this->me) ) $this->error();
-        $this->view->setData('results', $this->model->query('planload')->lists(array('status'=>1)));
-        $this->view->setPage('on', 'packing');
-        $this->view->setPage('title', 'Create en Pack');
 
         $planload = $this->model->query('planload')->get($id);
         $this->view->setData('planload', $planload);
@@ -44,11 +41,11 @@ class Packing extends Controller {
         $item = $this->model->get($id);
         if( empty($item) ) $this->error();
 
-        $planload = $this->model->query('planload')->lists( array('status'=>1, 'unlimit'=>1) );
-        $planload['lists'][] = $this->model->query('planload')->get($item['plan_id']);
+        // $planload = $this->model->query('planload')->lists( array('status'=>1, 'unlimit'=>1) );
+        // $planload['lists'][] = $this->model->query('planload')->get($item['plan_id']);
 
         $this->view->setData('item', $item);
-        $this->view->setData('planload', $planload);
+        // $this->view->setData('planload', $planload);
         $this->view->render('packing/forms/create');
     }
     public function save(){

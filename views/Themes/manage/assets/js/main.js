@@ -2797,6 +2797,10 @@ if ( typeof Object.create !== 'function' ) {
 				self.changeDeep();
 			});
 
+			self.$elem.find('.js-add').click(function(){
+				self.$listsRT.append( self.setItem({}) );
+			});
+
 			self.$elem.delegate('.js-add-item', 'click', function () {
 				var box = $(this).closest('tr');
 
@@ -2907,6 +2911,18 @@ if ( typeof Object.create !== 'function' ) {
 				$batch.append( $('<option>', {value:obj.id, text:obj.name, "data-id":obj.id}) );
 			});
 
+			var $hr = $('<select>', {class:'inputtext js-select-hr', name:'retort[hr][]'});
+			$hr.append( $('<option>', {value:'', text:'-'}) );
+			for(var i = 1; i <= 24; i++) {
+				$hr.append( $('<option>', {value:i, text:i, "data-id":i}) );
+			}
+
+			var $min = $('<select>', {class:'inputtext js-select-min', name:'retort[min][]'});
+			$min.append( $('<option>', {value:'', text:'-'}) );
+			for(var i = 1; i <= 60; i++) {
+				$min.append( $('<option>', {value:i, text:i, "data-id":i}) );
+			}
+
 			$tr = $('<tr>');
 			$tr.append(
 				$('<td>', {class: "ID"}).append($retort),
@@ -2914,14 +2930,16 @@ if ( typeof Object.create !== 'function' ) {
 				$('<td>', {class: "status"}).append(
 					$('<input>', {class:'inputtext', type:'number', name:'retort[qty][]', value:data.qty})
 				),
-				$('<td>', {class: 'actions', style:"text-align: center;"}).append( 
-					$('<span>', {class:"gbtn"}).append(
-						$('<button>', {
-							type:"button",
-							class:"btn js-add-item btn-no-padding btn-blue",
-						}).html( $('<i>', {class: 'icon-plus'}) )
-					),
-					$('<span>', {class:"gbtn"}).append(
+				$('<td>', {class: "status"}).append($hr),
+				$('<td>', {class: "status"}).append($min),
+				$('<td>', {class: 'actions group-btn', style:"text-align: center;"}).append( 
+					// $('<span>', {class:""}).append(
+					// 	$('<button>', {
+					// 		type:"button",
+					// 		class:"btn js-add-item btn-no-padding btn-blue",
+					// 	}).html( $('<i>', {class: 'icon-plus'}) )
+					// ),
+					$('<span>', {class:""}).append(
 						$('<button>', {
 							type:"button",
 							class:"btn js-remove-item btn-no-padding btn-red",
@@ -2932,6 +2950,8 @@ if ( typeof Object.create !== 'function' ) {
 
 			$tr.find('select.js-select-retort').find('[data-id='+data.rt_id+']').prop('selected', true);
 			$tr.find('select.js-select-batch').find('[data-id='+data.batch+']').prop('selected', true);
+			$tr.find('select.js-select-hr').find('[data-id='+data.hr+']').prop('selected', true);
+			$tr.find('select.js-select-min').find('[data-id='+data.min+']').prop('selected', true);
 
 			return $tr;
 		}
