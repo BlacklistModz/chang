@@ -1,6 +1,6 @@
 <?php
 $floor = array();
-for ($i=1; $i <= 6 ; $i++) {
+for ($i=1; $i <= 4 ; $i++) {
 	$floor[] = array('id'=>$i, 'name'=>'ชั้นที่ '.$i);
 }
 
@@ -38,7 +38,7 @@ $form 	->field('pallet_date')
 		->value( !empty($this->item['date']) ? $this->item['date'] : '' );
 
 $form 	->field('pallet_code')
-		->label('PALLET CODE')
+		->label('PALLET NUMBER')
 		->autocomplete('off')
 		->addClass('inputtext')
 		->value( !empty($this->item['code']) ? $this->item['code'] : '' );
@@ -219,14 +219,21 @@ $form2 	->field("rt_lists")
 					<table class="table-bordered" width="100%">
 						<thead>
 							<tr>
-								<th class="ID" width="25%">RT NO.</th>
-								<th class="status" width="25%">Batch</th>
-								<th class="status" width="25%">จำนวนกระป๋อง</th>
-								<th class="actions" width="25%">เพิ่ม/ลบ</th>
+								<th class="ID" width="17.5%">RT</th>
+								<th class="status" width="17.5%">BT</th>
+								<th class="status" width="20%">QTY</th>
+								<th class="status" width="17%">Hr.</th>
+								<th class="status" width="17%">Min.</th>
+								<th class="actions" width="10%"></th>
 							</tr>
 						</thead>
 						<tbody role="listsRT"></tbody>
 					</table>
+					<div class="tac">
+						<span class="gbtn">
+							<a class="btn btn-blue btn-no-padding js-add"><i class="icon-plus"></i></a>
+						</span>
+					</div>
 				</div>'
 		);
 ?>
@@ -248,7 +255,7 @@ $form2 	->field("rt_lists")
 					</div>
 					<div class="clearfix uiBoxWhite pam mtl">
 						<div class="lfloat">
-							<a href="<?=URL?>pallets/<?=$this->types['id']?>" class="btn btn-text">ยกเลิก</a>
+							<a href="<?=URL?>pallets/<?=$this->types['id']?>" class="btn btn-red">ยกเลิก</a>
 						</div>
 						<div class="rfloat">
 							<button type="submit" class="btn btn-primary btn-submit">

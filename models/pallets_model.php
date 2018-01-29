@@ -573,7 +573,7 @@ class pallets_Model extends Model
 
     #SET RETORT
     public function listsRetort($id){
-        return $this->db->select("SELECT prt_id AS id , prt_rt_id AS rt_id, prt_pallet_id AS pallet_id, prt_batch AS batch, prt_qty AS qty, rt_name FROM pallets_retort pr LEFT JOIN retort r ON pr.prt_rt_id=r.rt_id WHERE prt_pallet_id={$id} ORDER BY prt_id ASC");
+        return $this->db->select("SELECT prt_id AS id , prt_rt_id AS rt_id, prt_pallet_id AS pallet_id, prt_batch AS batch, prt_qty AS qty, prt_hr AS hr, prt_min AS min, rt_name FROM pallets_retort pr LEFT JOIN retort r ON pr.prt_rt_id=r.rt_id WHERE prt_pallet_id={$id} ORDER BY prt_id ASC");
     }
     public function setRetort($data){
         if( !empty($data['id']) ){

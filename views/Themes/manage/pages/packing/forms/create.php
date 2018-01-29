@@ -4,18 +4,11 @@ $form = $form ->create()
 			  ->elem('div')
 			  ->addClass('form-insert form-packing');
 
-$form 	->field("pack_plan_id")
-		->label("PLANLOAD")
-		->addClass("inputtext")
-		->autocomplete("off")
-		->select( $this->planload['lists'], 'id', 'name' )
-		->value( !empty($this->item['plan_id']) ? $this->item['plan_id'] : '' );
-
-$form 	->field("pack_carton")
-		->label("จำนวนกล่อง")
-		->addClass("inputtext")
-		->autocomplete("off")
-		->value( !empty($this->item["carton"]) ? $this->item["carton"] : '' );
+// $form 	->field("pack_carton")
+// 		->label("จำนวนกล่อง")
+// 		->addClass("inputtext")
+// 		->autocomplete("off")
+// 		->value( !empty($this->item["carton"]) ? $this->item["carton"] : '' );
 
 $options = $this->fn->stringify( array(
 		'items' => !empty($this->item['items']) ? $this->item['items'] : array(),
@@ -28,12 +21,15 @@ $options = $this->fn->stringify( array(
 				<h3 class="fwb mbm"><i class="icon-cube"></i> PACKING</h3>
 				<div class="uiBoxWhite pas pam" style="width:900px;">
 					<?=$form->html()?>
+					<?php
+					print_r($this->planload);die;
+					?>
 					<div class="lists-items" role="listsitems">
 						<table class="lists-items-listbox table-bordered">
 							<thead>
 								<tr>
 									<th width="5%">#</th>
-									<th width="45%">PLANLOAD/JO NO.</th>
+									<th width="45%">PALLET</th>
 									<th width="12%" style="text-align: center;">จำนวน</th>
 									<th width="12%" style="text-align: center;">บุบ</th>
 									<th width="12%" style="text-align: center;">เสียหาย</th>

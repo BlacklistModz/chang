@@ -12,7 +12,7 @@
 
 				<li class="divider"></li>
 
-				<!-- <li class="mt"><a class="btn btn-blue" href="<?=URL?>planload/add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li> -->
+				<li class="mt"><a class="btn btn-blue" href="<?=URL?>packing/add"><i class="icon-plus mrs"></i><span><?=$this->lang->translate('Add New')?></span></a></li>
 
 			</ul>
 			
